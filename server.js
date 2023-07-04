@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
+require('dotenv').config()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 var { expressjwt: jwt } = require('express-jwt')
-require('dotend').config()
+require('dotenv').config()
 uri = process.env.URI
 const path = require('path')
 
@@ -18,7 +19,8 @@ mongoose.connect(uri, console.log('Connected to DB'))
 
 app.use('/auth', require('./routes/authRouter.js'))
 app.use('/api', jwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
-app.use('/api/meal', require('.routes/mealRouter.js'))
+app.use('/api/meal', require('./routes/mealRouter.js'))
+app.use('/api/stat', require('./routes/statRouter.js'))
 
 app.use((err, req, res, next) => {
     console.log(err)
