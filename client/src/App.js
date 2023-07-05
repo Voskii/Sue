@@ -4,7 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import './style.css';
 
 function App() {
-  const { token, logout } = useContext(UserContext)
+  const { token, logout } = useContext(UserContext) 
   return (
     <div className="App">
       Hello Sue!
