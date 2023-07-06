@@ -47,7 +47,7 @@ export default function UserProvider(props){
                     user,
                     token
                 }))})
-            .catch(err => handleAuthErr(err.response.data.errMsg))
+            .catch(err => handleAuthErr(err.response.data.errMsg)) 
     }
 
     function logout(){
