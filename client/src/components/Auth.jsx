@@ -35,7 +35,7 @@ resetAuthErr()
 
 return (
 <div className="cred-container wrap">
-    <h1 className='game-name'></h1>
+    <h1 className='game-name'>HeySue!</h1>
     { !toggle ?
     <>
         <AuthForm 

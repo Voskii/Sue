@@ -8,13 +8,13 @@ import Header from './components/Header.jsx';
 import './style.css';
 
 function App() {
-  const { token, logout } = useContext(UserContext)
+  const { token, logout} = useContext(UserContext)
   // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   return (
     <div className="App">
       { token && 
         <div className='sticky-box shrink fish'>
-          <Header logout={logout}/>
+          <Header logout={logout}  />
           {/* <Navbar /> */}
         </div>
       }
