@@ -34,10 +34,10 @@ resetAuthErr()
 }
 
 return (
-<div className="cred-container wrap">
+<div className="auth-container">
     <h1 className='game-name'>HeySue!</h1>
     { !toggle ?
-    <>
+    <div className='auth'>
         <AuthForm 
         handleChange={handleChange}
         handleSubmit={handleSignup}
@@ -46,9 +46,9 @@ return (
         errMsg={errMsg}
         />
         <p onClick={toggleForm}>Already a HeySuer?</p>
-    </>
+    </div>
     :
-    <>
+    <div className='auth'>
         <AuthForm 
         handleChange={handleChange}
         handleSubmit={handleLogin}
@@ -57,7 +57,7 @@ return (
         errMsg={errMsg}
         />
         <p onClick={toggleForm}>Not a member?</p>
-    </>
+    </div>
     }
 </div>
 )

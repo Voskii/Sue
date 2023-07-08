@@ -1,0 +1,14 @@
+.counter-component{
+    height: 400px;
+    width: 400px;
+    border: 1px dashed var(--p);
+    text-align: center;
+}
+
+.next-meal{
+
+}
+
+.counter{
+    
+}

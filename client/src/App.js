@@ -6,6 +6,7 @@ import Auth from './components/Auth.jsx'
 import Hey from './components/Hey.jsx'
 import Header from './components/Header.jsx';
 import './style.css';
+import './hey.css'
 
 function App() {
   const { token, logout} = useContext(UserContext)
