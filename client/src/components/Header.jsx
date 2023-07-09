@@ -6,9 +6,9 @@ export default function Header(props){
     const {logout, userState} = props
     console.log(userState)
     return(
-        <header style={{textAlign: 'center'}}>
-            <div style={{fontSize: '6em'}}>Hello {user.username}!</div>
-            <button onClick={logout} className='game logButt'>Logout</button>
+        <header style={{textAlign: 'center', padding: '25px'}}>
+            <div style={{fontSize: '2em'}}>🌻{user.username}🌻</div>
+            <button onClick={logout} className=''>Logout</button>
         </header>
     )
 }

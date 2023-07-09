@@ -1,7 +1,16 @@
+
+
+.counter-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .counter-component{
     height: 400px;
     width: 400px;
-    border: 1px dashed var(--p);
+    border: 2px dashed var(--p);
     text-align: center;
 }
 

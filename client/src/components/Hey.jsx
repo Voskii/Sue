@@ -8,19 +8,21 @@ export default function Hey(){
     const { user } = useContext(UserContext)
     const [ newM, setNewM ] = useState(false)
     return (
-        <div className='counter-component'>
-            
-            {newM ? 
-                <NewMeal setNewM={setNewM}/>
-            :
-                <div>
+        <div className='counter-container'>
+            <div className='counter-component'>
+                {newM ? 
+                    <NewMeal setNewM={setNewM}/>
+                :
                     <div>
-                        {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
-                        <Counter />
+                        <div>
+                            {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
+                            <Counter />
+                        </div>
+                        <NextMeal />
                     </div>
-                    <NextMeal />
-                </div>
-            }
+                }
+            </div>
         </div>
+        
     )
 }

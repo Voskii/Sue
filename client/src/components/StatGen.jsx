@@ -5,12 +5,14 @@ const StatGen = () => {
 
     const [newStat, setNewStat] = useState({
         name: '',
-        stat: ''
+        stat: '',
+        mealId: ''
     })
 
-    const addStat = () => {
+    const addStat = (newS) => {
+        
         axios.post('./statId', newStat)
-            .then(res => console.log(res))
+            .then(res => console.log(`inside addStat result:`, res))
             .catch(err => console.log(err))
     }
 
@@ -22,7 +24,7 @@ const StatGen = () => {
     }
 
     return (
-        <form onSubmit={addStat}>
+        <form onSubmit={() => addStat(newStat)}>
                 <input
                     type='text'
                     name='name'

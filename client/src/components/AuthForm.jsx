@@ -14,7 +14,7 @@ const {
 } = props
 
 return (
-<form onSubmit={handleSubmit} className=''>
+<form onSubmit={handleSubmit} className='auth-inputs'>
     <input 
         type="text" 
         value={username} 

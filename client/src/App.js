@@ -12,9 +12,9 @@ function App() {
   const { token, logout} = useContext(UserContext)
   // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   return (
-    <div className="App">
+    <div className="">
       { token && 
-        <div className='sticky-box shrink fish'>
+        <div className=''>
           <Header logout={logout}  />
           {/* <Navbar /> */}
         </div>
