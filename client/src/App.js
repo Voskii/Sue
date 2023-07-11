@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { UserContext } from './context/UserProvider.jsx'
+import Meals from './components/Meals.jsx'
 import Auth from './components/Auth.jsx'
 import Hey from './components/Hey.jsx'
 import Header from './components/Header.jsx';
@@ -14,10 +15,10 @@ function App() {
   return (
     <div className="">
       { token && 
-        <div className=''>
+        <nav className=''>
           <Header logout={logout}  />
-          {/* <Navbar /> */}
-        </div>
+          <Link to="meals">Meals</Link> 
+        </nav>
       }
       <Routes>
         <Route 
@@ -26,6 +27,11 @@ function App() {
         <Route
           path='/hey' element = {<ProtectedRoute token={token} redirectTo='/'>
             <Hey />
+          </ProtectedRoute>}
+        />
+        <Route
+          path='/meals' element = {<ProtectedRoute token={token} redirectTo='/'>
+            <Meals />
           </ProtectedRoute>}
         />
       </Routes>

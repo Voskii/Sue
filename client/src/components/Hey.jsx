@@ -9,9 +9,9 @@ export default function Hey(){
     const [ newM, setNewM ] = useState(false)
     return (
         <div className='counter-container'>
-            <div className='counter-component'>
+            <div className=''>
                 {newM ? 
-                    <NewMeal setNewM={setNewM}/>
+                    <NewMeal setNewM={setNewM} user={user}/>
                 :
                     <div>
                         <div>

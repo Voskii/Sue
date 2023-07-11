@@ -28,7 +28,9 @@ code {
   margin: 0 auto;
   
 } */
-
+.intro-name {
+  font-size: clamp(3rem, 1rem + 5vw, 7rem);
+}
 .auth-container{
   display: flex;
   flex-direction: column;

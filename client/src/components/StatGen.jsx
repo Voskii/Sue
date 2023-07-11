@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const StatGen = () => {
+const StatGen = (props) => {
 
+    const { meal, setNewM } = props
     const [newStat, setNewStat] = useState({
         name: '',
         stat: '',
-        mealId: ''
+        mealId: meal._id
     })
 
-    const addStat = (newS) => {
-        
-        axios.post('./statId', newStat)
+    const addStat = (event, newS) => {
+        event.preventDefault()
+        axios.post('./statId', newS)
             .then(res => console.log(`inside addStat result:`, res))
             .catch(err => console.log(err))
+            // setNewM(false)
     }
 
     const handleChange = (e) => {
-        const [name, value] = e.target
+        const {name, value} = e.target
+        console.log(`Name: ${name} Value: ${value}`)
         setNewStat({
             [name]: value
         })
@@ -39,6 +42,7 @@ const StatGen = () => {
                     placeholder='Stat'
                     onChange={handleChange}
                 />
+                <button>SMASHED</button>
         </form>
     )
 }

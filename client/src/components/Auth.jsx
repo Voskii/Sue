@@ -35,7 +35,7 @@ resetAuthErr()
 
 return (
 <div className="auth-container">
-    <h1 className='game-name'>HeySue!</h1>
+    <h1 className='intro-name'>HeySue!</h1>
     { !toggle ?
     <div className='auth'>
         <AuthForm 

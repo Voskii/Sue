@@ -13,7 +13,7 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
-    memeberSince: {
+    memberSince: {
         type: Date,
         default: Date.now
     },
