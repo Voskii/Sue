@@ -48,3 +48,9 @@ nav a {
     transition-property: border color;
     transition-duration: 1s;
   }
+
+  .stat-info{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }

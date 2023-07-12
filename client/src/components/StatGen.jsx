@@ -40,7 +40,7 @@ const StatGen = (props) => {
                 />
                 <input
                     type='text'
-                    name='stat'
+                    name='value'
                     value={newStat.value}
                     placeholder='Stat'
                     onChange={handleChange}
