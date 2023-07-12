@@ -2,44 +2,31 @@ import axios from 'axios'
 import React, { useState, useContext } from 'react'
 import { MealContext } from '../context/MealProvider'
 import StatGen from './StatGen'
+import { useEffect } from 'react'
 
 export default function NextMeal(props) {
 
-    const { addMeal } = useContext(MealContext)
+    const { addMeal, newMeal, setUserIdNow, mealId, handleChange, handleSubmit } = useContext(MealContext)
     const { setNewM, user } = props
     console.log(`user:`, user)
     const [next, setNext] = useState(true)
     // const mapMe = data.map()
-    const [newMeal, setNewMeal] = useState({
-        name: '',
-        user: user._id,
-        _img: ''
-    })
+    useEffect(()=>{
+        setUserIdNow(user._id)
+    },[])
 
-    const handleChange = (e) => {
-        const  {name, value}  = e.target
-        console.log(`Name: ${name} Value: ${value}`)
-        setNewMeal({
-            [name]: value
-        })
-    }
-
-    const fish = (e) => {
+    const submit = (e) => {
         e.preventDefault()
-        console.log(`anger`)
-        addMeal(newMeal)
-        // Mealaxios.post('./api/meal', newMeal)
-        //     .then(res => console.log(`post meal func:`, res))
-        //     .catch(res => console.log(res))
-        setNext(false)
+        handleSubmit()
+        
     }
 
     return (
 
         <div className='new-meal'>
             {newMeal.name ? <h1>Meal: {newMeal.name}</h1> : <h1>New Meal</h1>}
-                {next &&
-                    <form onSubmit={fish}>
+                {!mealId &&
+                    <form onSubmit={submit}>
                         <input 
                             name='name'
                             type='text'
@@ -57,7 +44,7 @@ export default function NextMeal(props) {
                         <button>SMASH MEAL</button>
                     </form>
                 }
-            {!next && <StatGen meal={newMeal} setNewM={setNewM} />}
+            {mealId && <StatGen meal={mealId} setNewM={setNewM} />}
         </div>
     )
 }

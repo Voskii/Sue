@@ -17,6 +17,7 @@ function App() {
       { token && 
         <nav className=''>
           <Header logout={logout}  />
+          <Link to="/">Hey</Link>
           <Link to="meals">Meals</Link> 
         </nav>
       }

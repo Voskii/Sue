@@ -1,6 +1,7 @@
 const express = require('express')
 const mealRouter = express.Router()
 const Meal = require('../models/meal.js')
+const Stat = require('../models/stat.js')
 
 // Get All Meals
 mealRouter.get("/", (req, res, next) => {
@@ -15,13 +16,14 @@ mealRouter.get("/", (req, res, next) => {
 
 // Get Meals by user id
 mealRouter.get("/user", (req, res, next) => {
-Meal.find({ user: req.auth._id }, (err, meals) => {
-    if(err){
-    res.status(500)
-    return next(err)
-    }
-    return res.status(200).send(meals)
-})
+    
+    Meal.find({ user: req.auth._id }, (err, meals) => {
+        if(err){
+        res.status(500)
+        return next(err)
+        }
+        return res.status(200).send(meals)
+    })
 })
 
 // Add new Meal

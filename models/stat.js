@@ -11,8 +11,8 @@ const statSchema = new Schema ({
         required: false
     },
     mealId: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
+        
         required: false
     }
 })

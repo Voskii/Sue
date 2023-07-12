@@ -10,9 +10,9 @@ const mealSchema = new Schema({
         type: String,
     },
     stats: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Stat',
-        required: false
+        required: true
     }],
     user: {
         type: Schema.Types.ObjectId,
@@ -22,3 +22,4 @@ const mealSchema = new Schema({
 })
 
 module.exports = mongoose.model('Meal', mealSchema)
+

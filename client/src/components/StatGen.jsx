@@ -4,19 +4,30 @@ import { StatContext } from '../context/StatProvider'
 
 const StatGen = (props) => {
 
-    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat } = useContext(StatContext)
+    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal } = useContext(StatContext)
     const { meal, setNewM } = props
-
-    const [wutId, setwutId] = useState({
-        name: '',
-        stat: '',
-        mealId: meal._id
-    })
+    console.log(meal)
+    // const [wutId, setwutId] = useState({
+    //     name: '',
+    //     stat: '',
+    //     mealId: meal._id
+    // })
+    
 
     useEffect(() => {
-        setMealIdNow(wutId.mealId)
+        console.log(`meal id use effect fired`)
+        setMealIdNow(meal)
+        setNewStat(prevInputs => ({
+            ...prevInputs,
+            mealId: meal
+        }))
     },[])
 
+    const clear = () => {
+        setMealIdNow('')
+        setNewM(false)
+    } 
+    
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -30,13 +41,13 @@ const StatGen = (props) => {
                 <input
                     type='text'
                     name='stat'
-                    value={newStat.stat}
+                    value={newStat.value}
                     placeholder='Stat'
                     onChange={handleChange}
                 />
                 <button>SMASHED</button>
             </form>
-            <button onClick={() => setNewM(false)}>All done ⚡</button>
+            <button onClick={clear}>All done ⚡</button>
         </div>
     )
 }
