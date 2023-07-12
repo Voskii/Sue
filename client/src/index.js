@@ -5,6 +5,7 @@ import { UserProvider } from './context/UserProvider.jsx'
 import './style.css';
 import App from './App';
 import { MealProvider } from './context/MealProvider.jsx';
+import { StatProvider } from './context/StatProvider.jsx'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +14,9 @@ root.render(
     <Router>
       <UserProvider>
         <MealProvider>
-          <App />
+          <StatProvider>
+            <App />
+          </StatProvider>
         </MealProvider>
       </UserProvider>
     </Router>

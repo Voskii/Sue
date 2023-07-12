@@ -4,15 +4,16 @@ const Schema = mongoose.Schema
 const statSchema = new Schema ({
     name: {
         type: String,
-        required: true
+        required: false
     },
     value: {
         type: Number,
-        required: true
+        required: false
     },
     mealId: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: false
     }
 })
 

@@ -57,7 +57,7 @@ export default function NextMeal(props) {
                         <button>SMASH MEAL</button>
                     </form>
                 }
-            {!next && <StatGen meal={newMeal} setNewM={setNewM}/>}
+            {!next && <StatGen meal={newMeal} setNewM={setNewM} />}
         </div>
     )
 }

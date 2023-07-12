@@ -1,33 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import { StatContext } from '../context/StatProvider'
 
 const StatGen = (props) => {
 
+    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat } = useContext(StatContext)
     const { meal, setNewM } = props
-    const [newStat, setNewStat] = useState({
+
+    const [wutId, setwutId] = useState({
         name: '',
         stat: '',
         mealId: meal._id
     })
 
-    const addStat = (event, newS) => {
-        event.preventDefault()
-        axios.post('./statId', newS)
-            .then(res => console.log(`inside addStat result:`, res))
-            .catch(err => console.log(err))
-            // setNewM(false)
-    }
-
-    const handleChange = (e) => {
-        const {name, value} = e.target
-        console.log(`Name: ${name} Value: ${value}`)
-        setNewStat({
-            [name]: value
-        })
-    }
+    useEffect(() => {
+        setMealIdNow(wutId.mealId)
+    },[])
 
     return (
-        <form onSubmit={() => addStat(newStat)}>
+        <div>
+            <form onSubmit={handleSubmit}>
                 <input
                     type='text'
                     name='name'
@@ -43,7 +35,9 @@ const StatGen = (props) => {
                     onChange={handleChange}
                 />
                 <button>SMASHED</button>
-        </form>
+            </form>
+            <button onClick={() => setNewM(false)}>All done ⚡</button>
+        </div>
     )
 }
 

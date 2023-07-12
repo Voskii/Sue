@@ -11,7 +11,15 @@ const Meals = () => {
 
     },[])
 
-    const mapMe = meals.map(meal => <h3 key={meal._id}>{meal.name}</h3>)
+    const mapMe = meals.map(meal => {
+        <>
+            <h2 key={meal._id}>{meal.name}</h2>
+            <ul>
+                {/* {meal.stats.map(stat => <li>{stat}</li>)} */}
+            </ul>
+            
+        </>
+    })
 
     return (
         <div>

@@ -12,7 +12,7 @@ const mealSchema = new Schema({
     stats: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Stat',
-        required: true
+        required: false
     }],
     user: {
         type: Schema.Types.ObjectId,
