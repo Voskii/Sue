@@ -17,6 +17,8 @@ const Meals = () => {
     },[])
 
     const [chosen, setChosen] = useState('')
+    const [trackedMeals, setTrackedMeals] = useState([])
+    const [checked, setChecked] = useState(false)
 
     const mealClicked = (meal) => {
         console.log(`meal clicked`)
@@ -25,13 +27,21 @@ const Meals = () => {
         setChosen(meal)
     }
 
-    
+    const track = (meal) => {
+        console.log(meal)
+        setChecked(!checked)
+        setTrackedMeals(prev => [
+            ...prev,
+            meal.name
+        ])
+    }
 
     const mapMe = meals.map(meal => {
         
         return (
             <div>
-                <h2 key={meal._id} onClick={() => mealClicked(meal)}>{meal.name}</h2>
+                {/* <div key={meal._id} onClick={() => mealClicked(meal)}><span onClick={()=>track(meal)}>{checked? '👀':'✨'}</span>  {meal.name}✨</div> */}
+                <Meal key={meal._id} noBro={true} meal={meal} checked={checked} setChecked={setChecked} mealClicked={mealClicked} track={track} />
                 {/* {showStats && stats && stats.map(item => <Stat info={item}/>)} */}
             </div>
         )
@@ -53,6 +63,7 @@ const Meals = () => {
             :
             mapMe
             }
+
         </div>
     )
 }
