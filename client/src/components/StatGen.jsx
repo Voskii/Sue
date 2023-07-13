@@ -5,7 +5,7 @@ import { StatContext } from '../context/StatProvider'
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal } = useContext(StatContext)
-    const { meal, setNewM } = props
+    const { meal, setNewM, setCreateStat, createStat, setStats } = props
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -24,13 +24,39 @@ const StatGen = (props) => {
     },[])
 
     const clear = () => {
+        console.log(`in clear comp newStat:`, newStat)
+        setStats(prev => ([
+                ...prev,
+                {
+                    name: newStat.name,
+                    value: newStat.value,
+                    mealId: meal
+                }
+        ]))
+        if(createStat){
+            setCreateStat(false)
+            return 
+        }
         setMealIdNow('')
         setNewM(false)
-    } 
+    }
+
+    const submit = (event) => {
+        event.preventDefault()
+        setStats(prev => ([
+            ...prev,
+            {
+                name: newStat.name,
+                value: newStat.value,
+                mealId: meal
+            }
+        ]))
+        handleSubmit(event)
+    }
     
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={submit}>
                 <input
                     type='text'
                     name='name'

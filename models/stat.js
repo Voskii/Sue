@@ -12,7 +12,6 @@ const statSchema = new Schema ({
     },
     mealId: {
         type: String,
-        
         required: false
     }
 })

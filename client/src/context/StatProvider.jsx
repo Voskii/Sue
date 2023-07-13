@@ -17,7 +17,7 @@ export default function StatProvider(props){
     
     
     const [mealId, setMealId] = useState('')
-    const [stats, setStats] = useState('')
+    const [stats, setStats] = useState([])
 
     const [newStat, setNewStat] = useState({
         name: '',
@@ -46,9 +46,13 @@ export default function StatProvider(props){
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(`inside handle sub`, newStat)
+        
         statAxios.post('/api/stat', newStat)
-            .then(res => console.log(`inside addStat result:`, res))
+            .then(res => 
+                console.log(`inside addStat result:`, res)
+                )
             .catch(err => console.log(err))
+        
         setNewStat({
             name: '',
             value: '',

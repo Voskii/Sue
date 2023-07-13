@@ -27,7 +27,7 @@ export default function MealProvider(props){
             name: '',
             user: userId,
             _img: ''
-        })
+    })
 
     const handleChange = (e) => {
         const  {name, value}  = e.target
