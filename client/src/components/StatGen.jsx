@@ -43,15 +43,8 @@ const StatGen = (props) => {
 
     const submit = (event) => {
         event.preventDefault()
-        setStats(prev => ([
-            ...prev,
-            {
-                name: newStat.name,
-                value: newStat.value,
-                mealId: meal
-            }
-        ]))
         handleSubmit(event)
+        
     }
     
     return (

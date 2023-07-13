@@ -48,16 +48,24 @@ export default function StatProvider(props){
         console.log(`inside handle sub`, newStat)
         
         statAxios.post('/api/stat', newStat)
-            .then(res => 
+            .then(res => {
                 console.log(`inside addStat result:`, res)
-                )
+                setStats(prev => ([
+                        ...prev,
+                        {
+                            name: newStat.name,
+                            value: newStat.value,
+                            _id: res.data._id,
+                            mealId: mealId
+                        }
+                    ]))
+                })
             .catch(err => console.log(err))
-        
-        setNewStat({
-            name: '',
-            value: '',
-            mealId: mealId
-        })
+            setNewStat({
+                name: '',
+                value: '',
+                mealId: mealId
+            })
     }
 
     const getStats = (id) => {
