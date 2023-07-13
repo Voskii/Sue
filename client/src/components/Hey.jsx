@@ -18,7 +18,7 @@ export default function Hey(){
                             {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
                             <Counter />
                         </div>
-                        <NextMeal />
+                            <NextMeal />
                     </div>
                 }
             </div>
