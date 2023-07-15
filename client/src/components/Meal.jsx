@@ -19,7 +19,7 @@ const Meal = (props) => {
     return (
         <div>
             {createStat? 
-                <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/>
+                <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/>  
             :!noBro &&
             <div>
                 <h2 onClick={cleanUp}>{meal.name}</h2>
