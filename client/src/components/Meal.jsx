@@ -4,9 +4,9 @@ import StatGen from './StatGen'
 
 const Meal = (props) => {
 
-    const {meal, stats, cleanUp, setStats, noBro, checked, setChecked, mealClicked, track} = props
+    const {meal, stats, cleanUp, setStats, noBro, mealClicked, track} = props
     const [createStat, setCreateStat] = useState(false)
-    
+    const [checked, setChecked] = useState(false)
 
     console.log(`inside meal comp, stats:`, stats)
 
@@ -18,7 +18,7 @@ const Meal = (props) => {
 
     return (
         <div>
-            {createStat?
+            {createStat? 
                 <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/>
             :!noBro &&
             <div>
