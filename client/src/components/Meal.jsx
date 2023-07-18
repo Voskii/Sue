@@ -4,34 +4,28 @@ import StatGen from './StatGen'
 
 const Meal = (props) => {
 
-    const {meal, stats, cleanUp, setStats, noBro, mealClicked, track} = props
-    const [createStat, setCreateStat] = useState(false)
+    const {meal, stats, cleanUp, setStats, noBro, mealClicked, track, statMe, showStats} = props
+    
     const [checked, setChecked] = useState(false)
 
     console.log(`inside meal comp, stats:`, stats)
 
-    const mapMe =  stats?.map(item => <Stat info={item} />)
+    
 
-    const letsMakeAStat = () => {
-        setCreateStat(true)
+    // const letsMakeAStat = () => {
+    //     setCreateStat(true)
+    // }
+
+    const check = () => {
+
+        setChecked(!checked)
     }
 
     return (
         <div>
-            {createStat? 
-                <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/>  
-            :!noBro &&
-            <div>
-                <h2 onClick={cleanUp}>{meal.name}</h2>
-                {mapMe}
-                {!noBro &&<button onClick={letsMakeAStat}>+Stat?</button>}
-            </div>
-            }
-            {noBro && 
-                <div>
-                    <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
-                    <div onClick={track}>{checked? '👀':'✨'}</div>
-                </div>}
+            <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
+            {showStats && {statMe}}
+            <div onClick={()=>track(meal)}>{checked? '👀':'✨'}</div>
         </div>
     )
 }
