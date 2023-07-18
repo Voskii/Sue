@@ -12,6 +12,11 @@
     border: 1px dashed var(--p);
 }
 
+.hey-meals {
+  display: flex;
+  justify-content: center;
+}
+
 .new-meal{
     display: flex;
     flex-direction: column;

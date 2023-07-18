@@ -18,11 +18,13 @@ export default function StatProvider(props){
     
     const [mealId, setMealId] = useState('')
     const [stats, setStats] = useState([])
+    
 
     const [newStat, setNewStat] = useState({
         name: '',
         value: '',
-        mealId: mealId
+        mealId: mealId,
+        track: false
     })
 
     const setMealIdNow = (id) => {
@@ -33,6 +35,12 @@ export default function StatProvider(props){
         }))
     }
     
+    const setTracked = () => {
+        setNewStat(prev => ({
+            ...prev,
+            track: !prev.track
+        }))
+    }
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -45,6 +53,7 @@ export default function StatProvider(props){
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        
         console.log(`inside handle sub`, newStat)
         
         statAxios.post('/api/stat', newStat)
@@ -56,7 +65,8 @@ export default function StatProvider(props){
                             name: newStat.name,
                             value: newStat.value,
                             _id: res.data._id,
-                            mealId: mealId
+                            mealId: mealId,
+                            track: newStat.track
                         }
                     ]))
                 })
@@ -64,7 +74,8 @@ export default function StatProvider(props){
             setNewStat({
                 name: '',
                 value: '',
-                mealId: mealId
+                mealId: mealId,
+                track: false
             })
     }
 
@@ -73,7 +84,7 @@ export default function StatProvider(props){
         
             .then(res => {
                 setStats(res.data)
-                console.log(res)
+                console.log(`getStat func`, res)
             })
             .catch(err => console.log(err))
     }
@@ -92,7 +103,8 @@ export default function StatProvider(props){
                 setNewStat,
                 stats,
                 setStats,
-                getStats
+                getStats,
+                setTracked
             }}>
             { props.children }
         </StatContext.Provider>

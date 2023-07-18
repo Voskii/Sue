@@ -13,6 +13,11 @@ const statSchema = new Schema ({
     mealId: {
         type: String,
         required: false
+    },
+    track: {
+        type: Boolean,
+        default: false,
+        required: false
     }
 })
 

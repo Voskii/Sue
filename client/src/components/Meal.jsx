@@ -23,8 +23,15 @@ const Meal = (props) => {
 
     return (
         <div>
-            <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
-            {showStats && {statMe}}
+            {showStats?
+                <div>
+                    <h2 onClick={()=>cleanUp(meal)}>{meal.name}</h2>
+                    {statMe}
+                    <button onClick={''}>+Stat?</button>
+                </div>
+            :
+                <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
+            }
             <div onClick={()=>track(meal)}>{checked? '👀':'✨'}</div>
         </div>
     )

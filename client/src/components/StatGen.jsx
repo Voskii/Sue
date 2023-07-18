@@ -4,7 +4,7 @@ import { StatContext } from '../context/StatProvider'
 
 const StatGen = (props) => {
 
-    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal } = useContext(StatContext)
+    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, setStats } = props
     console.log(meal)
     // const [wutId, setwutId] = useState({
@@ -30,7 +30,8 @@ const StatGen = (props) => {
                 {
                     name: newStat.name,
                     value: newStat.value,
-                    mealId: meal
+                    mealId: meal,
+                    track: newStat.track
                 }
         ]))
         if(createStat){
@@ -45,6 +46,11 @@ const StatGen = (props) => {
         event.preventDefault()
         handleSubmit(event)
         
+    }
+
+    const handleCheck = () => {
+        console.log(`CHECKED BRUV`)
+        setTracked()
     }
     
     return (
@@ -63,6 +69,13 @@ const StatGen = (props) => {
                     value={newStat.value}
                     placeholder='Stat'
                     onChange={handleChange}
+                />
+                <input
+                    type='checkbox'
+                    checked={newStat.track}
+                    name='track'
+                    value={newStat.track}
+                    onChange={handleCheck}
                 />
                 <button>SMASHED</button>
             </form>
