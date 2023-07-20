@@ -17,7 +17,7 @@ const DailyDub = (props) => {
         <div className='daily-dub-container'>
             {generate && 
                 <>
-                    <h3>Tracked Meals</h3>
+                    <h3>Tracked Meals</h3> 
                     {mapMe}
                     <button>SMASH ME</button>
                 </>
