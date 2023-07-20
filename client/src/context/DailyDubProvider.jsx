@@ -24,11 +24,23 @@ export default function DailyDubProvider(props){
     }])
 
     const addDubStat = (meal) => {
-        setDub()
+        console.log(`inside dubStat:meal:`, meal)
+        // setDub(prev => [
+        //     ...prev,
+        //     {
+        //         name: meal.name
+        //     }
+        // ])
     }
     
     const addDubMealStat = (stats) => {
-        setDub()
+        console.log(`inside dubMealStat:stats:`, stats)
+        // setDub(prev => [
+        //     ...prev,
+        //     {
+
+        //     }
+        // ])
     }
     
     // const handleChange = (e) => {

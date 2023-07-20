@@ -43,7 +43,7 @@ const Meals = () => {
         setTracking(true)
         setTrackedMeals(prev => [
             ...prev,
-            meal.name
+            meal
         ])
     }
 
@@ -53,7 +53,7 @@ const Meals = () => {
         setShowStats(false)
     }
 
-    const statMe = stats?.map(item => <Stat info={item} />)
+    const statMe = stats?.map(item => <Stat key={item._id} info={item} />)
 
     const mapMe = meals.map(meal => {
 
@@ -67,21 +67,21 @@ const Meals = () => {
             </div>
         )
     }) 
-
+    console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
         <div>
             {chosen? 
                 <div>
-                    <Meal onClick={cleanUp} meal={chosen} stats={stats} cleanUp={cleanUp} setStats={setStats} statMe={statMe} setShowStats={setShowStats} showStats={showStats} />
+                    <Meal onClick={cleanUp} meal={chosen} stats={stats} cleanUp={cleanUp} setStats={setStats} statMe={statMe} setShowStats={setShowStats} showStats={showStats} track={track}/>
                     
                 </div>
             :
-                <div className='hey-meals'>
+                <div className='hey-meals-dd'>
                     <ul>
                         {mapMe}
                     </ul>
                     
-                    {tracking && <DailyDub />}
+                    {tracking && <DailyDub mealss={trackedMeals} generate={true}/>}
                 </div>
             
             }

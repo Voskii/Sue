@@ -19,6 +19,7 @@ const Meal = (props) => {
     const check = () => {
 
         setChecked(!checked)
+        track(meal)
     }
 
     return (
@@ -32,7 +33,7 @@ const Meal = (props) => {
             :
                 <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
             }
-            <div onClick={()=>track(meal)}>{checked? '👀':'✨'}</div>
+            <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div>
         </div>
     )
 }

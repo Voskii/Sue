@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 export default function NextMeal(props) {
 
     const { addMeal, newMeal, setUserIdNow, mealId, handleChange, handleSubmit } = useContext(MealContext)
-    const { setNewM, user } = props
+    const { setNewM, user, setStats } = props
     console.log(`user:`, user)
     const [next, setNext] = useState(true)
     // const mapMe = data.map()
@@ -44,7 +44,7 @@ export default function NextMeal(props) {
                         <button>SMASH MEAL</button>
                     </form>
                 }
-            {mealId && <StatGen meal={mealId} setNewM={setNewM} />}
+            {mealId && <StatGen meal={mealId} setNewM={setNewM} setStats={setStats} />}
         </div>
     )
 }
