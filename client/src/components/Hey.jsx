@@ -9,7 +9,7 @@ import DailyDub from './DailyDub.jsx'
 
 export default function Hey(){
     const { user } = useContext(UserContext)
-    const { setStats }= useContext(StatContext)
+    const { setStats, stats, getStats }= useContext(StatContext)
     const { meals, getMeals } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
     return (
@@ -23,7 +23,7 @@ export default function Hey(){
                             {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
                             <Counter />
                         </div>
-                            <DailyDub onDeck={true} mealss={meals} getMeals={getMeals} />
+                            <DailyDub onDeck={true} mealss={meals} getMeals={getMeals} stats={stats} getStats={getStats} />
                     </div>
                 }
             </div>

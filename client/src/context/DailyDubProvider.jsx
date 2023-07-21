@@ -23,24 +23,25 @@ export default function DailyDubProvider(props){
             }]
     }])
 
-    const addDubStat = (meal) => {
-        console.log(`inside dubStat:meal:`, meal)
-        // setDub(prev => [
-        //     ...prev,
-        //     {
-        //         name: meal.name
-        //     }
-        // ])
+    const addDubStat = (stats) => {
+        console.log(`inside dubStat:stats:`, stats)
+        setDub(prev => [{
+            ...prev,
+            stats: stats
+            }
+        ])
+        
     }
     
-    const addDubMealStat = (stats) => {
-        console.log(`inside dubMealStat:stats:`, stats)
-        // setDub(prev => [
-        //     ...prev,
-        //     {
-
-        //     }
-        // ])
+    const addDubMealStat = (meal) => {
+        console.log(`inside dubMealStat:meal:`, meal)
+        setDub(prev => [{
+            ...prev,
+            name: meal.name,
+            mealId: meal._id,
+            user: meal.user
+            }
+        ])
     }
     
     // const handleChange = (e) => {

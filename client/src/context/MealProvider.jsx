@@ -10,10 +10,27 @@ mealAxios.interceptors.request.use(config => {
     return config
 })
 
+const statAxios = axios.create()
+
+statAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem('token')
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 export default function MealProvider(props){
 
     const [meals, setMeals] = useState([])
-
+    const [fullMeal, setFullMeal] = useState([{
+        name: '',
+        mealId: '',
+        user:'',
+        stats: [{
+            name:'',
+            value:'',
+            track: false
+            }]
+    }])
     
 
     const [userId, setUserId] = useState('')
@@ -58,11 +75,31 @@ export default function MealProvider(props){
     //         .catch(err => console.log(err))
     // }
     const getMeals = () => {
+        console.log(`get meals func called`)
         mealAxios.get("/api/meal/user")
             .then(res => {
                 setMeals(res.data)
+                res.data.map(meal => {
+                    setFullMeal(prev => [{
+                        name: meal.name,
+                        mealId: meal._id,
+                        user: meal.user
+                    }])
+                    statAxios.get(`/api/stat/${meal._id}`)
+                    .then(res => {
+                        console.log(`getStats:stats`, res.data)
+                        setFullMeal(prev => [{
+                            ...prev,
+                            stats: res.data.map(stat => [{
+                                name: stat.name,
+                                value: stat.value,
+                                track: stat.track
+                            }])
+                        }])
+                    })
+                })
             })
-            .catch(err => console.log(err))
+        .catch(err => console.log(err))
     }
 
     function addMeal(newMeal){
@@ -99,7 +136,9 @@ export default function MealProvider(props){
                 setNewMeal,
                 setUserIdNow,
                 userId,
-                mealId
+                mealId,
+                fullMeal,
+                setFullMeal
             }}>
             { props.children }
         </MealContext.Provider>

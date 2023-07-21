@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
@@ -9,23 +9,34 @@ const DailyDub = (props) => {
     const { mealss, onDeck, generate} = props
     const { addMeal, getMeals, meals, mealId } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
-    const { dub, setDub } = useContext(DubContext)
+    const { dub, setDub, addDubStat } = useContext(DubContext)
 
     const mapMe = mealss.map(meal => (<h3>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
+
+    useEffect(() => {
+        addDubStat(stats)
+    },[])
+
+    const submit = () => {
+        console.log(`DD Submit:dub`, dub, `stats:`, stats)
+        
+    }
+
     return (
         <div className='daily-dub-container'>
             {generate && 
                 <>
                     <h3>Tracked Meals</h3> 
                     {mapMe}
-                    <button>SMASH ME</button>
+                    <button onClick={submit}>SMASH ME</button>
                 </>
             }
             {onDeck && mealss &&
                 <>
                     <h3>On Deck Meals</h3>
                     {/* {mapMe} */}
+
                     <button>SMASH ME</button>
                 </>
             }

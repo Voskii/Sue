@@ -8,7 +8,7 @@ import Stat from './Stat'
 import DailyDub from './DailyDub'
 
 const Meals = () => {
-    const { addMeal, getMeals, meals, mealId } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub, addDubStat, addDubMealStat } = useContext(DubContext)
     
@@ -37,9 +37,9 @@ const Meals = () => {
 
     const track = (meal) => {
         console.log(`inside track func`, meal)
-        getStats(meal._id)
-        addDubStat(meal)
-        addDubMealStat(stats)
+        console.log(stats)
+        addDubStat(stats)
+        addDubMealStat(meal)
         setTracking(true)
         setTrackedMeals(prev => [
             ...prev,
@@ -62,7 +62,7 @@ const Meals = () => {
                 {createStat? 
                     <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/> 
                 :
-                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} statMe={statMe}/>
+                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} statMe={statMe} stats={stats} getStats={getStats} fullMeal={fullMeal}/>
                 }
             </div>
         )
@@ -72,7 +72,7 @@ const Meals = () => {
         <div>
             {chosen? 
                 <div>
-                    <Meal onClick={cleanUp} meal={chosen} stats={stats} cleanUp={cleanUp} setStats={setStats} statMe={statMe} setShowStats={setShowStats} showStats={showStats} track={track}/>
+                    <Meal onClick={cleanUp} meal={chosen} stats={stats} cleanUp={cleanUp} setStats={setStats} statMe={statMe} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats}/>
                     
                 </div>
             :
@@ -81,7 +81,7 @@ const Meals = () => {
                         {mapMe}
                     </ul>
                     
-                    {tracking && <DailyDub mealss={trackedMeals} generate={true}/>}
+                    {tracking && <DailyDub mealss={trackedMeals} generate={true} stats={stats} getStats={getStats} />}
                 </div>
             
             }

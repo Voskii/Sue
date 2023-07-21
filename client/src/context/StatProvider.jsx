@@ -84,7 +84,7 @@ export default function StatProvider(props){
         
             .then(res => {
                 setStats(res.data)
-                console.log(`getStat func`, res)
+                console.log(`getStat func`, res.data)
             })
             .catch(err => console.log(err))
     }
