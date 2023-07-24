@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
+import axios from 'axios'
 
 const DailyDub = (props) => {
 // stat map, add values together for the day, back end storage for total stats vs max stats for the day, contains array of selected user meals
@@ -9,18 +10,18 @@ const DailyDub = (props) => {
     const { mealss, onDeck, generate} = props
     const { addMeal, getMeals, meals, mealId } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
-    const { dub, setDub, addDubStat } = useContext(DubContext)
+    const { dub, setDub, addDubStat, submit } = useContext(DubContext)
 
-    const mapMe = mealss.map(meal => (<h3>{meal.name}</h3>))
+    const mapMe = mealss.map(meal => {<h3>{meal.name}</h3>})
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
 
     useEffect(() => {
         addDubStat(stats)
     },[])
 
-    const submit = () => {
+    const addDubs = () => {
         console.log(`DD Submit:dub`, dub, `stats:`, stats)
-        
+        submit(mealss)
     }
 
     return (
@@ -29,7 +30,7 @@ const DailyDub = (props) => {
                 <>
                     <h3>Tracked Meals</h3> 
                     {mapMe}
-                    <button onClick={submit}>SMASH ME</button>
+                    <button onClick={addDubs}>SMASH ME</button>
                 </>
             }
             {onDeck && mealss &&
