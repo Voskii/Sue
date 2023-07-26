@@ -27,6 +27,7 @@ dubRouter.get("/:dubId", (req, res, next) => {
 
 //Post one
 dubRouter.post("/", (req, res, next) => {
+    console.log('inside dubpost', req.body)
     const newDub = new Dub(req.body)
     newDub.save((err, savedDub) => {
         if(err){

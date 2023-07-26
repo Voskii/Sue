@@ -10,9 +10,9 @@ const DailyDub = (props) => {
     const { mealss, onDeck, generate} = props
     const { addMeal, getMeals, meals, mealId } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
-    const { dub, setDub, addDubStat, submit } = useContext(DubContext)
+    const { dub, setDub, addDubStat, handleSubmit } = useContext(DubContext)
 
-    const mapMe = mealss.map(meal => {<h3>{meal.name}</h3>})
+    const mapMe = mealss.map(meal => (<h3>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
 
     useEffect(() => {
@@ -20,8 +20,8 @@ const DailyDub = (props) => {
     },[])
 
     const addDubs = () => {
-        console.log(`DD Submit:dub`, dub, `stats:`, stats)
-        submit(mealss)
+        console.log(`DD Submit:dub`, dub, `stats:`, stats, 'mealss:', mealss)
+        handleSubmit(mealss)
     }
 
     return (
@@ -36,8 +36,7 @@ const DailyDub = (props) => {
             {onDeck && mealss &&
                 <>
                     <h3>On Deck Meals</h3>
-                    {/* {mapMe} */}
-
+                        {/* {mapMe} */}
                     <button>SMASH ME</button>
                 </>
             }

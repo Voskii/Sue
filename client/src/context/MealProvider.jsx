@@ -74,33 +74,75 @@ export default function MealProvider(props){
     //         })
     //         .catch(err => console.log(err))
     // }
-    const getMeals = () => {
-        console.log(`get meals func called`)
-        mealAxios.get("/api/meal/user")
-            .then(res => {
-                setMeals(res.data)
-                res.data.map(meal => {
-                    setFullMeal(prev => [{
-                        name: meal.name,
-                        mealId: meal._id,
-                        user: meal.user
-                    }])
-                    statAxios.get(`/api/stat/${meal._id}`)
-                    .then(res => {
-                        console.log(`getStats:stats`, res.data)
-                        setFullMeal(prev => [{
-                            ...prev,
-                            stats: res.data.map(stat => [{
-                                name: stat.name,
-                                value: stat.value,
-                                track: stat.track
-                            }])
-                        }])
-                    })
-                })
-            })
-        .catch(err => console.log(err))
-    }
+    // const getMeals = () => {
+    //     console.log(`get meals func called`)
+    //     mealAxios.get("/api/meal/user")
+    //         .then(res => {
+    //             setMeals(res.data)
+    //             res.data.map(meal => {
+    //                 setFullMeal(prev => [{
+    //                     ...prev,
+    //                     name: meal.name,
+    //                     mealId: meal._id,
+    //                     user: meal.user
+    //                 }])
+    //                 statAxios.get(`/api/stat/${meal._id}`)
+    //                 .then(res => {
+    //                     console.log(`getStats:stats`, res.data)
+    //                     setFullMeal(prev => [{
+    //                         ...prev,
+    //                         stats: res.data.map(stat => [{
+    //                             name: stat.name,
+    //                             value: stat.value,
+    //                             track: stat.track
+    //                         }])
+    //                     }])
+    //                 })
+    //             })
+    //         })
+    //     .catch(err => console.log(err))
+    // }
+
+    const getMeals = async () => {
+        console.log('get meals func called');
+    
+        try {
+            const mealResponse = await mealAxios.get("/api/meal/user");
+            const meals = mealResponse.data;
+    
+            const fullMealsPromises = meals.map(async meal => {
+                const mealData = {
+                    name: meal.name,
+                    mealId: meal._id,
+                    user: meal.user,
+                };
+    
+                try {
+                    const statResponse = await statAxios.get(`/api/stat/${meal._id}`);
+                    const stats = statResponse.data.map(stat => ({
+                        name: stat.name,
+                        value: stat.value,
+                        track: stat.track
+                    }));
+    
+                    return {
+                        ...mealData,
+                        stats
+                    };
+                } catch (err) {
+                    console.error("Error fetching stats", err);
+                    return mealData;  // Return meal data even if stats fetch failed.
+                }
+            });
+    
+            const fullMeals = await Promise.all(fullMealsPromises);
+            setMeals(meals);
+            setFullMeal(fullMeals);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    
 
     function addMeal(newMeal){
         mealAxios.post('/api/meal', newMeal)

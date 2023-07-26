@@ -30,7 +30,6 @@ const Meals = () => {
 
     const mealClicked = (meal) => {
         console.log(`meal clicked`)
-        getStats(meal._id)
         setChosen(meal)
         setShowStats(!showStats)
     }
@@ -53,8 +52,6 @@ const Meals = () => {
         setShowStats(false)
     }
 
-    const statMe = stats?.map(item => <Stat key={item._id} info={item} />)
-
     const mapMe = meals.map(meal => {
 
         return (
@@ -62,7 +59,7 @@ const Meals = () => {
                 {createStat? 
                     <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/> 
                 :
-                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} statMe={statMe} stats={stats} getStats={getStats} fullMeal={fullMeal}/>
+                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} fullMeal={fullMeal}/>
                 }
             </div>
         )
@@ -72,7 +69,7 @@ const Meals = () => {
         <div>
             {chosen? 
                 <div>
-                    <Meal onClick={cleanUp} meal={chosen} stats={stats} cleanUp={cleanUp} setStats={setStats} statMe={statMe} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats}/>
+                    <Meal onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats}/>
                     
                 </div>
             :
