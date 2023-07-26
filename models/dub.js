@@ -10,8 +10,7 @@ const dubSchema = new Schema({
         type: String,
     },
     stats: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Stat',
+        type: Array,
         required: true
     }],
     user: {
@@ -26,3 +25,8 @@ const dubSchema = new Schema({
 })
 
 module.exports = mongoose.model('Dub', dubSchema)
+// ,
+//     position: {
+//         type: Number,
+//         required: true
+//     }

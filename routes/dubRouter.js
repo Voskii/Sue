@@ -14,6 +14,16 @@ dubRouter.get("/", async (req, res, next) => {
     }
 })
 
+dubRouter.get('/user', (req, res, next) => {
+    Dub.find({ user: req.auth._id}, (err, dubs) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+            return res.status(200).send(dubs)
+    })
+})
+
 // Get by Meal
 dubRouter.get("/:dubId", (req, res, next) => {
     Dub.find({ dubId : req.params.dubId }, (err, dub) => {

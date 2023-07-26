@@ -15,21 +15,18 @@ const DailyDub = (props) => {
     const mapMe = mealss.map(meal => (<h3>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
 
-    useEffect(() => {
-        addDubStat(stats)
-    },[])
-
     const addDubs = () => {
         console.log(`DD Submit:dub`, dub, `stats:`, stats, 'mealss:', mealss)
         handleSubmit(mealss)
+        
     }
 
     return (
         <div className='daily-dub-container'>
             {generate && 
                 <>
-                    <h3>Tracked Meals</h3> 
-                    {mapMe}
+                    <h3>Tracked Meals</h3>
+                        {mapMe}
                     <button onClick={addDubs}>SMASH ME</button>
                 </>
             }

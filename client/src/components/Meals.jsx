@@ -52,14 +52,14 @@ const Meals = () => {
         setShowStats(false)
     }
 
-    const mapMe = meals.map(meal => {
+    const mapMe = fullMeal.map(meal => {
 
         return (
             <div>
                 {createStat? 
                     <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/> 
                 :
-                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} fullMeal={fullMeal}/>
+                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} />
                 }
             </div>
         )
@@ -69,7 +69,7 @@ const Meals = () => {
         <div>
             {chosen? 
                 <div>
-                    <Meal onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats}/>
+                    <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} />
                     
                 </div>
             :

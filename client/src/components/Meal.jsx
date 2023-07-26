@@ -5,11 +5,11 @@ import StatGen from './StatGen'
 const Meal = (props) => {
 
     const {meal, cleanUp, noBro, mealClicked, track, showStats, fullMeal} = props
-    console.log(fullMeal)
+    console.log(`fullmeal inside mealcomp:`, fullMeal)
     const [checked, setChecked] = useState(false)
 
 
-    const statMe = fullMeal.stats?.map(item => <Stat key={item._id} info={item} />)
+    const statMe = meal.stats?.map(item => <Stat key={item._id} info={item} />)
 
     // const letsMakeAStat = () => {
     //     setCreateStat(true)
@@ -25,14 +25,14 @@ const Meal = (props) => {
         <div>
             {showStats?
                 <div>
-                    <h2 onClick={()=>cleanUp(fullMeal)}>{meal.name}</h2>
+                    <h2 onClick={()=>cleanUp(meal)}>{meal.name}</h2>
                     {statMe}
                     <button onClick={''}>+Stat?</button>
                 </div>
             :
-                <h2 onClick={()=>mealClicked(fullMeal)}>{meal.name}</h2>
+                <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
             }
-            <div onClick={()=>check(fullMeal)}>{checked? '👀':'✨'}</div>
+            <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div>
         </div>
     )
 }
