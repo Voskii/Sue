@@ -14,17 +14,17 @@ dubRouter.get("/", async (req, res, next) => {
     }
 })
 
-dubRouter.get('/user', (req, res, next) => {
-    Dub.find({ user: req.auth._id}, (err, dubs) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-            return res.status(200).send(dubs)
-    })
-})
+// dubRouter.get('/user', (req, res, next) => {
+//     Dub.find({ user: req.auth._id}, (err, dubs) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//             return res.status(200).send(dubs)
+//     })
+// })
 
-// Get by Meal
+// Get by dubId
 dubRouter.get("/:dubId", (req, res, next) => {
     Dub.find({ dubId : req.params.dubId }, (err, dub) => {
         if(err){
@@ -32,6 +32,16 @@ dubRouter.get("/:dubId", (req, res, next) => {
             return next(err)
         }
         return res.status(200).send(dub)
+    })
+})
+
+dubRouter.get('/user/:userId', (req, res, next) => {
+    Dub.find({ user: req.auth._id}, (err, dubs) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+            return res.status(200).send(dubs)
     })
 })
 
@@ -59,7 +69,7 @@ dubRouter.delete( "/:dubId", async (req, res, next) =>{
     })
 })
 
-//update one stat
+//update one dub
 dubRouter.put("/:dubId" , (req, res, next) => {
     Dub.findOneAndUpdate(
         {_id : req.params.dubId},

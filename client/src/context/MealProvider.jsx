@@ -18,6 +18,14 @@ statAxios.interceptors.request.use(config => {
     return config
 })
 
+const dubAxios = axios.create()
+
+dubAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem('token')
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 export default function MealProvider(props){
 
     const [meals, setMeals] = useState([])
@@ -35,6 +43,7 @@ export default function MealProvider(props){
 
     const [userId, setUserId] = useState('')
     const [mealId, setMealId] = useState('')
+    const [dubs, setDubs] = useState([])
 
     const setUserIdNow = (id) => {
         setUserId(id)
@@ -142,6 +151,29 @@ export default function MealProvider(props){
             console.log(err);
         }
     };
+
+    const getDubs = async (user) => {
+        console.log(`get dubs func`, user)
+        try {
+
+            const dubResponse = await dubAxios.get(`api/dub/user/${user._id}`)
+            console.log(dubResponse)
+            const dubsPromises = dubResponse.data.map(dub => ({
+                name: dub.name,
+                mealId: dub.mealId,
+                user: dub.user,
+                stats: dub.stats.map(stat => ([{
+                    name: stat.name,
+                    value: stat.value,
+                    track: stat.track
+                }]))
+            }))
+            const fullDubs = await Promise.all(dubsPromises)
+            setDubs(fullDubs)
+        } catch (err) {
+            console.log(err)
+        }
+    }
     
 
     function addMeal(newMeal){
@@ -180,7 +212,9 @@ export default function MealProvider(props){
                 userId,
                 mealId,
                 fullMeal,
-                setFullMeal
+                setFullMeal,
+                getDubs,
+                dubs
             }}>
             { props.children }
         </MealContext.Provider>

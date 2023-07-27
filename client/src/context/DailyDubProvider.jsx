@@ -23,26 +23,26 @@ export default function DailyDubProvider(props){
             }]
     }])
 
-    const addDubStat = (stats) => {
-        console.log(`inside dubStat:stats:`, stats)
-        setDub(prev => [{
-            ...prev,
-            stats: stats
-            }
-        ])
+    // const addDubStat = (stats) => {
+    //     console.log(`inside dubStat:stats:`, stats)
+    //     setDub(prev => [{
+    //         ...prev,
+    //         stats: stats
+    //         }
+    //     ])
         
-    }
+    // }
     
-    const addDubMealStat = (meal) => {
-        console.log(`inside dubMealStat:meal:`, meal)
-        setDub(prev => [{
-            ...prev,
-            name: meal.name,
-            mealId: meal._id,
-            user: meal.user
-            }
-        ])
-    }
+    // const addDubMealStat = (meal) => {
+    //     console.log(`inside dubMealStat:meal:`, meal)
+    //     setDub(prev => [{
+    //         ...prev,
+    //         name: meal.name,
+    //         mealId: meal._id,
+    //         user: meal.user
+    //         }
+    //     ])
+    // }
     
     // const handleChange = (e) => {
     //     const  {name, value}  = e.target
@@ -102,9 +102,7 @@ export default function DailyDubProvider(props){
                 handleChange,
                 handleSubmit,
                 dub,
-                setDub,
-                addDubStat,
-                addDubMealStat
+                setDub
             }}>
             { props.children }
         </DubContext.Provider>

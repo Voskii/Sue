@@ -8,9 +8,9 @@ import Stat from './Stat'
 import DailyDub from './DailyDub'
 
 const Meals = () => {
-    const { addMeal, getMeals, meals, mealId, fullMeal } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
-    const { dub, setDub, addDubStat, addDubMealStat } = useContext(DubContext)
+    const { dub, setDub} = useContext(DubContext)
     
     const [ showStats, setShowStats ] = useState(false)
     console.log(meals)
@@ -18,7 +18,7 @@ const Meals = () => {
     useEffect(() => {
 
         getMeals()
-
+        
     },[])
 
     const [chosen, setChosen] = useState('')
@@ -37,8 +37,6 @@ const Meals = () => {
     const track = (meal) => {
         console.log(`inside track func`, meal)
         console.log(stats)
-        addDubStat(stats)
-        addDubMealStat(meal)
         setTracking(true)
         setTrackedMeals(prev => [
             ...prev,
@@ -78,7 +76,7 @@ const Meals = () => {
                         {mapMe}
                     </ul>
                     
-                    {tracking && <DailyDub mealss={trackedMeals} generate={true} stats={stats} getStats={getStats} />}
+                    {dubs && <DailyDub mealss={trackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs}/>}
                 </div>
             
             }
