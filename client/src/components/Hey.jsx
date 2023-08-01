@@ -8,9 +8,9 @@ import { MealContext } from '../context/MealProvider.jsx'
 import DailyDub from './DailyDub.jsx'
 
 export default function Hey(){
-    const { user } = useContext(UserContext)
+    const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
     const { setStats, stats, getStats }= useContext(StatContext)
-    const { meals, getMeals, getDubs, dubs } = useContext(MealContext)
+    const { meals, getMeals, getDubs, dubs, tStats } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
 
     useEffect(()=>{
@@ -26,7 +26,7 @@ export default function Hey(){
                     <div>
                         <div>
                             {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
-                            <Counter />
+                            <Counter thisStat={thisStat} setThisStat={setThisStat} addPrioStat={addPrioStat} tStats={tStats} />
                         </div>
                             <DailyDub onDeck={true} mealss={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>

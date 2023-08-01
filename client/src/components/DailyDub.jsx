@@ -12,7 +12,7 @@ const DailyDub = (props) => {
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub, addDubStat, handleSubmit } = useContext(DubContext)
 
-    const mapMe = mealss.map(meal => (<h3>{meal.name}</h3>))
+    const mapMe = mealss.map(meal => (<h3 key={meal._id}>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
 
     const addDubs = () => {
@@ -21,7 +21,7 @@ const DailyDub = (props) => {
         
     }
 
-    const dubMe = dubs?.map(dub => (<h3>{dub.name}</h3>))
+    const dubMe = dubs?.map((dub, index) => (<h3 key={index}>{dub.name}</h3>))
 
     return (
         <div className='daily-dub-container'>

@@ -14,11 +14,12 @@ export default function UserProvider(props){
     const initState = {
         user: JSON.parse(localStorage.getItem('user')) || {}, 
         token: localStorage.getItem('token') || "", 
-        todos: [],
+        fav: '',
         errMsg: ""
     }
 
     const [userState, setUserState] = useState(initState)
+    const [thisStat, setThisStat] = useState('')
 
     function signUp(credentials){
         axios.post("/auth/signup", credentials)
@@ -56,7 +57,7 @@ export default function UserProvider(props){
         setUserState({
             user: {},
             token: "",
-            todos: []
+            fav: ''
         })
     }
 
@@ -85,7 +86,8 @@ export default function UserProvider(props){
             .catch(err => console.log(err))
     }
 
-    function addTodo(newTodo){
+    function addPrioStat(newTodo){
+        console.log(newTodo)
         userAxios.post('/api/todo', newTodo)
             .then(res => {
                 setUserState(prev => ({
@@ -96,6 +98,8 @@ export default function UserProvider(props){
             .catch(err => console.log(err.response.data.errMsg))
     }
 
+    
+
     return (
 
         <UserContext.Provider
@@ -104,8 +108,10 @@ export default function UserProvider(props){
                 signUp,
                 login,
                 logout,
-                addTodo,
-                resetAuthErr
+                resetAuthErr,
+                thisStat,
+                setThisStat,
+                addPrioStat
             }}>
             { props.children }
         </UserContext.Provider>

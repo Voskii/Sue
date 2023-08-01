@@ -9,11 +9,11 @@ const mealSchema = new Schema({
     imgUrl: {
         type: String,
     },
-    stats: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Stat',
+    stats: {
+        type: Array,
+        
         required: true
-    }],
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

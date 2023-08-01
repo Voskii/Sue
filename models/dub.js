@@ -9,10 +9,10 @@ const dubSchema = new Schema({
     imgUrl: {
         type: String,
     },
-    stats: [{
+    stats: {
         type: Array,
         required: true
-    }],
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

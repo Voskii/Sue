@@ -44,6 +44,7 @@ export default function MealProvider(props){
     const [userId, setUserId] = useState('')
     const [mealId, setMealId] = useState('')
     const [dubs, setDubs] = useState([])
+    const [tStats, setTStats] = useState([])
 
     const setUserIdNow = (id) => {
         setUserId(id)
@@ -158,6 +159,21 @@ export default function MealProvider(props){
 
             const dubResponse = await dubAxios.get(`api/dub/user/${user._id}`)
             console.log(dubResponse)
+            const newTStats = []
+            dubResponse.data.map(dub => {
+                dub.stats.map(stat => {
+                    console.log(`stat`, stat)
+                    newTStats.push({
+                        name: stat.name, 
+                        value: stat.value, 
+                        track: stat.track 
+                    })
+                })
+                
+            })
+
+            setTStats(prev=> [...prev, ...newTStats])
+            
             const dubsPromises = dubResponse.data.map(dub => ({
                 name: dub.name,
                 mealId: dub.mealId,
@@ -195,7 +211,7 @@ export default function MealProvider(props){
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-
+    console.log(`mealcontext tstats`, tStats)
     return (
 
         <MealContext.Provider
@@ -214,7 +230,8 @@ export default function MealProvider(props){
                 fullMeal,
                 setFullMeal,
                 getDubs,
-                dubs
+                dubs,
+                tStats
             }}>
             { props.children }
         </MealContext.Provider>
