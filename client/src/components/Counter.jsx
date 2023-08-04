@@ -16,7 +16,7 @@ export default function Counter(props){
 
     return (
         <div>
-            <h1>chosen stat</h1>
+            <h1>chosen stat</h1> 
         </div>
     )
 }
