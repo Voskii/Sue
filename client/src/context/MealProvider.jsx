@@ -159,30 +159,30 @@ export default function MealProvider(props){
 
             const dubResponse = await dubAxios.get(`api/dub/user/${user._id}`)
             console.log(dubResponse)
-            const newTStats = []
+            
+            // 
             dubResponse.data.map(dub => {
                 dub.stats.map(stat => {
                     console.log(`stat`, stat)
-                    newTStats.push({
-                        name: stat.name, 
-                        value: stat.value, 
-                        track: stat.track 
-                    })
+                    setTStats( prev => ([
+                        ...prev,
+                        {
+                            name: stat.name, 
+                            value: stat.value, 
+                            track: stat.track
+                        }
+                    ]))
                 })
                 
             })
 
-            setTStats(prev=> [...prev, ...newTStats])
+            // setTStats(prev=> [...prev, ...newTStats])
             
             const dubsPromises = dubResponse.data.map(dub => ({
                 name: dub.name,
                 mealId: dub.mealId,
                 user: dub.user,
-                stats: dub.stats.map(stat => ([{
-                    name: stat.name,
-                    value: stat.value,
-                    track: stat.track
-                }]))
+                stats: dub.stats
             }))
             const fullDubs = await Promise.all(dubsPromises)
             setDubs(fullDubs)

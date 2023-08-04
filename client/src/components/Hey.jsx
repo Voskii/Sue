@@ -13,6 +13,7 @@ export default function Hey(){
     const { meals, getMeals, getDubs, dubs, tStats } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
     console.log('hey page load', tStats)
+    console.log(`hey page dubs:`, dubs)
     useEffect(()=>{
         getDubs(user)
     },[])
