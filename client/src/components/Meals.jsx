@@ -55,9 +55,9 @@ const Meals = () => {
         return (
             <div>
                 {createStat? 
-                    <StatGen setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats}/> 
+                    <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false}/> 
                 :
-                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} />
+                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} setNewM={false}/>
                 }
             </div>
         )
@@ -67,7 +67,7 @@ const Meals = () => {
         <div>
             {chosen? 
                 <div>
-                    <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} />
+                    <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats} />
                     
                 </div>
             :

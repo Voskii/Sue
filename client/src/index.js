@@ -7,6 +7,7 @@ import App from './App';
 import { MealProvider } from './context/MealProvider.jsx'
 import { StatProvider } from './context/StatProvider.jsx'
 import { DailyDubProvider } from './context/DailyDubProvider.jsx'
+import FavProvider from './context/FavProvider.jsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +18,9 @@ root.render(
         <MealProvider>
           <StatProvider>
             <DailyDubProvider>
-              <App />
+              <FavProvider>
+                <App />
+              </FavProvider>
             </DailyDubProvider>
           </StatProvider>
         </MealProvider>

@@ -2,15 +2,18 @@ import React, {useContext} from 'react'
 import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { UserContext } from './context/UserProvider.jsx'
+import { MealContext } from './context/MealProvider.jsx'
 import Meals from './components/Meals.jsx'
 import Auth from './components/Auth.jsx'
 import Hey from './components/Hey.jsx'
+import Counter from './components/Counter.jsx'
 import Header from './components/Header.jsx';
 import './style.css';
 import './hey.css'
 
 function App() {
-  const { token, logout} = useContext(UserContext)
+  const { token, logout, user} = useContext(UserContext)
+  const { getFav } = useContext(MealContext)
   // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   return (
     <div className="">
@@ -18,7 +21,8 @@ function App() {
         <nav className=''>
           <Header logout={logout}  />
           <Link to="/">Hey</Link>
-          <Link to="meals">Meals</Link> 
+          <Link to="meals">Meals</Link>
+          <Link to='counter'>Fav</Link>
         </nav>
       }
       <Routes>
@@ -33,7 +37,14 @@ function App() {
         <Route
           path='/meals' element = {<ProtectedRoute token={token} redirectTo='/'>
             <Meals />
-          </ProtectedRoute>}
+          </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/counter' element = {<ProtectedRoute token={token} redirectTo='/'>
+            <Counter comp={true} getFav={getFav} user={user} />
+          </ProtectedRoute>
+          }
         />
       </Routes>
     </div>

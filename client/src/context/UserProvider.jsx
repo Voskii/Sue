@@ -39,14 +39,15 @@ export default function UserProvider(props){
     function login(credentials){
         axios.post("/auth/login", credentials)
             .then(res => {
-                const { user, token } = res.data
+                const { user, token, fav } = res.data
                 localStorage.setItem('token', token)
                 localStorage.setItem('user', JSON.stringify(user))
                 getUserTodos()
                 setUserState(prev => ({
                     ...prev,
                     user,
-                    token
+                    token, 
+                    fav
                 }))})
             .catch(err => handleAuthErr(err.response.data.errMsg)) 
     }
@@ -92,7 +93,7 @@ export default function UserProvider(props){
             .then(res => {
                 setUserState(prev => ({
                     ...prev,
-                    todos: [...prev.todos, res.data]
+                    fav: res.data
                 }))
             })
             .catch(err => console.log(err.response.data.errMsg))

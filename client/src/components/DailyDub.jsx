@@ -11,7 +11,7 @@ const DailyDub = (props) => {
     const { addMeal, getMeals, meals, mealId } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub, addDubStat, handleSubmit } = useContext(DubContext)
-
+//render tracked meals on load?
     const mapMe = mealss.map(meal => (<h3 key={meal._id}>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dub, `mealss:`, mealss)
 
@@ -28,7 +28,7 @@ const DailyDub = (props) => {
             {generate && 
                 <>
                     <h3>Tracked Meals</h3>
-                        {dubMe}
+                        {mapMe}
                     <button onClick={addDubs}>SMASH ME</button>
                 </>
             }

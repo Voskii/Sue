@@ -59,16 +59,16 @@ export default function StatProvider(props){
         statAxios.post('/api/stat', newStat)
             .then(res => {
                 console.log(`inside addStat result:`, res)
-                setStats(prev => ([
-                        ...prev,
-                        {
-                            name: newStat.name,
-                            value: newStat.value,
-                            _id: res.data._id,
-                            mealId: mealId,
-                            track: newStat.track
-                        }
-                    ]))
+                // setStats(prev => ([
+                //         ...prev,
+                //         {
+                //             name: res.data.name,
+                //             value: res.data.value,
+                //             _id: res.data._id,
+                //             mealId: res.data.mealId,
+                //             track: res.data.track
+                //         }
+                //     ]))
                 })
             .catch(err => console.log(err))
             setNewStat({

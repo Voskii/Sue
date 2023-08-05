@@ -58,7 +58,7 @@ export default function DailyDubProvider(props){
     const handleSubmit = (meals) => {
         meals.map(meal=>{
             console.log('handlesub', meal)
-            dubAxios.post(`./api/dub`, meal)
+            dubAxios.post(`/api/dub`, meal)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
         })

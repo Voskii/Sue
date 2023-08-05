@@ -10,10 +10,12 @@ import DailyDub from './DailyDub.jsx'
 export default function Hey(){
     const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
     const { setStats, stats, getStats }= useContext(StatContext)
-    const { meals, getMeals, getDubs, dubs, tStats } = useContext(MealContext)
+    const { meals, getMeals, getDubs, dubs, tStats, newFav } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
+    
     console.log('hey page load', tStats)
     console.log(`hey page dubs:`, dubs)
+
     useEffect(()=>{
         getDubs(user)
     },[])
@@ -27,7 +29,7 @@ export default function Hey(){
                     <div>
                         <div>
                             {!newM && <button onClick={() => setNewM(!newM)}>+M?</button>}
-                            <Counter thisStat={thisStat} setThisStat={setThisStat} addPrioStat={addPrioStat} tStats={tStats} />
+                            <Counter newFav={newFav} tStats={stats}/>
                         </div>
                             <DailyDub onDeck={true} mealss={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>

@@ -5,17 +5,17 @@ import { StatContext } from '../context/StatProvider'
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, setStats } = props
+    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat } = props
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
     //     stat: '',
     //     mealId: meal._id
     // })
-    
+    //set meal id for rendering statgen in hey//meal componet
 
     useEffect(() => {
-        console.log(`meal id use effect fired`)
+        console.log(`meal id use effect fired`, meal)
         setMealIdNow(meal)
         setNewStat(prevInputs => ({
             ...prevInputs,
@@ -39,7 +39,11 @@ const StatGen = (props) => {
             return 
         }
         setMealIdNow('')
-        setNewM(false)
+        if(setNewM){
+            setNewM(false)
+        }
+        
+        setMakeMeAStat(false)
     }
 
     const submit = (event) => {

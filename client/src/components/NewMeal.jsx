@@ -4,13 +4,13 @@ import { MealContext } from '../context/MealProvider'
 import StatGen from './StatGen'
 import { useEffect } from 'react'
 
-export default function NextMeal(props) {
+export default function NewMeal(props) {
 
     const { addMeal, newMeal, setUserIdNow, mealId, handleChange, handleSubmit } = useContext(MealContext)
     const { setNewM, user, setStats } = props
     console.log(`user:`, user)
     const [next, setNext] = useState(true)
-    // const mapMe = data.map()
+    
     useEffect(()=>{
         setUserIdNow(user._id)
     },[])

@@ -26,6 +26,14 @@ dubAxios.interceptors.request.use(config => {
     return config
 })
 
+const favAxios = axios.create()
+
+favAxios.interceptors.request.use(config=>{
+    const token = localStorage.getItem('token')
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 export default function MealProvider(props){
 
     const [meals, setMeals] = useState([])
@@ -73,45 +81,6 @@ export default function MealProvider(props){
         //     .then(res => console.log(`post meal func:`, res))
         //     .catch(res => console.log(res))
     }
-    
-    // function getUserTodos(){
-    //     mealAxios.get("/api/todo/user")
-    //         .then(res => {
-    //             setUserState(prev => ({
-    //                 ...prev,
-    //                 todos: res.data
-    //             }))
-    //         })
-    //         .catch(err => console.log(err))
-    // }
-    // const getMeals = () => {
-    //     console.log(`get meals func called`)
-    //     mealAxios.get("/api/meal/user")
-    //         .then(res => {
-    //             setMeals(res.data)
-    //             res.data.map(meal => {
-    //                 setFullMeal(prev => [{
-    //                     ...prev,
-    //                     name: meal.name,
-    //                     mealId: meal._id,
-    //                     user: meal.user
-    //                 }])
-    //                 statAxios.get(`/api/stat/${meal._id}`)
-    //                 .then(res => {
-    //                     console.log(`getStats:stats`, res.data)
-    //                     setFullMeal(prev => [{
-    //                         ...prev,
-    //                         stats: res.data.map(stat => [{
-    //                             name: stat.name,
-    //                             value: stat.value,
-    //                             track: stat.track
-    //                         }])
-    //                     }])
-    //                 })
-    //             })
-    //         })
-    //     .catch(err => console.log(err))
-    // }
 
     const getMeals = async () => {
         console.log('get meals func called');
@@ -156,15 +125,13 @@ export default function MealProvider(props){
     const getDubs = async (user) => {
         console.log(`get dubs func`, user)
         try {
-
             const dubResponse = await dubAxios.get(`api/dub/user/${user._id}`)
             console.log(dubResponse)
-            
-            // 
             dubResponse.data.map(dub => {
                 dub.stats.map(stat => {
                     console.log(`stat`, stat)
-                    setTStats( prev => ([
+                    if(stat.track){
+                        setTStats( prev => ([
                         ...prev,
                         {
                             name: stat.name, 
@@ -172,12 +139,11 @@ export default function MealProvider(props){
                             track: stat.track
                         }
                     ]))
+                    }
                 })
                 
             })
 
-            // setTStats(prev=> [...prev, ...newTStats])
-            
             const dubsPromises = dubResponse.data.map(dub => ({
                 name: dub.name,
                 mealId: dub.mealId,
@@ -187,11 +153,10 @@ export default function MealProvider(props){
             const fullDubs = await Promise.all(dubsPromises)
             setDubs(fullDubs)
         } catch (err) {
-            console.log(err)
-        }
+        console.log(err)
+    }
     }
     
-
     function addMeal(newMeal){
         mealAxios.post('/api/meal', newMeal)
             .then(res => {
@@ -212,6 +177,11 @@ export default function MealProvider(props){
             .catch(err => console.log(err.response.data.errMsg))
     }
     console.log(`mealcontext tstats`, tStats)
+
+    const newFav = (thisOne) => {
+        favAxios.post('/api/fav', thisOne)
+            .then(res => console.log(res.data))
+    }
     return (
 
         <MealContext.Provider
@@ -231,7 +201,8 @@ export default function MealProvider(props){
                 setFullMeal,
                 getDubs,
                 dubs,
-                tStats
+                tStats,
+                newFav
             }}>
             { props.children }
         </MealContext.Provider>
