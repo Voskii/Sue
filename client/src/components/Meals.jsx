@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
+import { UserContext } from '../context/UserProvider'
 import StatGen from './StatGen'
 import Meal from './Meal'
 import Stat from './Stat'
 import DailyDub from './DailyDub'
 
 const Meals = () => {
+    const { user } = useContext(UserContext)
     const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub} = useContext(DubContext)
@@ -18,9 +20,11 @@ const Meals = () => {
     useEffect(() => {
 
         getMeals()
-        
+        getDubs(user)
+
     },[])
 
+    
     const [chosen, setChosen] = useState('')
     const [trackedMeals, setTrackedMeals] = useState([])
     const [tracking, setTracking] = useState(false)

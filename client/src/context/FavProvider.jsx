@@ -14,6 +14,7 @@ favAxios.interceptors.request.use(config => {
 const getFav = (id) => {
     favAxios.get(`/api/fav/${id}`)
         .then(res => console.log(`getFav func `, res))
+        .catch(err => console.log(err))
 }
 
 
