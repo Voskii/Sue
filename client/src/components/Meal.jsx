@@ -40,6 +40,7 @@ const Meal = (props) => {
                 <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
             }
             <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div>
+            {/* {'move this to meals component'} */}
         </div>
     )
 }

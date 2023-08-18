@@ -80,7 +80,7 @@ const Meals = () => {
                         {mapMe}
                     </ul>
                     
-                    {dubs && <DailyDub mealss={trackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs}/>}
+                    {dubs && <DailyDub mealss={trackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} setTrackedMeals={setTrackedMeals}/>}
                 </div>
             
             }

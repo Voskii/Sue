@@ -18,6 +18,10 @@ const dubSchema = new Schema({
         ref: 'User',
         required: true
     },
+    value: {
+        type: String,
+        required: false
+    },
     mealId: {
         type: String,
         required: true

@@ -17,7 +17,7 @@ export default function Counter(props){
         getFav(user)
     },[])
     // track users most important stat of the day in back end
-    const [chosen, setChosen] = useState({})
+    const [chosen, setChosen] = useState('')
 
     const iChooseYou = (thisOne) => {
         setChosen(thisOne.name)
