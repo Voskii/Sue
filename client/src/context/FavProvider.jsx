@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import axios from "axios";
 
-const FavContext = React.createContext()
+const FavContext = createContext()
 
 const favAxios = axios.create()
 

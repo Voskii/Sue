@@ -19,6 +19,7 @@ mongoose.connect(uri, console.log('Connected to DB'))
 
 app.use('/auth', require('./routes/authRouter.js'))
 app.use('/api', jwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
+
 app.use('/api/meal', require('./routes/mealRouter.js'))
 app.use('/api/stat', require('./routes/statRouter.js'))
 app.use('/api/dub', require('./routes/dubRouter.js'))

@@ -43,7 +43,7 @@ const StatGen = (props) => {
             setNewM(false)
         }
         
-        setMakeMeAStat(false)
+        // setMakeMeAStat(!makeMeAStat)
     }
 
     const submit = (event) => {
