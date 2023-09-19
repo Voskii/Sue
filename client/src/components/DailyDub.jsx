@@ -56,7 +56,7 @@ const DailyDub = (props) => {
                     <h3>To Track</h3>
                         {trackMe}
                     <form onSubmit={addDubs}>
-                        <button >TRACK ME</button>
+                        <button>TRACK ME</button>
                         {/* {'-get, update frontend'} */}
                     </form>
                     
