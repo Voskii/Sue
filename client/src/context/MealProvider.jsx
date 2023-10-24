@@ -157,25 +157,45 @@ export default function MealProvider(props){
     }
     }
     
-    function addMeal(newMeal){
-        mealAxios.post('/api/meal', newMeal)
-            .then(res => {
-                console.log(res)
-                setMealId(res.data._id)
-                setMeals(prev => [
-                    ...prev,
-                    {
-                        name: res.data.name,
-                        imgUrl: res.data.imgUrl,
-                        user: res.data.user,
-                        stats: res.data.stats,
-                        _id: res.data._id
-                    }
+    // function addMeal(newMeal){
+    //     mealAxios.post('/api/meal', newMeal)
+    //         .then(res => {
+    //             console.log(res)
+    //             setMealId(res.data._id)
+    //             setMeals(prev => [
+    //                 ...prev,
+    //                 {
+    //                     name: res.data.name,
+    //                     imgUrl: res.data.imgUrl,
+    //                     user: res.data.user,
+    //                     stats: res.data.stats,
+    //                     _id: res.data._id
+    //                 }
                     
-                ])
-            })
-            .catch(err => console.log(err.response.data.errMsg))
+    //             ])
+    //         })
+    //         .catch(err => console.log(err.response.data.errMsg))
+    //     }
+    const addMeal = async (newMeal) => {
+        try {
+            const res = await mealAxios.post('/api/meal', newMeal)
+        console.log(res)
+        setMealId(res.data._id)
+        setMeals((prev) => [
+            ...prev,
+            {
+                name: res.data.name,
+                imgUrl: res.data.imgUrl,
+                user: res.data.user,
+                stats: res.data.stats,
+                _id: res.data._id
+            }
+        ])
+        } catch(err) {
+            console.log(err.response.data.errMsg)
+    
     }
+}
     console.log(`mealcontext tstats`, tStats)
 
     const newFav = (thisOne) => {

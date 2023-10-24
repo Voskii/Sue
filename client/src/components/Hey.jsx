@@ -9,7 +9,7 @@ import DailyDub from './DailyDub.jsx'
 
 export default function Hey(){
     const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
-    const { setStats, stats, getStats }= useContext(StatContext)
+    const { setStats, stats, getStats } = useContext(StatContext)
     const { meals, getMeals, getDubs, dubs, tStats, newFav } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
     
