@@ -4,17 +4,18 @@ import StatGen from './StatGen'
 
 const Meal = (props) => {
 
-    const {meal, cleanUp, noBro, mealClicked, track, showStats, fullMeal, setStats, setNewM} = props
+    const {meal, cleanUp, noBro, mealClicked, track, showStats, fullMeal, setStats, setNewM, stats} = props
     console.log(`fullmeal inside mealcomp:`, fullMeal)
     const [checked, setChecked] = useState(false)
     const [makeMeAStat, setMakeMeAStat] = useState(false)
 
-    const statMe = meal.stats?.map(item => <Stat key={item._id} info={item} />)
+    const statMe = meal.stats?.map(item => item.track && <Stat key={item._id} info={item} track={true}/>)
+    const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true}/>)
+
 
 
     const letsMakeAStat = () => {
         setMakeMeAStat(true)
-        
     }
 
     const check = (fish) => {
@@ -28,13 +29,25 @@ const Meal = (props) => {
             {showStats?
                 <div>
                     <h2 onClick={()=>cleanUp(meal)}>{meal.name}</h2>
-                    {statMe}
+                        <div className='both-stats'>
+                            <div className="stat-tracked">
+                                <h6 className="stat-colors">Stat</h6>
+                                {statMe}
+                            </div>
+
+                            <div className="stat-untracked">
+                                <h6 className='stat-colors'>Ingredient</h6>
+                                {ingredientMe}
+                            </div>
+                        </div>
+                        
                     
-                    {makeMeAStat? 
-                        <StatGen makeMeAStat={makeMeAStat} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM}/>
-                    :
-                    <button onClick={()=>letsMakeAStat()}>+Stat?</button>
-                    }
+                        {makeMeAStat? 
+                            <StatGen makeMeAStat={makeMeAStat} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM}/>
+                        :
+                            <button onClick={()=>letsMakeAStat()}>+Stat?</button>
+                        }
+
                 </div>
             :
                 <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>

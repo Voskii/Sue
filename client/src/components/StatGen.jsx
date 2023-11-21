@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { StatContext } from '../context/StatProvider'
+import { MealContext } from '../context/MealProvider'
 
 const StatGen = (props) => {
 
-    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat } = props
+    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
+    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
+    // const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -43,7 +45,7 @@ const StatGen = (props) => {
             setNewM(false)
         }
         
-        // setMakeMeAStat(!makeMeAStat)
+        setMakeMeAStat(!makeMeAStat)
     }
 
     const submit = (event) => {
@@ -80,7 +82,7 @@ const StatGen = (props) => {
                     name='track'
                     value={newStat.track}
                     onChange={handleCheck}
-                />
+                />Stat 
                 <button>SMASHED</button>
             </form>
             <button onClick={clear}>All done ⚡</button>

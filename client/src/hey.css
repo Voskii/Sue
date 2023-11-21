@@ -19,6 +19,25 @@
     gap: 25%;
 }
 
+.stat-tracked{
+  
+}
+
+.stat-untracked{
+
+}
+
+.both-stats{
+  display: flex;
+  
+}
+
+.stat-colors{
+  color: var(--ws)
+}
+
+
+
 .new-meal{
     display: flex;
     flex-direction: column;
@@ -58,6 +77,7 @@ nav a {
 
   .stat-info{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 30px;
   }
