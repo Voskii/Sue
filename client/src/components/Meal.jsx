@@ -5,7 +5,7 @@ import StatGen from './StatGen'
 const Meal = (props) => {
 
     const {meal, cleanUp, noBro, mealClicked, track, showStats, fullMeal, setStats, setNewM, stats} = props
-    console.log(`fullmeal inside mealcomp:`, fullMeal)
+    console.log(`fullmeal inside mealcomp:`, fullMeal, 'meal:', meal)
     const [checked, setChecked] = useState(false)
     const [makeMeAStat, setMakeMeAStat] = useState(false)
 

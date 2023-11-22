@@ -7,7 +7,7 @@ const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
-    // const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -23,6 +23,8 @@ const StatGen = (props) => {
             ...prevInputs,
             mealId: meal
         }))
+        //get meals? to update front end
+        // getMeals()
     },[])
 
     const clear = () => {
@@ -46,12 +48,26 @@ const StatGen = (props) => {
         }
         
         setMakeMeAStat(!makeMeAStat)
+        // getMeals()
     }
 
     const submit = (event) => {
         event.preventDefault()
         handleSubmit(event)
+        //setFullMeals stats
         
+        setFullMeal((prevFullMeal) =>
+        prevFullMeal.map((prev) => {
+            if (prev._id === meal) {
+                return {
+                    ...prev,
+                    stats: [...prev.stats, newStat] // Add the new stat to the stats array
+                };
+            } else {
+                return prev;
+            }
+        })
+    );
     }
 
     const handleCheck = () => {

@@ -131,7 +131,7 @@ export default function MealProvider(props){
                 dub.stats.map(stat => {
                     console.log(`stat`, stat)
                     if(stat.track){
-                        setTStats( prev => ([
+                        setTStats(prev => ([
                         ...prev,
                         {
                             name: stat.name, 
