@@ -92,3 +92,8 @@ nav a {
     border-radius: 5%;
     padding: 5%;
   }
+
+  .create-meal-name{
+    padding: 20px;
+    font-size: 1.5em;
+  }

@@ -1,13 +1,13 @@
 import React from "react";
 
 const Stat = (props) => {
-    const { info } = props
+    const { info, whiteOut} = props
     //separate tracked value from untracked value
     return (
         <div className="stat-info">
 
             <div>{info.name}</div>
-            <div>{info.value}</div>
+            <div style={whiteOut?{color: 'whiteSmoke'}:{color: 'whiteSmoke'}}>{info.value}</div>
 
         </div>
     )

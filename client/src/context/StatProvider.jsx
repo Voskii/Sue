@@ -51,33 +51,63 @@ export default function StatProvider(props){
         }))
     }
 
-    const handleSubmit = (event) => {
+    // const handleSubmit = (event) => {
+    //     event.preventDefault()
+        
+    //     console.log(`inside handle sub`, newStat)
+        
+    //     statAxios.post('/api/stat', newStat)
+    //         .then(res => {
+    //             console.log(`inside addStat result:`, res)
+    //             setStats(prev => ([
+    //                     ...prev,
+    //                     {
+    //                         name: newStat.name,
+    //                         value: newStat.value,
+    //                         _id: newStat._id,
+    //                         mealId: newStat.mealId,
+    //                         track: newStat.track
+    //                     }
+    //                 ]))
+    //             })
+    //         .catch(err => console.log(err))
+    //         setNewStat({
+    //             name: '',
+    //             value: '',
+    //             mealId: mealId,
+    //             track: false
+    //         })
+        
+    // }
+    
+    //handlesub async await
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        
-        console.log(`inside handle sub`, newStat)
-        
-        statAxios.post('/api/stat', newStat)
-            .then(res => {
-                console.log(`inside addStat result:`, res)
-                setStats(prev => ([
-                        ...prev,
-                        {
-                            name: newStat.name,
-                            value: newStat.value,
-                            _id: newStat._id,
-                            mealId: newStat.mealId,
-                            track: newStat.track
-                        }
-                    ]))
-                })
-            .catch(err => console.log(err))
+        console.log('inside handle sub', newStat)
+
+        try{
+            const res = await statAxios.post('/api/stat', newStat)
+            console.log(`inside addStat result:`, res)
+            setStats(prev => ([
+                ...prev,
+                {
+                    name: newStat.name,
+                    value: newStat.value,
+                    _id: newStat._id,
+                    mealId: newStat.mealId,
+                    track: newStat.track
+                }
+            ]))
+
             setNewStat({
                 name: '',
                 value: '',
                 mealId: mealId,
                 track: false
             })
-        
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const getStats = (id) => {

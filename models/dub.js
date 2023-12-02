@@ -22,6 +22,10 @@ const dubSchema = new Schema({
         type: String,
         required: false
     },
+    eatWhen: {
+        type: String,
+        required: true
+    },
     mealId: {
         type: String,
         required: true

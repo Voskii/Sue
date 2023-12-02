@@ -15,14 +15,23 @@ statRouter.get("/", async (req, res, next) => {
 })
 
 // Get by Meal
-statRouter.get("/:mealId", (req, res, next) => {
-    Stat.find({ mealId : req.params.mealId }, (err, Stat) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-        return res.status(200).send(Stat)
-    })
+// statRouter.get("/:mealId", (req, res, next) => {
+//     Stat.find({ mealId : req.params.mealId }, (err, Stat) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(200).send(Stat)
+//     })
+// })
+statRouter.get('/:mealId', async (req, res, next) => {
+    try{
+        const stats = await Stat.find({ mealId: req.params.mealId})
+        return res.status(200).send(stats)
+    }
+    catch (err) {
+        next(err)
+    }
 })
 
 //Post one

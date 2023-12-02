@@ -1,22 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Stat from './Stat'
 import StatGen from './StatGen'
+import { MealContext } from '../context/MealProvider'
 
 const Meal = (props) => {
 
-    const {meal, cleanUp, noBro, mealClicked, track, showStats, fullMeal, setStats, setNewM, stats} = props
-    console.log(`fullmeal inside mealcomp:`, fullMeal, 'meal:', meal)
+    const {meal, cleanUp, noBro, mealClicked, track, showStats, meals, setStats, setNewM, stats} = props
+    console.log(`MealCOMP meals:`, meals, 'meal:', meal)
     const [checked, setChecked] = useState(false)
     const [makeMeAStat, setMakeMeAStat] = useState(false)
+    const { deleteMeal } = useContext(MealContext)
+    const statMe = meal.stats?.map(item => item.track && <Stat key={item._id} info={item} track={true} whiteOut={true}/>)
+    const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true} whiteOut={false}/>)
 
-    const statMe = meal.stats?.map(item => item.track && <Stat key={item._id} info={item} track={true}/>)
-    const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true}/>)
-
-
-
-    const letsMakeAStat = () => {
-        setMakeMeAStat(true)
-    }
 
     const check = (fish) => {
         
@@ -28,31 +24,39 @@ const Meal = (props) => {
         <div>
             {showStats?
                 <div>
-                    <h2 onClick={()=>cleanUp(meal)}>{meal.name}</h2>
+                    <div onClick={()=>cleanUp(meal)}>{meal.name}</div>
                         <div className='both-stats'>
-                            <div className="stat-tracked">
-                                <h6 className="stat-colors">Stat</h6>
-                                {statMe}
-                            </div>
 
                             <div className="stat-untracked">
                                 <h6 className='stat-colors'>Ingredient</h6>
                                 {ingredientMe}
                             </div>
+
+                            <div className="stat-tracked">
+                                <h6 className="stat-colors">Stat</h6>
+                                {statMe}
+                            </div>
+
+                            
                         </div>
                         
-                    
                         {makeMeAStat? 
-                            <StatGen makeMeAStat={makeMeAStat} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM}/>
+                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM}/>
                         :
-                            <button onClick={()=>letsMakeAStat()}>+Stat?</button>
+                            <button onClick={()=>setMakeMeAStat(!makeMeAStat)}>+Stat?</button>
                         }
 
                 </div>
             :
-                <h2 onClick={()=>mealClicked(meal)}>{meal.name}</h2>
+                <div onClick={()=>mealClicked(meal)}>{meal.name}</div>
             }
-            <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div> 
+            {!showStats && 
+                <>
+                    <span onClick={()=>check(meal)}>{checked? '👀':'✨'}</span>
+                    <span><button onClick={()=>deleteMeal(meal)}>✖</button></span>
+                    </>
+            }
+            
             {/* {'move this to meals component'} */}
         </div>
     )

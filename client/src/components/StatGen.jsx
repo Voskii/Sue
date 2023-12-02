@@ -7,7 +7,7 @@ const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
-    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -43,11 +43,16 @@ const StatGen = (props) => {
             return 
         }
         setMealIdNow('')
+        setNewStat('')
+        setMealId('')
         if(setNewM){
             setNewM(false)
         }
+        if(makeMeAStat){
+            setMakeMeAStat(false)
+            return
+        }
         
-        setMakeMeAStat(!makeMeAStat)
         // getMeals()
     }
 

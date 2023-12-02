@@ -41,6 +41,7 @@ export default function MealProvider(props){
         name: '',
         mealId: '',
         user:'',
+        eatWhen: '',
         stats: [{
             name:'',
             value:'',
@@ -65,7 +66,7 @@ export default function MealProvider(props){
     })
 
     const handleChange = (e) => {
-        const  {name, value}  = e.target
+        const  {name, value} = e.target
         console.log(`Name: ${name} Value: ${value}`)
         setNewMeal(prev => {
             return ({
@@ -77,6 +78,11 @@ export default function MealProvider(props){
 
     const handleSubmit = () => {
         addMeal(newMeal)
+        setNewMeal({
+            name: '',
+            user: userId,
+            _img: ''
+    })
         // Mealaxios.post('./api/meal', newMeal)
         //     .then(res => console.log(`post meal func:`, res))
         //     .catch(res => console.log(res))
@@ -101,7 +107,8 @@ export default function MealProvider(props){
                     const stats = statResponse.data.map(stat => ({
                         name: stat.name,
                         value: stat.value,
-                        track: stat.track
+                        track: stat.track,
+                        _id: stat._id
                     }));
     
                     return {
@@ -115,7 +122,7 @@ export default function MealProvider(props){
             });
     
             const fullMeals = await Promise.all(fullMealsPromises);
-            setMeals(meals);
+            setMeals(fullMeals);
             setFullMeal(fullMeals);
         } catch (err) {
             console.log(err);
@@ -148,7 +155,8 @@ export default function MealProvider(props){
                 name: dub.name,
                 mealId: dub.mealId,
                 user: dub.user,
-                stats: dub.stats
+                stats: dub.stats,
+                eatWhen: dub.eatWhen
             }))
             const fullDubs = await Promise.all(dubsPromises)
             setDubs(fullDubs)
@@ -198,6 +206,23 @@ export default function MealProvider(props){
 }
     console.log(`mealcontext tstats`, tStats)
 
+    const deleteMeal = (deleteThis) => {
+        console.log(`to delete:`, deleteThis)
+        //FISH UNDEFINED
+        //delete meal and stats lol
+        
+        deleteThis.stats.map(stat=> {
+            statAxios.delete(`/api/stat/${stat._id}`)
+                .then(res=>console.log('stat delete', res.data))
+                .then(err=>console.log(err))
+        })
+        mealAxios.delete(`/api/meal/${deleteThis.mealId}`)
+            .then(res => console.log(res.data))
+            .then(err => console.log(err))
+        //update front end 
+        setMeals(meals.filter(meall => meall.mealId === deleteThis.mealId ? '' : meall))
+    }
+
     const newFav = (thisOne) => {
         favAxios.post('/api/fav', thisOne)
             .then(res => console.log(res.data))
@@ -217,12 +242,14 @@ export default function MealProvider(props){
                 setUserIdNow,
                 userId,
                 mealId,
+                setMealId,
                 fullMeal,
                 setFullMeal,
                 getDubs,
                 dubs,
                 tStats,
-                newFav
+                newFav,
+                deleteMeal
             }}>
             { props.children }
         </MealContext.Provider>

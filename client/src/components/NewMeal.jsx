@@ -17,14 +17,18 @@ export default function NewMeal(props) {
 
     const submit = (e) => {
         e.preventDefault()
+        setMealName(newMeal.name)
         handleSubmit()
         
     }
 
+    const [mealName, setMealName] = useState('')
+
     return (
 
         <div className='new-meal'>
-            {newMeal.name ? <h1>Meal: {newMeal.name}</h1> : <h1>New Meal</h1>}
+            {newMeal.name ? <h1>Meal: {newMeal.name}</h1> : <div className='create-meal-name'>{mealName}</div>}
+            {!mealName && <div className='create-meal-name'>New Meal</div>}
                 {!mealId &&
                     <form onSubmit={submit}>
                         <input 

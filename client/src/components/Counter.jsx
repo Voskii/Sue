@@ -40,7 +40,7 @@ export default function Counter(props){
 
     return (
         <div>
-            <h1>ello lovely</h1>
+            <h1>Hello lovely</h1>
             {mapMe}
             {chosen? 
                 <h1>{chosen.name}</h1>

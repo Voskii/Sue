@@ -12,15 +12,18 @@ dubAxios.interceptors.request.use(config => {
 
 export default function DailyDubProvider(props){
 
+    const [disOne, setDisOne] = useState('')
+
     const [dub, setDub] = useState([{
         name: '',
         mealId: '',
         user:'',
+        eatWhen: '',
         stats: [{
             name:'',
             value:'',
             track: Boolean
-            }]
+        }]
     }])
 
     // const addDubStat = (stats) => {
@@ -63,6 +66,17 @@ export default function DailyDubProvider(props){
                 .catch(err => console.log(err))
         })
     }
+
+    //UPDATE CHOSEN VALUE FOR TIME OF MEAL RESUME HERE
+    // const handleChangeMealTime = (event) => {
+    //     console.log('MealTime:', event.target)
+    //     const {name, value} = event.target
+    //     // setDisOne(value)
+    //     setDub(prev =>[{
+            
+    //         eatWhen: value
+    //     }])
+    // }
     
     const handleChange = () => {
         
@@ -94,7 +108,7 @@ export default function DailyDubProvider(props){
     //         })
     //         .catch(err => console.log(err.response.data.errMsg))
     // }
-
+    console.log('bottom of dub component:', dub)
     return (
 
         <DubContext.Provider
