@@ -6,7 +6,7 @@ import { FavContext } from '../context/FavProvider.jsx'
 
 
 export default function Counter(props){
-    const { tStats, user } = useContext(MealContext)
+    const { tStats, user, dubs } = useContext(MealContext)
     const { thisStat, setThisStat, addPrioStat } = useContext(StatContext)
     const { getFav } = useContext(FavContext)
     const {comp, newFav, stats} = props

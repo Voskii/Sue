@@ -9,7 +9,7 @@ const DailyDub = (props) => {
 // stat map, add values together for the day, back end storage for total stats vs max stats for the day, contains array of selected user meals
 // setStats code will need to be stats for value tracking items only
     const { trackedMeals, onDeck, generate, user, setTrackedMeals} = props
-    const { addMeal, getMeals, meals, mealId, dubs, getDubs } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, dubs, getDubs, delDub, addCounterStats } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub, addDubStat, handleSubmit, handleChangeMealTime } = useContext(DubContext)
 //render tracked meals on load?
@@ -60,9 +60,10 @@ const DailyDub = (props) => {
     })
     .map((dubb, index) =>
         dubb.eatWhen !== undefined ? (
-            <h3 key={index} style={{ color: 'aqua' }}>
+            <div key={index} style={{ color: 'aqua' , padding: '15px'}}>
                 {dubb.name}
-            </h3>
+                {generate && <button onClick={()=>delDub(dubb)}>X</button>}
+            </div>
         ) : null
     );
 
@@ -81,7 +82,7 @@ const DailyDub = (props) => {
                 {options.map(option => <option>{option}</option>)}
             </select></span><span><button onClick={() => delThisTrackedOne(dub, i)}>✖</button></span>
         </div>
-    )
+    ) 
 
     return (
         <div className='daily-dub-container'>
@@ -102,7 +103,7 @@ const DailyDub = (props) => {
                 <>
                     <h3>On Deck Meals</h3>
                         {fishMe}
-                    <button>ATE IT</button>
+                    <button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>
                 </>
             }
         </div>

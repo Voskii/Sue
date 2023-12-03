@@ -52,6 +52,7 @@ dubRouter.post("/", (req, res, next) => {
     newDub.save((err, savedDub) => {
         if(err){
             res.status(500)
+            console.log('savedDub', savedDub)
             return next(err)
         }
     return res.status(201).send(savedDub)

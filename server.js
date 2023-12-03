@@ -24,6 +24,7 @@ app.use('/api/meal', require('./routes/mealRouter.js'))
 app.use('/api/stat', require('./routes/statRouter.js'))
 app.use('/api/dub', require('./routes/dubRouter.js'))
 app.use('/api/fav', require('./routes/favRouter.js')) 
+app.use('/api/counter', require('./routes/counterRouter.js')) 
 
 app.use((err, req, res, next) => {
     console.log(err)

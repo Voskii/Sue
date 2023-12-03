@@ -54,6 +54,11 @@ export default function MealProvider(props){
     const [mealId, setMealId] = useState('')
     const [dubs, setDubs] = useState([])
     const [tStats, setTStats] = useState([])
+    const [setCounterStats, counterStats] = useState({
+        protein: 0,
+        calories: 0,
+        sugar: 0
+    })
 
     const setUserIdNow = (id) => {
         setUserId(id)
@@ -156,7 +161,8 @@ export default function MealProvider(props){
                 mealId: dub.mealId,
                 user: dub.user,
                 stats: dub.stats,
-                eatWhen: dub.eatWhen
+                eatWhen: dub.eatWhen,
+                _id: dub._id
             }))
             const fullDubs = await Promise.all(dubsPromises)
             setDubs(fullDubs)
@@ -164,7 +170,13 @@ export default function MealProvider(props){
         console.log(err)
     }
     }
-    
+    const delDub = (deleteThis) => {
+        console.log('delDub:', deleteThis)
+        dubAxios.delete(`/api/dub/${deleteThis._id}`)
+            .then(res => console.log(res.data))
+            .then(err => console.log(err))
+            setDubs(dubs.filter(dub => dub._id === deleteThis._id ? '' : dub))
+    }
     // function addMeal(newMeal){
     //     mealAxios.post('/api/meal', newMeal)
     //         .then(res => {
@@ -227,6 +239,18 @@ export default function MealProvider(props){
         favAxios.post('/api/fav', thisOne)
             .then(res => console.log(res.data))
     }
+
+    const addCounterStats = (eatenDub) => {
+
+    setCounterStats(prev => ({
+        protein: prev.protein + eatenDub.protein,
+        calories: prev.calories + eatenDub.calories,
+        sugar: prev.sugar + eatenDub.sugar
+    }))
+    delDub(eatenDub)
+
+    }
+
     return (
 
         <MealContext.Provider
@@ -249,7 +273,11 @@ export default function MealProvider(props){
                 dubs,
                 tStats,
                 newFav,
-                deleteMeal
+                deleteMeal,
+                delDub,
+                addCounterStats,
+                setCounterStats,
+                counterStats
             }}>
             { props.children }
         </MealContext.Provider>
