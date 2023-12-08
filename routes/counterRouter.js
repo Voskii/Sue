@@ -30,31 +30,31 @@ counterRouter.get('/:mealId', async (req, res, next) => {
         const counts = await Counter.find({ mealId: req.params.mealId})
         return res.status(200).send(counts)
     }
-    catch (err) {
+    catch(err){
         next(err)
     }
 })
 
 //Post one
 counterRouter.post("/", (req, res, next) => {
-    const newStat = new Stat(req.body)
-    newStat.save((err, savedStat) => {
+    const newCounter = new Counter(req.body)
+    newCounter.save((err, savedCounter) => {
         if(err){
             res.status(500)
             return next(err)
         }
-    return res.status(201).send(savedStat)
+    return res.status(201).send(savedCounter)
     })
 })
 
 // delete function
-counterRouter.delete( "/:statId", async (req, res, next) =>{
-    Stat.findByIdAndDelete( {_id: req.params.statId}, (err, deletedItem) => {
+counterRouter.delete("/:statId", async (req, res, next) =>{
+    Counter.findByIdAndDelete({_id: req.params.statId}, (err, deletedItem) => {
         if(err){
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(`Successfully deleted item: ${deletedItem} from the database.`)
+        return res.status(200).send(`Successfully deleted item:${deletedItem} from the database.`)
     })
 })
 

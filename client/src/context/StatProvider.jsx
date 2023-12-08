@@ -14,8 +14,6 @@ statAxios.interceptors.request.use(config => {
 
 export default function StatProvider(props){
 
-    
-    
     const [mealId, setMealId] = useState('')
     const [stats, setStats] = useState([])
     

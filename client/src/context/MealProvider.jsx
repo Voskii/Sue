@@ -10,6 +10,14 @@ mealAxios.interceptors.request.use(config => {
     return config
 })
 
+const counterAxios = axios.create()
+
+counterAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem('token')
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 const statAxios = axios.create()
 
 statAxios.interceptors.request.use(config => {
@@ -54,10 +62,11 @@ export default function MealProvider(props){
     const [mealId, setMealId] = useState('')
     const [dubs, setDubs] = useState([])
     const [tStats, setTStats] = useState([])
+    
     const [setCounterStats, counterStats] = useState({
-        protein: 0,
-        calories: 0,
-        sugar: 0
+        protein: '',
+        calories: '',
+        sugar: ''
     })
 
     const setUserIdNow = (id) => {
@@ -240,14 +249,26 @@ export default function MealProvider(props){
             .then(res => console.log(res.data))
     }
 
-    const addCounterStats = (eatenDub) => {
+    const addCounterStats = async (eatenDub) => {
+        try{
+            const counts = await counterAxios.post('/api/counter')
+            //bugg broke below
+            const allCounts = counts.data
+            console.log('inside addCounterStats:' , allCounts)
+            //do something with allCounts
+            setCounterStats(prev => ({
+                protein: prev.protein + eatenDub.protein,
+                calories: prev.calories + eatenDub.calories,
+                sugar: prev.sugar + eatenDub.sugar
+        }))
+            console.log(allCounts)
+            delDub(eatenDub)
+        }catch(err) {
+            console.log(err.response.data.errMsg)
 
-    setCounterStats(prev => ({
-        protein: prev.protein + eatenDub.protein,
-        calories: prev.calories + eatenDub.calories,
-        sugar: prev.sugar + eatenDub.sugar
-    }))
-    delDub(eatenDub)
+        }
+    
+    
 
     }
 
