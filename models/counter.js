@@ -3,19 +3,19 @@ const Schema = mongoose.Schema
 
 const counterSchema = new Schema ({
     protein: {
-        type: String,
+        type: Number,
         required: false
     },
     sugar: {
-        type: String,
-        required: false
-    },
-    calories: {
-        type: String,
+        type: Number,
         required: false
     },
     fat: {
-        type: String,
+        type: Number,
+        required: false
+    },
+    calories: {
+        type: Number,
         required: false
     },
     created: {

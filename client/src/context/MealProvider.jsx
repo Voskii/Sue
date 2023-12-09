@@ -63,10 +63,10 @@ export default function MealProvider(props){
     const [dubs, setDubs] = useState([])
     const [tStats, setTStats] = useState([])
     
-    const [setCounterStats, counterStats] = useState({
-        protein: '',
-        calories: '',
-        sugar: ''
+    const [counterStats, setCounterStats] = useState({
+        protein: 0,
+        calories: 0,
+        sugar: 0
     })
 
     const setUserIdNow = (id) => {
@@ -88,6 +88,10 @@ export default function MealProvider(props){
                 [name]:value
             })
         })
+    }
+
+    const handleCounterchange = (e) => {
+        const {name, value} = e.target
     }
 
     const handleSubmit = () => {
@@ -222,7 +226,6 @@ export default function MealProvider(props){
         ])
         } catch(err) {
             console.log(err.response.data.errMsg)
-    
     }
 }
     console.log(`mealcontext tstats`, tStats)
@@ -250,26 +253,22 @@ export default function MealProvider(props){
     }
 
     const addCounterStats = async (eatenDub) => {
-        try{
+        try {
             const counts = await counterAxios.post('/api/counter')
-            //bugg broke below
-            const allCounts = counts.data
-            console.log('inside addCounterStats:' , allCounts)
-            //do something with allCounts
+            const allCounts = counts.res
+            console.log('inside addCounterStats:', allCounts)
+
             setCounterStats(prev => ({
                 protein: prev.protein + eatenDub.protein,
                 calories: prev.calories + eatenDub.calories,
                 sugar: prev.sugar + eatenDub.sugar
-        }))
+            }));
+
             console.log(allCounts)
             delDub(eatenDub)
-        }catch(err) {
-            console.log(err.response.data.errMsg)
-
+        } catch (err) {
+            console.log(err)
         }
-    
-    
-
     }
 
     return (
@@ -297,7 +296,6 @@ export default function MealProvider(props){
                 deleteMeal,
                 delDub,
                 addCounterStats,
-                setCounterStats,
                 counterStats
             }}>
             { props.children }

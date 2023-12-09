@@ -7,7 +7,7 @@ const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
-    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange  } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -83,28 +83,66 @@ const StatGen = (props) => {
     return (
         <div>
             <form onSubmit={submit}>
-                <input
-                    type='text'
-                    name='name'
-                    value={newStat.name}
-                    placeholder='Name'
-                    onChange={handleChange}
-                />
-                <input
-                    type='text'
-                    name='value'
-                    value={newStat.value}
-                    placeholder='Stat'
-                    onChange={handleChange}
-                />
-                <input
-                    type='checkbox'
-                    checked={newStat.track}
-                    name='track'
-                    value={newStat.track}
-                    onChange={handleCheck}
-                />Stat 
-                <button>SMASHED</button>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
+                        Custom
+                        <input
+                        type='text'
+                        name='name'
+                        value={newStat.name}
+                        placeholder='Name'
+                        onChange={handleChange}
+                        />
+                        <input
+                            type='text'
+                            name='value'
+                            value={newStat.value}
+                            placeholder='Stat'
+                            onChange={handleChange}
+                        />
+                        <input
+                            type='checkbox'
+                            checked={newStat.track}
+                            name='track'
+                            value={newStat.track}
+                            onChange={handleCheck}
+                        /> 
+                        <button>SMASHED</button>
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
+                        Required
+                        <input
+                        type='text'
+                        name='calories'
+                        value={newStat.name}
+                        placeholder='Calories'
+                        onChange={handleChange}
+                        />
+                        <input
+                            type='text'
+                            name='protein'
+                            value={counterStats.value}
+                            placeholder='Stat'
+                            onChange={handleCounterChange}
+                        />
+                        <input
+                            type='text'
+                            name='fat'
+                            value={counterStats.value}
+                            placeholder='Stat'
+                            onChange={handleCounterChange}
+                        />
+                        <input
+                            type='text'
+                            name='sugar'
+                            value={counterStats.value}
+                            placeholder='Stat'
+                            onChange={handleCounterChange}
+                        />
+                    </div>
+                </div>
+                
+                
             </form>
             <button onClick={clear}>All done ⚡</button>
         </div>
