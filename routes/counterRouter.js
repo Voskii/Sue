@@ -24,10 +24,23 @@ counterRouter.get("/", async (req, res, next) => {
 //         return res.status(200).send(Stat)
 //     })
 // })
-// GET COUNTS BY USER
+// GET COUNTS BY MEAL
 counterRouter.get('/:mealId', async (req, res, next) => {
     try{
+       
         const counts = await Counter.find({ mealId: req.params.mealId})
+         console.log('COUNTER DATA GET CALL', counts)
+        return res.status(200).send(counts)
+    }
+    catch(err){
+        next(err)
+    }
+})
+
+// GET COUNTS BY USER
+counterRouter.get('/user/:userId', async (req, res, next) => {
+    try{
+        const counts = await Counter.find({ userId: req.params.userId})
         return res.status(200).send(counts)
     }
     catch(err){

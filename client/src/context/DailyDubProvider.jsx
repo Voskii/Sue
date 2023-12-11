@@ -23,7 +23,8 @@ export default function DailyDubProvider(props){
             name:'',
             value:'',
             track: Boolean
-        }]
+        }],
+        counts: []
     }])
 
     // const addDubStat = (stats) => {

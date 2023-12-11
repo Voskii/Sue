@@ -52,6 +52,7 @@ const DailyDub = (props) => {
 
     const fishMe = dubs?.sort((a, b) => {
         //sort array then render with map
+        console.log('inside dubs sort - dubs:', dubs)
         if (a.eatWhen === undefined || b.eatWhen === undefined) {
             return 0; // No sorting if eatWhen is undefined
         }

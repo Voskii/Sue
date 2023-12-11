@@ -9,7 +9,7 @@ const Meal = (props) => {
     console.log(`MealCOMP meals:`, meals, 'meal:', meal)
     const [checked, setChecked] = useState(false)
     const [makeMeAStat, setMakeMeAStat] = useState(false)
-    const { deleteMeal } = useContext(MealContext)
+    const { deleteMeal, counterStats } = useContext(MealContext)
     const statMe = meal.stats?.map(item => item.track && <Stat key={item._id} info={item} track={true} whiteOut={true}/>)
     const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true} whiteOut={false}/>)
 
@@ -37,7 +37,16 @@ const Meal = (props) => {
                                 {statMe}
                             </div>
 
-                            
+                            <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
+                        <span>Calories</span>
+                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].calories}</div>
+                        <span>Protein</span>
+                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].protein}</div>
+                        <span>FAT</span>
+                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].fat}</div>
+                        <span>Sugar</span>
+                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].sugar}</div>
+                    </div>
                         </div>
                         
                         {makeMeAStat? 

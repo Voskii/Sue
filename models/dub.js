@@ -29,6 +29,10 @@ const dubSchema = new Schema({
     mealId: {
         type: String,
         required: true
+    },
+    counts: {
+        type: Array,
+        required: false
     }
 })
 

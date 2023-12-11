@@ -21,6 +21,10 @@ const counterSchema = new Schema ({
     created: {
         type: Array,
         required: false
+    },
+    mealId: {
+        type: String,
+        required: true
     }
 })
 

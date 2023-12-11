@@ -7,7 +7,7 @@ const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
-    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange  } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats  } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -19,6 +19,7 @@ const StatGen = (props) => {
     useEffect(() => {
         console.log(`meal id use effect fired`, meal)
         setMealIdNow(meal)
+        
         setNewStat(prevInputs => ({
             ...prevInputs,
             mealId: meal
@@ -29,6 +30,7 @@ const StatGen = (props) => {
 
     const clear = () => {
         console.log(`in clear comp newStat:`, newStat)
+        addNewCounterStats()
         setStats(prev => ([
                 ...prev,
                 {
@@ -85,7 +87,7 @@ const StatGen = (props) => {
             <form onSubmit={submit}>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
                     <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
-                        Custom
+                        <span>Custom</span>
                         <input
                         type='text'
                         name='name'
@@ -109,34 +111,37 @@ const StatGen = (props) => {
                         /> 
                         <button>SMASHED</button>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
-                        Required
+                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
+                        <span>Calories</span>
                         <input
-                        type='text'
+                        type='number'
                         name='calories'
-                        value={newStat.name}
+                        value={newCounter.calories}
                         placeholder='Calories'
-                        onChange={handleChange}
+                        onChange={handleCounterChange}
                         />
+                        <span>Protien</span>
                         <input
-                            type='text'
+                            type='number'
                             name='protein'
-                            value={counterStats.value}
-                            placeholder='Stat'
+                            value={newCounter.protein}
+                            placeholder='Protein'
                             onChange={handleCounterChange}
                         />
+                        <span>FAT</span>
                         <input
-                            type='text'
+                            type='number'
                             name='fat'
-                            value={counterStats.value}
-                            placeholder='Stat'
+                            value={newCounter.fat}
+                            placeholder='⚡'
                             onChange={handleCounterChange}
                         />
+                        <span>Sugar</span>
                         <input
-                            type='text'
+                            type='number'
                             name='sugar'
-                            value={counterStats.value}
-                            placeholder='Stat'
+                            value={newCounter.sugar}
+                            placeholder='Sugar'
                             onChange={handleCounterChange}
                         />
                     </div>
