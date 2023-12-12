@@ -24,7 +24,9 @@ export default function DailyDubProvider(props){
             value:'',
             track: Boolean
         }],
-        counts: []
+        mealCount: [{
+            
+        }]
     }])
 
     // const addDubStat = (stats) => {

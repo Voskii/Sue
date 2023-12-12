@@ -7,7 +7,7 @@ const statSchema = new Schema ({
         required: false
     },
     value: {
-        type: Number,
+        type: String,
         required: false
     },
     mealId: {

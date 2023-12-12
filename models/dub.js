@@ -30,7 +30,7 @@ const dubSchema = new Schema({
         type: String,
         required: true
     },
-    counts: {
+    mealCount: {
         type: Array,
         required: false
     }

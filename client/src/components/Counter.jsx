@@ -6,11 +6,12 @@ import { FavContext } from '../context/FavProvider.jsx'
 
 
 export default function Counter(props){
-    const { tStats, user, dubs } = useContext(MealContext)
+    const { tStats, user, dubs, counterStats } = useContext(MealContext)
     const { thisStat, setThisStat, addPrioStat } = useContext(StatContext)
     const { getFav } = useContext(FavContext)
     const {comp, newFav, stats} = props
     console.log(`inside counter comp stats:`, tStats, 'comp?:', comp, user)
+    console.log(`counterstats`, counterStats)
     //write a useEffect to call for getFav
     useEffect(() => {
 
@@ -24,13 +25,13 @@ export default function Counter(props){
         newFav(thisOne)
     }
 
-    const mapMe = tStats?.map(stat => {
+    // const mapMe = tStats?.map(stat => {
         
-        <>
-            <h3 onClick={()=>iChooseYou(stat)}>{stat.name}</h3>
-        </>
+    //     <>
+    //         <h3 onClick={()=>iChooseYou(stat)}>{stat.name}</h3>
+    //     </>
         
-    })
+    // })
 
     // main stat and sub stat, main stat renders on Hey page
     // user main stat selected and added to user model
@@ -41,13 +42,17 @@ export default function Counter(props){
     return (
         <div>
             <h1>Hello lovely</h1>
-            {mapMe}
+            {/* {mapMe}
             {chosen? 
                 <h1>{chosen.name}</h1>
             :
                 <>{mapMe}</>
             }
-            {comp && <>{mapMe}</>}
+            {comp && <>{mapMe}</>} */}
+            <div>{counterStats.calories}</div>
+            <div>{counterStats.protein}</div>
+            <div>{counterStats.fat}</div>
+            <div>{counterStats.sugar}</div>
         </div>
     )
 }

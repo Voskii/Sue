@@ -10,7 +10,7 @@ import DailyDub from './DailyDub.jsx'
 export default function Hey(){
     const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
     const { setStats, stats, getStats } = useContext(StatContext)
-    const { meals, getMeals, getDubs, dubs, tStats, newFav } = useContext(MealContext)
+    const { meals, getMeals, getDubs, dubs, tStats, newFav, getUserCounts } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
     
     console.log('hey page load', tStats)
@@ -18,6 +18,8 @@ export default function Hey(){
 
     useEffect(()=>{
         getDubs(user)
+        //get user counter stats
+        getUserCounts(user)
     },[])
 
     return (
