@@ -17,6 +17,7 @@ export default function Hey(){
     console.log(`hey page dubs:`, dubs)
 
     useEffect(()=>{
+        //get dubs
         getDubs(user)
         //get user counter stats
         getUserCounts(user)

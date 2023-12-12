@@ -28,7 +28,7 @@ const counterSchema = new Schema ({
     },
     mealId: {
         type: String,
-        required: true
+        required: false
     },
     userId:{
         type: String,

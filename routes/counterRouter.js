@@ -40,7 +40,13 @@ counterRouter.get('/:mealId', async (req, res, next) => {
 // GET COUNTS BY USER
 counterRouter.get('/user/:userId', async (req, res, next) => {
     try{
-        const counts = await Counter.find({ userId: req.auth._id})
+        const userId = req.params.userId
+        const counts = await Counter.find({ userId: userId})
+        if(counts.length === 0){
+            const newCounter = new Counter({userId: userId})
+            await newCounter.save()
+            return res.status(201).send(newCounter)
+        }
         return res.status(200).send(counts)
     }
     catch(err){
@@ -61,18 +67,18 @@ counterRouter.post("/", (req, res, next) => {
     })
 })
 
-counterRouter.post("/user/:userId", (req, res, next) => {
-    const newCounter = new Counter(req.body)
-    newCounter.save((err, savedCounter) => {
-        if(err){
-            res.status(500)
-            return next(err)
-        }
-    return res.status(201).send(savedCounter)
-    })
-})
+// counterRouter.post("/user/:userId", (req, res, next) => {
+//     const newCounter = new Counter(req.body)
+//     newCounter.save((err, savedCounter) => {
+//         if(err){
+//             res.status(500)
+//             return next(err)
+//         }
+//     return res.status(201).send(savedCounter)
+//     })
+// })
 
-counterRouter.post("/user/:userId", async (req, res, next) => {
+counterRouter.put("/user/:userId", async (req, res, next) => {
     try {
         const userId = req.params.userId;
         const incrementBy = req.body.incrementBy; // Value to increment the counter by

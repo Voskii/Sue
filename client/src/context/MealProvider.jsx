@@ -56,7 +56,6 @@ export default function MealProvider(props){
             track: false
             }]
     }])
-    
 
     const [userId, setUserId] = useState('')
     const [mealId, setMealId] = useState('')
@@ -82,11 +81,11 @@ export default function MealProvider(props){
     })
 
     const [newCounter, setNewCounter] = useState({
-        mealId: '',
         protein: '',
         calories: '',
         sugar: '',
-        fat: ''
+        fat: '',
+        mealId: ''
     })
 
     const [userCounts, setUserCounts] = useState('')
@@ -170,6 +169,11 @@ export default function MealProvider(props){
         console.log(`get dubs func`, user)
         try {
             const dubResponse = await dubAxios.get(`/api/dub/user/${user._id}`)
+            const counterRequests = dubResponse.data.map(dub => {
+                return counterAxios.get(`/api/counter/${dub.mealId}`).then(res => res.data)
+            })
+
+            const counts = await Promise.all(counterRequests)
             console.log('DUB RESPONSE DATA:', dubResponse.data)
             dubResponse.data.map(dub => {
                 dub.stats.map(stat => {
@@ -186,17 +190,15 @@ export default function MealProvider(props){
                     }
                 })
             })
-
-            
-
-            const dubsPromises = dubResponse.data.map(dub => ({
+            //check this add in counts to dubPromises
+            const dubsPromises = dubResponse.data.map((dub,index) => ({
                 name: dub.name,
                 mealId: dub.mealId,
                 user: dub.user,
                 stats: dub.stats,
                 eatWhen: dub.eatWhen,
                 _id: dub._id,
-                counts: dub.counts
+                mealCount: counts[index]
             }))
             const fullDubs = await Promise.all(dubsPromises)
             setDubs(fullDubs)
@@ -277,24 +279,37 @@ export default function MealProvider(props){
             .then(res => console.log(res.data))
     }
 
-    const addCounterStats = async (eatenDub) => {
+    const addCounterStats = (eatenDub) => {
         try {
             // const counts = await counterAxios.post(`/api/counter/user/${userId}`, eatenDub)
             // const allCounts = counts.res
-            console.log('inside addCounterStats:', eatenDub)
-            if(counterStats.protein !== NaN){
-                setCounterStats(prev => ({
-                    protein: prev.protein + eatenDub.counts.protein,
-                    calories: prev.calories + eatenDub.counts.calories,
-                    sugar: prev.sugar + eatenDub.counts.sugar
-                }))
+            console.log('counterStats before ADD', counterStats, 'eatenDub:', eatenDub)
+            console.log('COUNTERSTATS ADD protein:', counterStats.protein)
+            console.log('COUNTERSTATS ADD protein:', counterStats.calories)
+            console.log('COUNTERSTATS ADD protein:', counterStats.fat)
+            console.log('COUNTERSTATS ADD protein:', counterStats.sugar)
+            console.log('inside addCounterStats:', eatenDub.mealCount[0])
+            console.log('inside addCounterStats PROTEIN:', eatenDub.mealCount[0].protein)
+            console.log('inside addCounterStats calories:', eatenDub.mealCount[0].calories)
+            console.log('inside addCounterStats fat:', eatenDub.mealCount[0].fat)
+            console.log('inside addCounterStats sugar:', eatenDub.mealCount[0].sugar)
+            setCounterStats(prev => {
+                console.log('WHAT IS PREV:', prev)
+                return {
+                    protein: prev.protein + eatenDub.mealCount[0].protein || 0,
+                    calories: prev.calories + eatenDub.mealCount[0].calories || 0,
+                    sugar: prev.sugar + eatenDub.mealCount[0].sugar || 0,
+                    fat: prev.fat + eatenDub.mealCount[0].fat || 0
+                }
+            })
+                
+                // put user counter increment
+                // await counterAxios.put(`/api/counter/user${userId}`, counterStats)
+            
                 //post
-                // await counterAxios.post(`/api/counter/user${userId}`, counterStats)
-            } else {
-                //post
-                setCounterStats(eatenDub.count)
+                // setCounterStats(eatenDub.mealCount[0])
                 // await counterAxios.post(`/api/counter/user${userId}`, eatenDub)
-            }
+            
             
 
             // console.log(allCounts)
@@ -302,6 +317,7 @@ export default function MealProvider(props){
         } catch (err) {
             console.log(err)
         }
+        console.log('AFTER ADD counterSTats:', counterStats)
     }
 
     const addNewCounterStats = async () => {
@@ -319,7 +335,8 @@ export default function MealProvider(props){
         try{
             const counts = await counterAxios.get(`/api/counter/user/${thatGuy._id}`)
             const allCounts = counts.data
-            setCounterStats(allCounts)
+            
+            // setCounterStats(allCounts)
             console.log('USER COUNTS get:', allCounts)
         } catch(err){
             console.log(err)
