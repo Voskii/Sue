@@ -40,7 +40,7 @@ const DailyDub = (props) => {
                         eatWhen: selectedTime
                     }
                 }
-                return meal
+                return meal 
             })
     })
     }
