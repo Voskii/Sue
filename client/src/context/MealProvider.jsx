@@ -279,64 +279,66 @@ export default function MealProvider(props){
             .then(res => console.log(res.data))
     }
 
-    const addCounterStats = (eatenDub) => {
+    const addCounterStats = async (eatenDub) => {
         try {
-            // const counts = await counterAxios.post(`/api/counter/user/${userId}`, eatenDub)
-            // const allCounts = counts.res
-            console.log('counterStats before ADD', counterStats, 'eatenDub:', eatenDub)
-            console.log('COUNTERSTATS ADD protein:', counterStats.protein)
-            console.log('COUNTERSTATS ADD protein:', counterStats.calories)
-            console.log('COUNTERSTATS ADD protein:', counterStats.fat)
-            console.log('COUNTERSTATS ADD protein:', counterStats.sugar)
-            console.log('inside addCounterStats:', eatenDub.mealCount[0])
-            console.log('inside addCounterStats PROTEIN:', eatenDub.mealCount[0].protein)
-            console.log('inside addCounterStats calories:', eatenDub.mealCount[0].calories)
-            console.log('inside addCounterStats fat:', eatenDub.mealCount[0].fat)
-            console.log('inside addCounterStats sugar:', eatenDub.mealCount[0].sugar)
-            setCounterStats(prev => {
-                console.log('WHAT IS PREV:', prev)
-                return {
-                    protein: prev.protein + eatenDub.mealCount[0].protein || 0,
-                    calories: prev.calories + eatenDub.mealCount[0].calories || 0,
-                    sugar: prev.sugar + eatenDub.mealCount[0].sugar || 0,
-                    fat: prev.fat + eatenDub.mealCount[0].fat || 0
+            // Update counterStats state
+            setCounterStats(prev => ({
+                protein: prev.protein + (eatenDub.mealCount[0].protein || 0),
+                calories: prev.calories + (eatenDub.mealCount[0].calories || 0),
+                sugar: prev.sugar + (eatenDub.mealCount[0].sugar || 0),
+                fat: prev.fat + (eatenDub.mealCount[0].fat || 0)
+            }));
+    
+            // Perform side effect (API call) immediately after updating the state
+            const updateCounterStats = async () => {
+                try {
+                    // Make PUT request with the updated counterStats
+                    const updateCounter = await counterAxios.put(`/api/counter/user/${eatenDub.user}`, counterStats);
+                    const yaya = updateCounter.data;
+                    console.log('yayaPut', yaya);
+                    
+                    // Delete the eatenDub after updating the counter
+                    delDub(eatenDub);
+                } catch (err) {
+                    console.log(err);
                 }
-            })
-                
-                // put user counter increment
-                // await counterAxios.put(`/api/counter/user${userId}`, counterStats)
-            
-                //post
-                // setCounterStats(eatenDub.mealCount[0])
-                // await counterAxios.post(`/api/counter/user${userId}`, eatenDub)
-            
-            
-
-            // console.log(allCounts)
-            delDub(eatenDub)
+            };
+    
+            // Call the function for updating counterStats
+            updateCounterStats();
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-        console.log('AFTER ADD counterSTats:', counterStats)
-    }
+    };
 
     const addNewCounterStats = async () => {
         try{
             const counts = await counterAxios.post('/api/counter', newCounter)
             const allCounts = counts.res
             console.log(allCounts)
+            setNewCounter({
+                protein: '',
+                calories: '',
+                sugar: '',
+                fat: '',
+                mealId: ''
+            })
         } catch(err){
             console.log(err)
         }
     }
 
     const getUserCounts = async (thatGuy) => {
-        console.log(`getUserCounts thatGuy:`,thatGuy)
+        console.log(`getUserCounts thatGuy:`, thatGuy)
         try{
             const counts = await counterAxios.get(`/api/counter/user/${thatGuy._id}`)
             const allCounts = counts.data
+            if(allCounts === undefined){
+
+            } else {
+                setCounterStats(allCounts[0])
+            }
             
-            // setCounterStats(allCounts)
             console.log('USER COUNTS get:', allCounts)
         } catch(err){
             console.log(err)

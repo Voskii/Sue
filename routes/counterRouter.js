@@ -29,7 +29,7 @@ counterRouter.get('/:mealId', async (req, res, next) => {
     try{
        
         const counts = await Counter.find({ mealId: req.params.mealId})
-         console.log('COUNTER DATA GET CALL', counts)
+         console.log('COUNTER DATA GET CALL - meals', counts)
         return res.status(200).send(counts)
     }
     catch(err){
@@ -40,8 +40,10 @@ counterRouter.get('/:mealId', async (req, res, next) => {
 // GET COUNTS BY USER
 counterRouter.get('/user/:userId', async (req, res, next) => {
     try{
+        
         const userId = req.params.userId
         const counts = await Counter.find({ userId: userId})
+        console.log('COUNTS:', counts)
         if(counts.length === 0){
             const newCounter = new Counter({userId: userId})
             await newCounter.save()
@@ -81,18 +83,22 @@ counterRouter.post("/", (req, res, next) => {
 counterRouter.put("/user/:userId", async (req, res, next) => {
     try {
         const userId = req.params.userId;
-        const incrementBy = req.body.incrementBy; // Value to increment the counter by
-
+        const incrementBy = req.body; // Object containing key-value pairs to increment properties
+        console.log('counterRouter PUT req.body:',req.body)
         // Find the counter associated with the user or create a new one if it doesn't exist
         let counter = await Counter.findOne({ userId });
 
-        if (!counter) {
-            counter = new Counter({ userId });
-        }
+        // if (!counter) {
+        //     counter = new Counter({ userId });
+        // }
 
-        // Increment the count by the specified value
-        counter.count += incrementBy;
-        
+        // Increment properties based on the incoming key-value pairs
+        Object.entries(incrementBy).forEach(([key, value]) => {
+            if (counter[key] !== undefined) {
+                counter[key] += value; // Increment the specified property
+            }
+        });
+
         // Save the updated counter
         await counter.save();
 
@@ -115,20 +121,20 @@ counterRouter.delete("/:statId", async (req, res, next) =>{
 })
 
 //update one stat
-counterRouter.put("/:statId" , (req, res, next) => {
-    Stat.findOneAndUpdate(
-        {_id : req.params.statId},
-        req.body,
-        {new: true},
-        (err, updatedStat) => {
-            if(err){
-                res.status(500)
-                return next(err)
-            }
-            //.send(updatedCard) is causing 500 error due to having numbers in a property
-        return res.status(201).send(`Card has been updated.`)
-        }
-    )
-})
+// counterRouter.put("/:statId" , (req, res, next) => {
+//     Stat.findOneAndUpdate(
+//         {_id : req.params.statId},
+//         req.body,
+//         {new: true},
+//         (err, updatedStat) => {
+//             if(err){
+//                 res.status(500)
+//                 return next(err)
+//             }
+//             //.send(updatedCard) is causing 500 error due to having numbers in a property
+//         return res.status(201).send(`Card has been updated.`)
+//         }
+//     )
+// })
 
 module.exports = counterRouter
