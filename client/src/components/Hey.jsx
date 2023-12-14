@@ -55,7 +55,8 @@ export default function Hey(){
                             <h1>Daily Stats</h1>
                             
                                 <form onSubmit={delCounts}>
-                                    {dubs.length === 0 && <button>X</button>}
+                                    {/* {dubs.length === 0 && <button>X</button>} */}
+                                    {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
                                 </form>
                             
                             <Counter newFav={newFav} tStats={stats} dubs={dubs} />

@@ -19,19 +19,14 @@ const Meals = () => {
     console.log(meals)
 
     useEffect(() => {
-
         getMeals()
         getDubs(user)
-
     },[])
 
-    
     const [chosen, setChosen] = useState('')
     const [trackedMeals, setTrackedMeals] = useState([])
     const [tracking, setTracking] = useState(false)
     const [createStat, setCreateStat] = useState(false)
-
-
 
     const mealClicked = (meal) => {
         console.log(`meal clicked`)
