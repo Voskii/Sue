@@ -18,6 +18,11 @@ const mealSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    eatWhen: {
+        type: Number,
+        default: 1,
+        required: true
     }
 })
 

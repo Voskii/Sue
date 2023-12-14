@@ -1,6 +1,7 @@
 const express = require('express')
 const counterRouter = express.Router()
 const Counter = require("../models/counter.js")
+const mongoose = require('mongoose')
 
 //Get all counts
 counterRouter.get("/", async (req, res, next) => {
@@ -27,9 +28,9 @@ counterRouter.get("/", async (req, res, next) => {
 // GET COUNTS BY MEAL
 counterRouter.get('/:mealId', async (req, res, next) => {
     try{
-       
+    
         const counts = await Counter.find({ mealId: req.params.mealId})
-         console.log('COUNTER DATA GET CALL - meals', counts)
+        console.log('COUNTER DATA GET CALL - meals', counts)
         return res.status(200).send(counts)
     }
     catch(err){
@@ -42,10 +43,11 @@ counterRouter.get('/user/:userId', async (req, res, next) => {
     try{
         
         const userId = req.params.userId
-        const counts = await Counter.find({ userId: userId})
+        console.log('get user, userId:', userId)
+        const counts = await Counter.find({ userId: userId })
         console.log('COUNTS:', counts)
         if(counts.length === 0){
-            const newCounter = new Counter({userId: userId})
+            const newCounter = new Counter({ userId: userId })
             await newCounter.save()
             return res.status(201).send(newCounter)
         }
@@ -79,39 +81,66 @@ counterRouter.post("/", (req, res, next) => {
 //     return res.status(201).send(savedCounter)
 //     })
 // })
+//MONGOOSE 6.12
+// counterRouter.put("/user/:userId", async (req, res, next) => {
+//     try {
+//         const userId = req.params.userId;
+//         const incrementBy = req.body; // Object containing key-value pairs to increment properties
+//         console.log('counterRouter PUT req.body:',req.body)
+//         // Find the counter associated with the user or create a new one if it doesn't exist
+//         let counter = await Counter.findOne({ userId });
 
+//         // if (!counter) {
+//         //     counter = new Counter({ userId });
+//         // }
+
+//         // Increment properties based on the incoming key-value pairs
+//         for (const [key, value] of Object.entries(incrementBy)) {
+//             if (typeof value === "number") {
+//             update.$inc[key] = value
+//             } else {
+//             console.warn(`Property '${key}' is not a number and will not be incremented.`)
+//             }
+//         };
+
+//         // Save the updated counter
+//         await counter.save();
+
+//         return res.status(200).json({ message: 'Counter updated successfully', counter });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Server error' });
+//     }
+// })
 counterRouter.put("/user/:userId", async (req, res, next) => {
     try {
-        const userId = req.params.userId;
-        const incrementBy = req.body; // Object containing key-value pairs to increment properties
-        console.log('counterRouter PUT req.body:',req.body)
-        // Find the counter associated with the user or create a new one if it doesn't exist
-        let counter = await Counter.findOne({ userId });
+    const userId = req.params.userId
+    const incrementBy = req.body// Object containing key-value pairs to increment properties
+        console.log('USER PUT')
+    const filter = { userId }
+    const update = { $inc: {} } // Initialize the update object with an empty $inc property
 
-        // if (!counter) {
-        //     counter = new Counter({ userId });
-        // }
+    for (const [key, value] of Object.entries(incrementBy)) {
+        if (typeof value === "number") {
+        update.$inc[key] = value
+        } else {
+        console.warn(`Property '${key}' is not a number and will not be incremented.`)
+        }
+    }
+        const options = { new: true, upsert: true }
+        const counter = await Counter.findOneAndUpdate(filter, update, options)
 
-        // Increment properties based on the incoming key-value pairs
-        Object.entries(incrementBy).forEach(([key, value]) => {
-            if (counter[key] !== undefined) {
-                counter[key] += value; // Increment the specified property
-            }
-        });
-
-        // Save the updated counter
-        await counter.save();
-
-        return res.status(200).json({ message: 'Counter updated successfully', counter });
+        return res.status(200).json({ message: "Counter updated successfully", counter })
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: "Server error" })
     }
-});
+})
 
 // delete function
-counterRouter.delete("/:statId", async (req, res, next) =>{
-    Counter.findByIdAndDelete({_id: req.params.statId}, (err, deletedItem) => {
+counterRouter.delete("/:counterId", async (req, res, next) =>{
+    // console.log('DELETE req.params', req.params)
+    Counter.findByIdAndDelete({_id: req.params.counterId}, (err, deletedItem) => {
         if(err){
             res.status(500)
             return next(err)

@@ -5,6 +5,7 @@ import { DubContext } from '../context/DailyDubProvider'
 // import ForceUpdateMethod from './components/ForceUpdateMethod.jsx'
 import axios from 'axios'
 
+
 const DailyDub = (props) => {
 // stat map, add values together for the day, back end storage for total stats vs max stats for the day, contains array of selected user meals
 // setStats code will need to be stats for value tracking items only
@@ -16,7 +17,8 @@ const DailyDub = (props) => {
     // const mapMe = trackedMeals.map(meal => (<h3 key={meal._id}>{meal.name}</h3>))
     console.log(`inside DailyDub:dub`, dubs, `trackedMeals:`, trackedMeals)
 
-    const addDubs = () => {
+    const addDubs = (e) => {
+        
         console.log(`DD Submit:dub`, dub, `stats:`, stats, 'trackedMeals:', trackedMeals)
         handleSubmit(trackedMeals)
         setTrackedMeals([])

@@ -18,7 +18,7 @@ export default function DailyDubProvider(props){
         name: '',
         mealId: '',
         user:'',
-        eatWhen: '',
+        eatWhen: 1,
         stats: [{
             name:'',
             value:'',
@@ -62,6 +62,7 @@ export default function DailyDubProvider(props){
     // }
 
     const handleSubmit = (meals) => {
+        console.log('SUB DUB meals:', meals)
         meals.map(meal=>{
             console.log('handlesub', meal)
             dubAxios.post(`/api/dub`, meal)

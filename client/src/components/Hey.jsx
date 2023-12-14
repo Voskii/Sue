@@ -33,6 +33,8 @@ export default function Hey(){
                         <div>
                             {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
                             <Counter newFav={newFav} tStats={stats} dubs={dubs} />
+                            
+                            
                         </div>
                             <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>
