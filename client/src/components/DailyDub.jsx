@@ -85,7 +85,7 @@ const DailyDub = (props) => {
                 {options.map(option => <option>{option}</option>)}
             </select></span><span><button onClick={() => delThisTrackedOne(dub, i)}>✖</button></span>
         </div>
-    ) 
+    )
 
     return (
         <div className='daily-dub-container'>
@@ -106,7 +106,7 @@ const DailyDub = (props) => {
                 <>
                     <h3>On Deck Meals</h3>
                         {fishMe}
-                    <button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>
+                    {dubs.length > 0 &&<button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>}
                 </>
             }
         </div>

@@ -7,7 +7,7 @@ import { FavContext } from '../context/FavProvider.jsx'
 
 
 export default function Counter(props){
-    const { tStats, user, dubs, counterStats, fish, delCounts } = useContext(MealContext)
+    const { tStats, user, dubs, counterStats } = useContext(MealContext)
     const { thisStat, setThisStat, addPrioStat } = useContext(StatContext)
     const { getFav } = useContext(FavContext)
     const {comp, newFav, stats} = props
@@ -18,8 +18,6 @@ export default function Counter(props){
 
         getFav(user)
     },[])
-
-    const [noBro,setNoBro] = useState(false)
     // track users most important stat of the day in back end
     const [chosen, setChosen] = useState('')
 
@@ -28,11 +26,7 @@ export default function Counter(props){
         newFav(thisOne)
     }
 
-    const clearCounts = (e) =>{
-        e.preventDefault()
-        delCounts()
-        
-    }
+    
     // const mapMe = tStats?.map(stat => {
         
     //     <>
@@ -46,21 +40,8 @@ export default function Counter(props){
     //put request to update userstate with prioritizedd stat
     // get request for all trackable stats from user in getDubs call
     // [favStat, setFavStat] = useState('')
-    useEffect(() => {
-
-        if(counterStats.protien === 0 && counterStats.calories === 0 && counterStats.fat === 0 && counterStats.sugar === 0 && dubs.length === 0){
-        setNoBro(!noBro)
-    } 
-
-    },[])
-    
     return (
         <div>
-            <h1>Daily Stats</h1>
-            {dubs.length === 0 && !noBro && <form onSubmit={(e)=>clearCounts(e)}>
-                <button>X</button>
-            </form>}
-            
             {/* {mapMe}
             {chosen? 
                 <h1>{chosen.name}</h1>

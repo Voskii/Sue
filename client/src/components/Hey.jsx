@@ -10,11 +10,12 @@ import DailyDub from './DailyDub.jsx'
 export default function Hey(){
     const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
     const { setStats, stats, getStats } = useContext(StatContext)
-    const { meals, getMeals, getDubs, dubs, tStats, newFav, getUserCounts } = useContext(MealContext)
+    const { meals, getMeals, getDubs, dubs, tStats, newFav, getUserCounts, delCounts, counterStats } = useContext(MealContext)
     const [ newM, setNewM ] = useState(false)
     
     console.log('hey page load', tStats)
     console.log(`hey page dubs:`, dubs)
+
 
     useEffect(()=>{
         //get dubs
@@ -22,6 +23,24 @@ export default function Hey(){
         //get user counter stats
         getUserCounts(user)
     },[])
+
+    // useEffect(() => {
+
+    //     if(counterStats.protien === 0 && counterStats.calories === 0 && counterStats.fat === 0 && counterStats.sugar === 0 && dubs.length === 0){
+    //         console.log('should hide button')
+    //     setNoButton(true)
+    // } else if (dubs.length === 0 && counterStats.calories > 0) {
+    //     setNoButton(false)
+    //     console.log('Show Button')
+    // }
+
+    // },[])
+
+    const clearCounts = (e) =>{
+        
+        delCounts()
+        // setNoButton(true)
+    }
 
     return (
         <div className='counter-container'>
@@ -32,6 +51,13 @@ export default function Hey(){
                     <div>
                         <div>
                             {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
+                            
+                            <h1>Daily Stats</h1>
+                            
+                                <form onSubmit={delCounts}>
+                                    {dubs.length === 0 && <button>X</button>}
+                                </form>
+                            
                             <Counter newFav={newFav} tStats={stats} dubs={dubs} />
                             
                             

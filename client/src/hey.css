@@ -36,7 +36,11 @@
   color: var(--ws)
 }
 
-
+.triggers{
+  padding: 5px;
+  display: flex;
+  gap: 8px;
+}
 
 .new-meal{
     display: flex;

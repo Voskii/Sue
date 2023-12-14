@@ -60,10 +60,10 @@ const Meal = (props) => {
                 <div onClick={()=>mealClicked(meal)}>{meal.name}</div>
             }
             {!showStats && 
-                <>
-                    <span onClick={()=>check(meal)}>{checked? '👀':'✨'}</span>
-                    <span><button onClick={()=>deleteMeal(meal)}>✖</button></span>
-                    </>
+                <div className='triggers'>
+                    <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div>
+                    <div><button onClick={()=>deleteMeal(meal)}>✖</button></div>
+                </div>
             }
             
             {/* {'move this to meals component'} */}

@@ -70,6 +70,10 @@ const Meals = () => {
     console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
         <div>
+            <div>
+                {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
+            </div>
+            
             {chosen? 
                 <div>
                     <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
