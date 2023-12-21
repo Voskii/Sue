@@ -22,7 +22,7 @@ function App() {
           <Header logout={logout}  />
           <Link to="/">Hey</Link>
           <Link to="meals">Meals</Link>
-          <Link to='counter'>Fav</Link>
+          {/* <Link to='counter'>Fav</Link> */}
         </nav>
       }
       <Routes>

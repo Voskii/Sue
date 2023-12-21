@@ -51,17 +51,12 @@ export default function Hey(){
                     <div>
                         <div>
                             {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
-                            
                             <h1>Daily Stats</h1>
-                            
                                 <form onSubmit={delCounts}>
                                     {/* {dubs.length === 0 && <button>X</button>} */}
                                     {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
                                 </form>
-                            
                             <Counter newFav={newFav} tStats={stats} dubs={dubs} />
-                            
-                            
                         </div>
                             <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>

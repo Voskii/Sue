@@ -27,6 +27,25 @@ code {
     monospace;
 }
 
+button {
+  color: var(--ws);
+  background-color: var(--p);
+  text-decoration: none;
+  border-radius: 50%;
+  border: dashed var(--bg);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  transition: color 1s ease, border 1s ease;
+  &:hover,
+  &:active{
+    color: var(--m);
+    border: dashed 5px var(--bg)
+  }
+}
+
+button:hover {
+
+}
 /* .app{
   margin: 0 auto;
   
