@@ -11,7 +11,7 @@ import DailyDub from './DailyDub'
 
 const Meals = () => {
     const { user } = useContext(UserContext)
-    const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs } = useContext(MealContext)
+    const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs, setMeals } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub} = useContext(DubContext)
     
@@ -55,9 +55,9 @@ const Meals = () => {
         return (
             <div>
                 {createStat? 
-                    <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false} stats={meal.stats} getMeals={getMeals}/> 
+                    <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false} stats={meal.stats} getMeals={getMeals} hideCounts={true} /> 
                 :
-                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} setNewM={false} stats={meal.stats} meals={meals}/>
+                    <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} setNewM={false} stats={meal.stats} meals={meals} />
                 }
             </div>
         )
@@ -65,9 +65,9 @@ const Meals = () => {
     console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
         <div>
-            <div>
+            <>
                 {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
-            </div>
+            </>
             
             {chosen? 
                 <div>

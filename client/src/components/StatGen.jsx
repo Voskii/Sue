@@ -6,8 +6,8 @@ import { MealContext } from '../context/MealProvider'
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat} = props
-    const { addMeal, getMeals, meals, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats  } = useContext(MealContext)
+    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat, hideCounts} = props
+    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats  } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -30,7 +30,9 @@ const StatGen = (props) => {
 
     const clear = () => {
         console.log(`in clear comp newStat:`, newStat)
-        addNewCounterStats()
+        if(!hideCounts){
+            addNewCounterStats()
+        }
         setStats(prev => ([
                 ...prev,
                 {
@@ -62,19 +64,19 @@ const StatGen = (props) => {
         event.preventDefault()
         handleSubmit(event)
         //setFullMeals stats
-        
-        setFullMeal((prevFullMeal) =>
-        prevFullMeal.map((prev) => {
-            if (prev._id === meal) {
-                return {
-                    ...prev,
-                    stats: [...prev.stats, newStat] // Add the new stat to the stats array
-                };
-            } else {
-                return prev;
-            }
-        })
-    );
+        updateMealsMap(meal, newStat)
+        // setMeals((prev) =>
+        // prev.map((prev) => {
+        //     if (prev._id === meal) {
+        //         return {
+        //             ...prev,
+        //             stats: [...prev.stats, newStat] // Add the new stat to the stats array
+        //         };
+        //     } else {
+        //         return prev;
+        //     }
+        // })
+        // )
     }
 
     const handleCheck = () => {
@@ -87,7 +89,7 @@ const StatGen = (props) => {
             <form onSubmit={submit}>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
                     <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
-                        <span>Custom</span>
+                        <span>Ingredients</span>
                         <input
                         type='text'
                         name='name'
@@ -111,16 +113,21 @@ const StatGen = (props) => {
                         /> 
                         <button>SMASHED</button>
                     </div>
+                    {hideCounts ?
+                    ''
+                    :
                     <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
+                        <span>Total</span>
+                        <span style={{color: 'whiteSmoke', fontSize: '.6em'}}>Fill out once</span>
                         <span>Calories</span>
                         <input
-                        type='number'
-                        name='calories'
-                        value={newCounter.calories}
-                        placeholder='Calories'
-                        onChange={handleCounterChange}
+                            type='number'
+                            name='calories'
+                            value={newCounter.calories}
+                            placeholder='Calories'
+                            onChange={handleCounterChange}
                         />
-                        <span>Protien</span>
+                        <span>Protein</span>
                         <input
                             type='number'
                             name='protein'
@@ -144,7 +151,10 @@ const StatGen = (props) => {
                             placeholder='Sugar'
                             onChange={handleCounterChange}
                         />
+                        
                     </div>
+                    }
+                    
                 </div>
                 
                 

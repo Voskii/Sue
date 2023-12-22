@@ -48,7 +48,7 @@ export default function NewMeal(props) {
                         <button>SMASH MEAL</button>
                     </form>
                 }
-            {mealId && <StatGen meal={mealId} setNewM={setNewM} setStats={setStats} />}
+            {mealId && <StatGen meal={mealId} setNewM={setNewM} setStats={setStats} hideCounts={false}/>}
         </div>
     )
 }

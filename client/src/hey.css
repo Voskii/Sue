@@ -1,4 +1,7 @@
 
+.log-butt{
+  height: 50%;
+}
 
 .counter-container{
     display: flex;

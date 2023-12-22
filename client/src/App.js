@@ -17,13 +17,16 @@ function App() {
   // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   return (
     <div className="">
-      { token && 
-        <nav className=''>
+      { token &&
+        <>
           <Header logout={logout}  />
-          <Link to="/">Hey</Link>
-          <Link to="meals">Meals</Link>
-          {/* <Link to='counter'>Fav</Link> */}
-        </nav>
+          <nav className=''>
+            <Link to="/">Hey</Link>
+            <Link to="meals">Meals</Link>
+            <button onClick={logout} className='log-butt'>Logout</button>
+            {/* <Link to='counter'>Fav</Link> */}
+          </nav>
+        </>
       }
       <Routes>
         <Route 

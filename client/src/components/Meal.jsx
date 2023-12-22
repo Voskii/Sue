@@ -2,16 +2,19 @@ import React, { useState, useContext } from 'react'
 import Stat from './Stat'
 import StatGen from './StatGen'
 import { MealContext } from '../context/MealProvider'
+import { StatContext } from '../context/StatProvider'
 
 const Meal = (props) => {
 
-    const {meal, cleanUp, noBro, mealClicked, track, showStats, meals, setStats, setNewM, stats} = props
+    const {meal, cleanUp, noBro, mealClicked, track, showStats, meals, setNewM, updateMealsMap} = props
+    const { getStats, stats, setStats } = useContext(StatContext)
     console.log(`MealCOMP meals:`, meals, 'meal:', meal)
     const [checked, setChecked] = useState(false)
     const [makeMeAStat, setMakeMeAStat] = useState(false)
     const { deleteMeal, counterStats } = useContext(MealContext)
-    const statMe = meal.stats?.map(item => item.track && <Stat key={item._id} info={item} track={true} whiteOut={true}/>)
-    const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true} whiteOut={false}/>)
+    const statMe = meal.stats?.map(item => <Stat key={item._id} info={item} track={true} whiteOut={true}/>)
+    // const ingredientMe = meal.stats?.map(item => !item.track && <Stat key={item._id} info={item} track={true} whiteOut={false}/>)
+
 
 
     const check = (fish) => {
@@ -21,7 +24,7 @@ const Meal = (props) => {
     }
 
     return (
-        <div>
+        <div style={{paddingTop: '30px'}}>
             {showStats?
                 <div>
                     <div onClick={()=>cleanUp(meal)}>{meal.name}</div>
@@ -29,13 +32,13 @@ const Meal = (props) => {
 
                             <div className="stat-untracked">
                                 <h6 className='stat-colors'>Ingredient</h6>
-                                {ingredientMe}
+                                {meal.stats?.map(item => <Stat key={item._id} info={item} track={true} whiteOut={true}/>)}
                             </div>
 
-                            <div className="stat-tracked">
+                            {/* <div className="stat-tracked">
                                 <h6 className="stat-colors">Stat</h6>
                                 {statMe}
-                            </div>
+                            </div> */}
 
                             <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
                         <span>Calories</span>
@@ -50,7 +53,7 @@ const Meal = (props) => {
                         </div>
                         
                         {makeMeAStat? 
-                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM}/>
+                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM} hideCounts={true} updateMealsMap={updateMealsMap}/>
                         :
                             <button onClick={()=>setMakeMeAStat(!makeMeAStat)}>+Stat?</button>
                         }

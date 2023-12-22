@@ -321,16 +321,18 @@ export default function MealProvider(props){
 
     const addNewCounterStats = async () => {
         try{
-            const counts = await counterAxios.post('/api/counter', newCounter)
-            const allCounts = counts.res
-            console.log(allCounts)
-            setNewCounter({
-                protein: '',
-                calories: '',
-                sugar: '',
-                fat: '',
-                mealId: ''
-            })
+            
+                const counts = await counterAxios.post('/api/counter', newCounter)
+                const allCounts = counts.res
+                console.log(allCounts)
+                setNewCounter({
+                    protein: '',
+                    calories: '',
+                    sugar: '',
+                    fat: '',
+                    mealId: ''
+                })
+            
         } catch(err){
             console.log(err)
         }
@@ -372,6 +374,22 @@ export default function MealProvider(props){
         }
     }
 
+    const updateMealsMap = (updateThisId, newInfo) => {
+        console.log('UMM id:', updateThisId, 'new stat:', newInfo)
+        setMeals((prev) =>
+        prev.map((prev) => {
+            if (prev._id === updateThisId) {
+                return {
+                    ...prev,
+                    stats: [...prev.stats, newInfo] // Add the new stat to the stats array
+                };
+            } else {
+                return prev;
+            }
+        })
+    )
+    }
+
     return (
 
         <MealContext.Provider
@@ -403,7 +421,8 @@ export default function MealProvider(props){
                 addNewCounterStats,
                 getUserCounts,
                 userCounts,
-                delCounts
+                delCounts,
+                updateMealsMap
             }}>
             { props.children }
         </MealContext.Provider>

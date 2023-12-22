@@ -9,7 +9,6 @@ export default function Header(props){
     return(
         <header style={{textAlign: 'center', padding: '25px'}}>
             <div style={{fontSize: '2em'}}>🌻{user.username.charAt(0).toUpperCase() + user.username.slice(1)}🌻</div>
-            <button onClick={logout} className=''>Logout</button>
         </header>
     )
 }
