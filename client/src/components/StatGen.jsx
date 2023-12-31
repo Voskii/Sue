@@ -104,13 +104,13 @@ const StatGen = (props) => {
                             placeholder='Stat'
                             onChange={handleChange}
                         />
-                        <input
+                        {/* <input
                             type='checkbox'
                             checked={newStat.track}
                             name='track'
                             value={newStat.track}
                             onChange={handleCheck}
-                        /> 
+                        />  */}
                         <button>SMASHED</button>
                     </div>
                     {hideCounts ?

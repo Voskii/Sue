@@ -85,8 +85,7 @@ nav a {
   .stat-info{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 30px;
+    gap: 5px;
   }
 
   .daily-dub-container{
