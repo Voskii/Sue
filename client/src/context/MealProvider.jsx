@@ -50,6 +50,7 @@ export default function MealProvider(props){
         mealId: '',
         user:'',
         eatWhen: 1,
+        mealCount: [],
         stats: [{
             name:'',
             value:'',
@@ -237,9 +238,9 @@ export default function MealProvider(props){
     //         .catch(err => console.log(err.response.data.errMsg))
     //     }
     const addMeal = async (newMeal) => {
+        console.log('addMeal context newMEal:', newMeal)
         try {
             const res = await mealAxios.post('/api/meal', newMeal)
-        console.log(res)
         setMealId(res.data._id)
         setNewCounter(prevInputs => ({
             ...prevInputs,
@@ -248,6 +249,8 @@ export default function MealProvider(props){
         setMeals((prev) => [
             ...prev,
             {
+                mealCount: [],
+                mealId: res.data._id,
                 name: res.data.name,
                 imgUrl: res.data.imgUrl,
                 user: res.data.user,
@@ -321,17 +324,29 @@ export default function MealProvider(props){
 
     const addNewCounterStats = async () => {
         try{
+            const counts = await counterAxios.post('/api/counter', newCounter)
+            const allCounts = counts.res
+            console.log(allCounts)
+            setMeals((prev) =>
+                prev.map((prev) => {
+                if (prev._id === newCounter.mealId) {
+                    return {
+                        ...prev,
+                        mealCount: [newCounter] // Add the new stat to the stats array
+                    };
+                } else {
+                    return prev;
+            }
+            })
+            )
+            setNewCounter({
+                protein: '',
+                calories: '',
+                sugar: '',
+                fat: '',
+                mealId: ''
+            })
             
-                const counts = await counterAxios.post('/api/counter', newCounter)
-                const allCounts = counts.res
-                console.log(allCounts)
-                setNewCounter({
-                    protein: '',
-                    calories: '',
-                    sugar: '',
-                    fat: '',
-                    mealId: ''
-                })
             
         } catch(err){
             console.log(err)

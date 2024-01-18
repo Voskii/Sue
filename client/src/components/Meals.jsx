@@ -3,6 +3,7 @@ import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
 import { UserContext } from '../context/UserProvider'
+import NewMeal from './NewMeal'
 import StatGen from './StatGen'
 import Meal from './Meal'
 import Stat from './Stat'
@@ -14,6 +15,7 @@ const Meals = () => {
     const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs, setMeals } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
     const { dub, setDub} = useContext(DubContext)
+    const [ newM, setNewM ] = useState(false)
     
     const [ showStats, setShowStats ] = useState(false)
     console.log(meals)
@@ -65,26 +67,28 @@ const Meals = () => {
     console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
         <div>
-            <>
-                {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
-            </>
-            
-            {chosen? 
-                <div>
-                    <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
-                    
-                </div>
+            {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
+            {newM ?
+                <NewMeal setNewM={setNewM} user={user} setStats={setStats} />
             :
-                <div className='hey-meals-dd'>
-                    <ul>
-                        {mapMe}
-                    </ul>
-                    
-                    {dubs && <DailyDub trackedMeals={trackedMeals} setTrackedMeals={setTrackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />}
+                <div>
+                    <>
+                        {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
+                    </>
+                    {chosen? 
+                    <div>
+                        <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
+                    </div>
+                    :
+                    <div className='hey-meals-dd'>
+                        <ul>
+                            {mapMe}
+                        </ul>
+                        {dubs && <DailyDub trackedMeals={trackedMeals} setTrackedMeals={setTrackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />}
+                    </div>
+                    }
                 </div>
-            
-            }
-
+        }
         </div>
     )
 }

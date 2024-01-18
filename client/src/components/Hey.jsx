@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Counter from './Counter.jsx'
 import NextMeal from './NextMeal.jsx'
 import NewMeal from './NewMeal.jsx'
@@ -45,12 +46,12 @@ export default function Hey(){
     return (
         <div className='counter-container'>
             <div className=''>
-                {newM ? 
-                    <NewMeal setNewM={setNewM} user={user} setStats={setStats} />
-                :
+                
+                    {/* <NewMeal setNewM={setNewM} user={user} setStats={setStats} /> */}
+                
                     <div>
                         <div style={{paddingTop: '12px'}}>
-                            {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
+                            {/* {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>} */}
                             <h1 style={{marginTop: '2px'}}>Daily Stats</h1>
                                 <form onSubmit={delCounts}>
                                     {/* {dubs.length === 0 && <button>X</button>} */}
@@ -60,7 +61,7 @@ export default function Hey(){
                         </div>
                             <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>
-                }
+                
             </div>
         </div>
         

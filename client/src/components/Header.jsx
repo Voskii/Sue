@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import yom from '../images/HeyYou1.png'
 
 import { UserContext } from '../context/UserProvider.jsx'
 
@@ -7,8 +8,12 @@ export default function Header(props){
     const {logout, userState} = props
     console.log(userState)
     return(
-        <header style={{textAlign: 'center', padding: '25px'}}>
-            <div style={{fontSize: '2em'}}>🌻{user.username.charAt(0).toUpperCase() + user.username.slice(1)}🌻</div>
-        </header>
+        <div style={{textAlign: '', padding: '5'}} className='header'>
+            <div style={{display: 'flex'}}>
+                <img src={yom} className='header-img'/>
+                <div className='header-name'>HeyYou!</div>
+            </div>
+            <button onClick={logout} className='log-butt'>Logout</button>
+        </div>
     )
 }

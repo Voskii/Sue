@@ -5,8 +5,8 @@ import { MealContext } from '../context/MealProvider'
 
 const StatGen = (props) => {
 
-    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, setStats, makeMeAStat, setMakeMeAStat, hideCounts} = props
+    const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats, setStats } = useContext(StatContext)
+    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts} = props
     const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats  } = useContext(MealContext)
     console.log(meal)
     // const [wutId, setwutId] = useState({
@@ -151,13 +151,9 @@ const StatGen = (props) => {
                             placeholder='Sugar'
                             onChange={handleCounterChange}
                         />
-                        
                     </div>
                     }
-                    
                 </div>
-                
-                
             </form>
             <button onClick={clear}>All done ⚡</button>
         </div>

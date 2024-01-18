@@ -16,14 +16,14 @@ function App() {
   const { getFav } = useContext(MealContext)
   // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 550px)' })
   return (
-    <div className="">
+    <div className={token ? 'hey-background' : ''}>
       { token &&
         <>
           <Header logout={logout}  />
+          <div className='welcome-user'>Welcome {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</div>
           <nav className=''>
             <Link to="/">Hey</Link>
             <Link to="meals">Meals</Link>
-            <button onClick={logout} className='log-butt'>Logout</button>
             {/* <Link to='counter'>Fav</Link> */}
           </nav>
         </>
@@ -34,11 +34,13 @@ function App() {
         />
         <Route
           path='/hey' element = {<ProtectedRoute token={token} redirectTo='/'>
+            
             <Hey />
           </ProtectedRoute>}
         />
         <Route
           path='/meals' element = {<ProtectedRoute token={token} redirectTo='/'>
+            
             <Meals />
           </ProtectedRoute>
           }
@@ -53,5 +55,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

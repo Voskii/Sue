@@ -6,10 +6,12 @@ const {
     handleChange, 
     handleSubmit, 
     btnText,
-    errMsg, 
+    errMsg,
+    needEmail, 
     inputs: {
         username, 
-        password
+        password,
+        email
     } 
 } = props
 
@@ -27,6 +29,14 @@ return (
             name="password" 
             onChange={handleChange} 
             placeholder="Password"/>
+        {needEmail && 
+        <input 
+            type="text" 
+            value={email} 
+            name="email" 
+            onChange={handleChange} 
+            placeholder="Email"/>
+        }
         <button>{ btnText }</button>
         <p style={{color: "red"}}>{ errMsg }</p>
     </form>
