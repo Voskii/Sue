@@ -45,24 +45,18 @@ export default function Hey(){
 
     return (
         <div className='counter-container'>
-            <div className=''>
-                
-                    {/* <NewMeal setNewM={setNewM} user={user} setStats={setStats} /> */}
-                
+                <>
+                    <h1 className='daily-stats'>Daily Stats</h1>
+                        <form onSubmit={delCounts}>
+                            {/* {dubs.length === 0 && <button>X</button>} */}
+                            {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
+                        </form>
+                    <Counter newFav={newFav} tStats={stats} dubs={dubs} />
+                </>
                     <div>
-                        <div style={{paddingTop: '12px'}}>
-                            {/* {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>} */}
-                            <h1 style={{marginTop: '2px'}}>Daily Stats</h1>
-                                <form onSubmit={delCounts}>
-                                    {/* {dubs.length === 0 && <button>X</button>} */}
-                                    {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
-                                </form>
-                            <Counter newFav={newFav} tStats={stats} dubs={dubs} />
-                        </div>
-                            <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
+                        <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
                     </div>
-                
-            </div>
+            
         </div>
         
     )

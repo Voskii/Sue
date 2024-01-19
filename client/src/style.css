@@ -2,12 +2,13 @@
   --bg: #2f4454;
   --m: #2e151b;
   --p: #da7b93;
-  --lg: #376E6f;
+  --lg: #376E6f; 
   --dg: #1C3334;
   --ws: #F5F5F5;
   --w: #EDEDED;
   --r: #FE534E;
   --lr: #BC716F;
+  --trans: rgb(55, 110, 111, 50%);
   --font: 1rem Sansita;
 }
 

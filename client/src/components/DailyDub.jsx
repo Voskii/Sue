@@ -104,9 +104,9 @@ const DailyDub = (props) => {
             }
             {onDeck &&
                 <>
-                    <h3>On Deck Meals</h3>
+                    {dubs.length > 0 ? <h3 style={{textAlign: 'center', paddingBottom: '25px', color: 'whitesmoke', fontSize: '1.8em'}}>On Deck Meals</h3> : <h3 style={{textAlign: 'center', paddingBottom: '25px', color: 'whitesmoke', fontSize: '1.8em'}}>Currently 0 Meals</h3>}
                         {fishMe}
-                    {dubs.length > 0 &&<button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>}
+                    {dubs.length > 0 && <button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>}
                 </>
             }
         </div>

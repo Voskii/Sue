@@ -8,6 +8,8 @@ import Auth from './components/Auth.jsx'
 import Hey from './components/Hey.jsx'
 import Counter from './components/Counter.jsx'
 import Header from './components/Header.jsx';
+import OvenMit from './images/Ovenmit.png'
+import YOM from './images/Meal.png'
 import './style.css';
 import './hey.css'
 
@@ -21,13 +23,14 @@ function App() {
         <>
           <Header logout={logout}  />
           <div className='welcome-user'>Welcome {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</div>
-          <nav className=''>
-            <Link to="/">Hey</Link>
-            <Link to="meals">Meals</Link>
-            {/* <Link to='counter'>Fav</Link> */}
-          </nav>
         </>
       }
+      <nav className=''>
+        
+        <Link to="/" className='hey-span'><img src={OvenMit} /><span>Hey</span></Link>
+        <Link to="meals" className='meals-span'><img src={YOM} /><span>Meals</span></Link>
+        {/* <Link to='counter'>Fav</Link> */}
+      </nav>
       <Routes>
         <Route 
           path='/' element = { token ? <Navigate to="/hey"/> : <Auth /> }
