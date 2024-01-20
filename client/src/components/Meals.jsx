@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
@@ -10,7 +11,8 @@ import Stat from './Stat'
 import DailyDub from './DailyDub'
 
 
-const Meals = () => {
+const Meals = (props) => {
+    const {location} = props
     const { user } = useContext(UserContext)
     const { addMeal, getMeals, meals, mealId, fullMeal, getDubs, dubs, setMeals } = useContext(MealContext)
     const { getStats, stats, setStats } = useContext(StatContext)
@@ -67,6 +69,7 @@ const Meals = () => {
     console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
         <div>
+            {/* <Link to="/" className='hey-span'>Hey</Link> */}
             {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
             {newM ?
                 <NewMeal setNewM={setNewM} user={user} setStats={setStats} />
@@ -76,9 +79,9 @@ const Meals = () => {
                         {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
                     </>
                     {chosen? 
-                    <div>
-                        <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
-                    </div>
+                        <div>
+                            <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
+                        </div>
                     :
                     <div className='hey-meals-dd'>
                         <ul>

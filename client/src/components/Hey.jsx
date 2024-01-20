@@ -8,7 +8,8 @@ import { StatContext } from '../context/StatProvider.jsx'
 import { MealContext } from '../context/MealProvider.jsx'
 import DailyDub from './DailyDub.jsx'
 
-export default function Hey(){
+export default function Hey(props){
+    const {isHey, isMeal} = props
     const { user, thisStat, setThisStat, addPrioStat } = useContext(UserContext)
     const { setStats, stats, getStats } = useContext(StatContext)
     const { meals, getMeals, getDubs, dubs, tStats, newFav, getUserCounts, delCounts, counterStats } = useContext(MealContext)
@@ -44,19 +45,18 @@ export default function Hey(){
     }
 
     return (
-        <div className='counter-container'>
-                <>
-                    <h1 className='daily-stats'>Daily Stats</h1>
-                        <form onSubmit={delCounts}>
-                            {/* {dubs.length === 0 && <button>X</button>} */}
-                            {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
-                        </form>
-                    <Counter newFav={newFav} tStats={stats} dubs={dubs} />
-                </>
-                    <div>
-                        <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
-                    </div>
-            
+        <div>
+            <div  className='counter-container'>
+                <h1 className='daily-stats'>Daily Stats</h1>
+                    <form onSubmit={delCounts}>
+                        {/* {dubs.length === 0 && <button>X</button>} */}
+                        {dubs.length === 0 && counterStats?.calories > 0 && <button>X</button>}
+                    </form>
+                <Counter newFav={newFav} tStats={stats} dubs={dubs} />
+            </div>
+            <div  className=''>
+                <DailyDub onDeck={true} myTrackedMeals={meals} getMeals={getMeals} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />
+            </div>
         </div>
         
     )

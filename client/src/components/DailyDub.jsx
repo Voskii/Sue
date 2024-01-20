@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
+import forkknife from '../images/forkknife.png'
+import ateIt from '../images/ateIt.png'
 // import ForceUpdateMethod from './components/ForceUpdateMethod.jsx'
 import axios from 'axios'
 
@@ -63,8 +65,8 @@ const DailyDub = (props) => {
     })
     .map((dubb, index) =>
         dubb.eatWhen !== undefined ? (
-            <div key={index} style={{ color: 'aqua' , padding: '15px'}}>
-                {dubb.name}
+            <div key={index} style={{ color: 'whitesmoke' , lineHeight: '40px', fontSize: '1.6em'}}>
+                {dubb.name.charAt(0).toUpperCase() + dubb.name.slice(1).toLowerCase()}
                 {generate && <button onClick={()=>delDub(dubb)}>X</button>}
             </div>
         ) : null
@@ -74,7 +76,7 @@ const DailyDub = (props) => {
         console.log('delete tracked clicked', meal)
         setTrackedMeals(trackedMeals.filter((mealss) => mealss.mealId === meal.mealId ? "" : mealss))
     }
-            //how the hell is tracked meals working when tracked meals = Allmeals????
+            
     const trackMe = trackedMeals?.map((dub, i) => 
             
         <div key={i}>
@@ -104,9 +106,9 @@ const DailyDub = (props) => {
             }
             {onDeck &&
                 <>
-                    {dubs.length > 0 ? <h3 style={{textAlign: 'center', paddingBottom: '25px', color: 'whitesmoke', fontSize: '1.8em'}}>On Deck Meals</h3> : <h3 style={{textAlign: 'center', paddingBottom: '25px', color: 'whitesmoke', fontSize: '1.8em'}}>Currently 0 Meals</h3>}
+                    {dubs.length > 0 ? <h3 style={{display: 'flex', justifyContent: 'center', textDecoration: 'underline 1px', paddingTop: '10px', color: 'whitesmoke', fontSize: '1.8em'}}><span><img src={forkknife}/></span>ON DECK</h3> : <h3 style={{textAlign: 'center', paddingBottom: '25px', color: 'whitesmoke', fontSize: '1.8em'}}>Currently 0 Meals</h3>}
                         {fishMe}
-                    {dubs.length > 0 && <button onClick={()=>addCounterStats(dubs[0])}>ATE IT</button>}
+                    {dubs.length > 0 && <div style={{paddingTop:'5px', paddingBottom: '20px'}}><button onClick={()=>addCounterStats(dubs[0])} className='ateit-butt'><img src={ateIt}/><div style={{fontSize: '1.5em'}}>Ate It All</div></button></div>}
                 </>
             }
         </div>

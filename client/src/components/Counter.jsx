@@ -28,7 +28,7 @@ export default function Counter(props){
     // }
 
     return (
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10px', paddingTop: '50px'}}>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '10px', padding: '10px'}}>
             <div><span style={{color: 'whitesmoke'}}>Calories: </span>{counterStats?.calories || 0}</div>
             <div><span style={{color: 'whitesmoke'}}>Protein: </span>{counterStats?.protein || 0}</div>
             <div><span style={{color: 'whitesmoke'}}>FAT: </span>{counterStats?.fat || 0}</div>
