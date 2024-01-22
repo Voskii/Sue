@@ -68,7 +68,7 @@ const Meals = (props) => {
     }) 
     console.log(`trackedMeals bottom of comp`, trackedMeals)
     return (
-        <div>
+        <div className=''>
             {/* <Link to="/" className='hey-span'>Hey</Link> */}
             {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
             {newM ?

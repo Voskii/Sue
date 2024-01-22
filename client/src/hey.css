@@ -111,18 +111,17 @@ p{
 nav {
   display: flex;
   justify-content: center;
-  gap: 10%;
   font-size: 2rem;
   background-color: var(--trans);
   max-width: 290px;
-  text-align: center;
-  margin: 0px auto;
+  /* text-align: center; */
+  margin: 0px 0px 0px 0px;
   border-radius: 5px 5px 0px 0px;
 }
 
 nav a {
   
-  padding: 4px 5px;
+  padding: 8px 7px;
   color: var(--ws);
   /* background-color: var(--trans); */
   text-decoration: none;
@@ -133,11 +132,26 @@ nav a {
 .hey-span{
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .meals-span{
   display: flex;
   justify-content: center;
+  width: 100%;
+  background-color: var(--dr);
+  border-radius: 0px 3px 3px 0px;
+  
+}
+
+.path-meal-span{
+  background-color: ;
+  width: 200%;
+}
+
+.path-hey-span{
+  background-color: ;
+  width: 100%;
 }
 
 .counter-container{
@@ -148,7 +162,7 @@ nav a {
   text-align: center;
   width: 100%;
   color: var(--p);
-  margin: 0px auto;
+  /* margin: 0px auto; */
   max-width: 290px;
   border-radius: 0px 0px 5px 5px;
   margin-bottom: 20px;
@@ -178,7 +192,7 @@ nav a {
   gap: 25%; */
   text-align: center;
   background-image: url(./images/DDBCKT.png);
-  filter: drop-shadow(4px 4px 1px var(--lr));
+  filter: drop-shadow(4px 4px 1px var(--dr));
   background-size: cover;
   background-repeat: no-repeat;
   flex-direction: column;

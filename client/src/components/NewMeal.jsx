@@ -39,9 +39,9 @@ export default function NewMeal(props) {
                             onChange={handleChange}
                         />
                         <input 
-                            name='_img'
+                            name='imgUrl'
                             type='text'
-                            value={newMeal._img}
+                            value={newMeal._imgUrl}
                             placeholder='image url?'
                             onChange={handleChange}
                         />

@@ -50,6 +50,7 @@ export default function MealProvider(props){
         mealId: '',
         user:'',
         eatWhen: 1,
+        imgUrl: '',
         mealCount: [],
         stats: [{
             name:'',
@@ -70,7 +71,7 @@ export default function MealProvider(props){
     const [newMeal, setNewMeal] = useState({
             name: '',
             user: userId,
-            _img: '',
+            imgUrl: '',
             eatWhen: 1
     })
 
@@ -119,7 +120,7 @@ export default function MealProvider(props){
         setNewMeal({
             name: '',
             user: userId,
-            _img: '',
+            imgUrl: '',
             eatWhen: 1
     })
         // Mealaxios.post('./api/meal', newMeal)
@@ -139,7 +140,8 @@ export default function MealProvider(props){
                     name: meal.name,
                     mealId: meal._id,
                     user: meal.user,
-                    eatWhen: meal.eatWhen
+                    eatWhen: meal.eatWhen,
+                    imgUrl: meal.imgUrl
                 };
     
                 const [mealCountResponse, statResponse] = await Promise.all([
@@ -203,6 +205,7 @@ export default function MealProvider(props){
                 stats: dub.stats,
                 eatWhen: dub.eatWhen,
                 _id: dub._id,
+                imgUrl: dub.imgUrl,
                 mealCount: counts[index]
             }))
             const fullDubs = await Promise.all(dubsPromises)
