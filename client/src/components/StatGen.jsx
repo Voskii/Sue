@@ -7,8 +7,9 @@ const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats, setStats } = useContext(StatContext)
     const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts} = props
-    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats  } = useContext(MealContext)
-    console.log(meal)
+    
+    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, thisMeal  } = useContext(MealContext)
+    console.log(meal, 'thisMeal:', thisMeal)
     // const [wutId, setwutId] = useState({
     //     name: '',
     //     stat: '',
@@ -87,15 +88,16 @@ const StatGen = (props) => {
     return (
         <div>
             <form onSubmit={submit}>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px'}}>
-                        <span>Ingredients</span>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px', justifyContent: 'center', alignItems: 'center', gap: '7px'}}>
+                        {thisMeal.imgUrl && <img src={thisMeal.imgUrl} className='meal-image'/>}
                         <input
                         type='text'
                         name='name'
                         value={newStat.name}
                         placeholder='Name'
                         onChange={handleChange}
+                        style={{transform: 'scale(.9)'}}
                         />
                         <input
                             type='text'
@@ -103,6 +105,7 @@ const StatGen = (props) => {
                             value={newStat.value}
                             placeholder='Stat'
                             onChange={handleChange}
+                            style={{transform: 'scale(.9)'}}
                         />
                         {/* <input
                             type='checkbox'
@@ -111,12 +114,12 @@ const StatGen = (props) => {
                             value={newStat.track}
                             onChange={handleCheck}
                         />  */}
-                        <button>SMASHED</button>
+                        <button style={{width: 'fit-content'}}>Add Ingredients</button>
                     </div>
                     {hideCounts ?
                     ''
                     :
-                    <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
+                    <div className='counter-addMeal-container'>
                         <span>Total</span>
                         <span style={{color: 'whiteSmoke', fontSize: '.6em'}}>Fill out once</span>
                         <span>Calories</span>
@@ -155,7 +158,7 @@ const StatGen = (props) => {
                     }
                 </div>
             </form>
-            <button onClick={clear}>All done ⚡</button>
+            <button onClick={clear}>Add Meal ⚡</button>
         </div>
     )
 }

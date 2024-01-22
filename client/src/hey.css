@@ -140,7 +140,7 @@ nav a {
   justify-content: center;
   width: 100%;
   background-color: var(--dr);
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 0px 3px 0px 0px;
   
 }
 
@@ -217,7 +217,3 @@ nav a {
     border-radius: 5px;
   }
 
-  .create-meal-name{
-    padding: 20px;
-    font-size: 1.5em;
-  }

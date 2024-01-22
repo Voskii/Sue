@@ -131,3 +131,50 @@ input{
   text-align: center;
   
 } */
+
+.new-meal{
+  max-width: 290px;
+  background-color: var(--dr);
+  border-radius: 0px 0px 3px 3px;
+  filter: drop-shadow(4px 4px 1px var(--lg));
+}
+
+.create-meal-name{
+  padding: 18px;
+  font-size: 1.5em;
+  text-decoration: underline 1px;
+  color: var(--ws);
+}
+
+.meal-image{
+  height: 100px;
+  width: 150px;
+  border-radius: 3px;
+}
+
+.add-meal-butt{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0px auto;
+    background-color: whitesmoke;
+    color: var(--r);
+    filter: drop-shadow(4px 4px 1px var(--lr));
+    border-radius: 5px;
+}
+
+.counter-addMeal-container{
+  display: flex;
+  background-color: var(--trans);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  color: var(--p);
+  margin: 0px auto;
+  max-width: 290px;
+  border-radius: 0px 0px 5px 5px;
+  margin-bottom: 20px;
+}

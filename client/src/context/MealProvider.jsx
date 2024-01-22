@@ -58,7 +58,7 @@ export default function MealProvider(props){
             track: false
             }]
     }])
-
+    const [thisMeal, setThisMeal] = useState({})
     const [userId, setUserId] = useState('')
     const [mealId, setMealId] = useState('')
     const [dubs, setDubs] = useState([])
@@ -115,8 +115,11 @@ export default function MealProvider(props){
         }))
     }
 
+    
+
     const handleSubmit = () => {
         addMeal(newMeal)
+        setThisMeal(newMeal)
         setNewMeal({
             name: '',
             user: userId,
@@ -440,7 +443,8 @@ export default function MealProvider(props){
                 getUserCounts,
                 userCounts,
                 delCounts,
-                updateMealsMap
+                updateMealsMap,
+                thisMeal
             }}>
             { props.children }
         </MealContext.Provider>

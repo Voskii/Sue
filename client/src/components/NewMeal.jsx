@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 export default function NewMeal(props) {
 
-    const { addMeal, newMeal, setUserIdNow, mealId, handleChange, handleSubmit } = useContext(MealContext)
+    const { addMeal, newMeal, setUserIdNow, mealId, handleChange, handleSubmit, thisMeal } = useContext(MealContext)
     const { setNewM, user, setStats } = props
     console.log(`user:`, user)
     const [next, setNext] = useState(true)
@@ -27,28 +27,32 @@ export default function NewMeal(props) {
     return (
 
         <div className='new-meal'>
-            {newMeal.name ? <h1>Meal: {newMeal.name}</h1> : <div className='create-meal-name'>{mealName}</div>}
-            {!mealName && <div className='create-meal-name'>New Meal</div>}
+            {newMeal.name && <div className='create-meal-name'>{newMeal.name}</div>}
+            {!mealName && !newMeal.name && !mealId && <div className='create-meal-name'>Add Meal</div>}
                 {!mealId &&
-                    <form onSubmit={submit}>
+                    <form onSubmit={submit} style={{textAlign: 'center', padding: '0px 0px 10px 0px', justifyContent: 'space-between'}}>
                         <input 
                             name='name'
                             type='text'
                             value={newMeal.name}
                             placeholder='Meal Name'
                             onChange={handleChange}
+                            required={true}
                         />
                         <input 
                             name='imgUrl'
                             type='text'
                             value={newMeal._imgUrl}
-                            placeholder='image url?'
+                            placeholder='Image URL Address'
                             onChange={handleChange}
                         />
-                        <button>SMASH MEAL</button>
+                        <div style={{padding:'10px'}}>
+                            <button className='add-meal-butt'>Next</button>
+                        </div>
                     </form>
                 }
-            {mealId && <StatGen meal={mealId} setNewM={setNewM} setStats={setStats} hideCounts={false}/>}
+            {mealId && <div className='create-meal-name' style={{padding: '5px'}}>{thisMeal.name}</div>}
+            {mealId && <StatGen meal={mealId} setNewM={setNewM} setStats={setStats} hideCounts={false} />}
         </div>
     )
 }
