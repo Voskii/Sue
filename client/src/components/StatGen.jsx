@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { StatContext } from '../context/StatProvider'
 import { MealContext } from '../context/MealProvider'
+import addM from '../images/Joyentred.png'
 
 const StatGen = (props) => {
 
@@ -91,22 +92,22 @@ const StatGen = (props) => {
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <div style={{display: 'flex', flexDirection: 'column', padding: '10px', justifyContent: 'center', alignItems: 'center', gap: '7px'}}>
                         {thisMeal.imgUrl && <img src={thisMeal.imgUrl} className='meal-image'/>}
-                        <input
-                        type='text'
-                        name='name'
-                        value={newStat.name}
-                        placeholder='Name'
-                        onChange={handleChange}
-                        style={{transform: 'scale(.9)'}}
-                        />
-                        <input
+                            <input
                             type='text'
-                            name='value'
-                            value={newStat.value}
-                            placeholder='Stat'
+                            name='name'
+                            value={newStat.name}
+                            placeholder='Name'
                             onChange={handleChange}
                             style={{transform: 'scale(.9)'}}
-                        />
+                            />
+                            <input
+                                type='text'
+                                name='value'
+                                value={newStat.value}
+                                placeholder='Stat'
+                                onChange={handleChange}
+                                style={{transform: 'scale(.9)'}}
+                            />
                         {/* <input
                             type='checkbox'
                             checked={newStat.track}
@@ -114,51 +115,74 @@ const StatGen = (props) => {
                             value={newStat.track}
                             onChange={handleCheck}
                         />  */}
-                        <button style={{width: 'fit-content'}}>Add Ingredients</button>
+                        
+                        <div style={{padding:'5px'}}><button className='add-ingredients-butt'><img src={addM}/><div style={{fontSize: '1em'}}>Add Ingredient</div></button></div>
                     </div>
                     {hideCounts ?
                     ''
                     :
-                    <div className='counter-addMeal-container'>
-                        <span>Total</span>
-                        <span style={{color: 'whiteSmoke', fontSize: '.6em'}}>Fill out once</span>
-                        <span>Calories</span>
-                        <input
-                            type='number'
-                            name='calories'
-                            value={newCounter.calories}
-                            placeholder='Calories'
-                            onChange={handleCounterChange}
-                        />
-                        <span>Protein</span>
-                        <input
-                            type='number'
-                            name='protein'
-                            value={newCounter.protein}
-                            placeholder='Protein'
-                            onChange={handleCounterChange}
-                        />
-                        <span>FAT</span>
-                        <input
-                            type='number'
-                            name='fat'
-                            value={newCounter.fat}
-                            placeholder='⚡'
-                            onChange={handleCounterChange}
-                        />
-                        <span>Sugar</span>
-                        <input
-                            type='number'
-                            name='sugar'
-                            value={newCounter.sugar}
-                            placeholder='Sugar'
-                            onChange={handleCounterChange}
-                        />
+                    <div className='bottom-newMeal-comp'>
+                        <div style={{textAlign: 'center', textDecoration: 'underline 1px', color: 'whitesmoke'}}>
+                            <div style={{padding: '8px', color: 'whitesmoke'}}>Total:</div>
+                            <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
+                        </div>
+                        <div className='counter-addMeal-container'>
+                            <div className='counter-value-flex'>
+                                <div className='counter-row'>
+                                    <>Calories:</>
+                                    <input
+                                        type='number'
+                                        name='calories'
+                                        value={newCounter.calories}
+                                        placeholder=''
+                                        onChange={handleCounterChange}
+                                        className='add-meal-counters'
+                                    />
+                                </div>
+                                <div className='counter-row'>
+                                    <>FATS:</>
+                                    <input
+                                        type='number'
+                                        name='fat'
+                                        value={newCounter.fat}
+                                        placeholder=''
+                                        onChange={handleCounterChange}
+                                        className='add-meal-counters'
+                                    />
+                                </div>
+                            </div>
+                            <div className='counter-value-flex'>
+                                <div className='counter-row'>
+                                    
+                                    <>Protein:</>
+                                    <input
+                                    type='number'
+                                    name='protein'
+                                    value={newCounter.protein}
+                                    placeholder=''
+                                    onChange={handleCounterChange}
+                                    className='add-meal-counters'
+                                    />
+                                    </div>
+                                <div className='counter-row'>
+                                    <>Sugar:</>
+                                    <input
+                                        type='number'
+                                        name='sugar'
+                                        value={newCounter.sugar}
+                                        placeholder=''
+                                        onChange={handleCounterChange}
+                                        className='add-meal-counters'
+                                    />
+                                </div>
+                        </div>
                     </div>
+                    </div>
+                    
                     }
                 </div>
             </form>
-            <button onClick={clear}>Add Meal ⚡</button>
+            <div style={{paddingBottom:'15px'}}><button className='add-ingredients-butt' onClick={clear}><img src={addM}/><div style={{fontSize: '1em'}}>Add Meal</div></button></div>
         </div>
     )
 }

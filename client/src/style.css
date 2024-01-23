@@ -118,6 +118,17 @@ input{
   font-size: .9em;
 }
 
+.add-meal-counters{
+  max-width: 25px;
+  background-color: #FFFFFF;
+  border: solid 1px;
+  border-radius: 2px;
+  padding: 5px;
+  font: var(--w);
+  font-size: .9em;
+}
+
+
 
 /* .auth{
   display: flex;
@@ -164,17 +175,50 @@ input{
     filter: drop-shadow(4px 4px 1px var(--lr));
     border-radius: 5px;
 }
+/* this is also add-meal-butt css in meal creation logic */ 
+.add-ingredients-butt{
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 0px auto;
+  width: fit-content;
+  background-color: whitesmoke;
+  color: var(--r);
+  border-radius: 3px;
+  filter: drop-shadow(4px 4px 1px rgba(255, 255, 255, 0.24));
+}
+
 
 .counter-addMeal-container{
   display: flex;
-  background-color: var(--trans);
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
   width: 100%;
-  color: var(--p);
+  color: var(--ws);
   margin: 0px auto;
-  max-width: 290px;
-  border-radius: 0px 0px 5px 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.counter-value-flex{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.counter-row{
+  display:flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.bottom-newMeal-comp{
+  background-image: url(./images/cupBG.png);
+  background-size: cover ;
+  background-repeat: no-repeat;
+  width: fit-content;
+  height: 18vh;
 }
