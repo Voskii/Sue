@@ -174,6 +174,8 @@ input{
     color: var(--r);
     filter: drop-shadow(4px 4px 1px var(--lr));
     border-radius: 5px;
+    width: fit-content;
+    padding: 0px 20px;
 }
 /* this is also add-meal-butt css in meal creation logic */ 
 .add-ingredients-butt{
@@ -204,8 +206,9 @@ input{
 
 .counter-value-flex{
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
+  
 }
 
 .counter-row{
@@ -215,10 +218,23 @@ input{
   padding: 5px;
 }
 
+.counter-row-pro{
+  display:flex; 
+  flex-direction: row;
+  padding: 5px;
+  gap: 8%;
+}
+
 .bottom-newMeal-comp{
   background-image: url(./images/cupBG.png);
-  background-size: cover ;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   width: fit-content;
-  height: 18vh;
+  height: fit-content;
+  padding-bottom: 35px;
+  text-align: center;
+}
+
+form{
+  text-align: center;
 }

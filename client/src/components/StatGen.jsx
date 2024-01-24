@@ -87,18 +87,18 @@ const StatGen = (props) => {
     }
     
     return (
-        <div>
-            <form onSubmit={submit}>
-                <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div className=''>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <div style={{display: 'flex', flexDirection: 'column', padding: '10px', justifyContent: 'center', alignItems: 'center', gap: '7px'}}>
                         {thisMeal.imgUrl && <img src={thisMeal.imgUrl} className='meal-image'/>}
+                        <form onSubmit={submit}>
                             <input
-                            type='text'
-                            name='name'
-                            value={newStat.name}
-                            placeholder='Name'
-                            onChange={handleChange}
-                            style={{transform: 'scale(.9)'}}
+                                type='text'
+                                name='name'
+                                value={newStat.name}
+                                placeholder='Name'
+                                onChange={handleChange}
+                                style={{transform: 'scale(.9)'}}
                             />
                             <input
                                 type='text'
@@ -117,72 +117,72 @@ const StatGen = (props) => {
                         />  */}
                         
                         <div style={{padding:'5px'}}><button className='add-ingredients-butt'><img src={addM}/><div style={{fontSize: '1em'}}>Add Ingredient</div></button></div>
+                        </form>
                     </div>
                     {hideCounts ?
                     ''
                     :
                     <div className='bottom-newMeal-comp'>
                         <div style={{textAlign: 'center', textDecoration: 'underline 1px', color: 'whitesmoke'}}>
-                            <div style={{padding: '8px', color: 'whitesmoke'}}>Total:</div>
+                            <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Total:</div>
                             <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
                         </div>
                         <div className='counter-addMeal-container'>
-                            <div className='counter-value-flex'>
-                                <div className='counter-row'>
-                                    <>Calories:</>
-                                    <input
-                                        type='number'
-                                        name='calories'
-                                        value={newCounter.calories}
-                                        placeholder=''
-                                        onChange={handleCounterChange}
-                                        className='add-meal-counters'
-                                    />
-                                </div>
-                                <div className='counter-row'>
-                                    <>FATS:</>
-                                    <input
-                                        type='number'
-                                        name='fat'
-                                        value={newCounter.fat}
-                                        placeholder=''
-                                        onChange={handleCounterChange}
-                                        className='add-meal-counters'
-                                    />
-                                </div>
-                            </div>
-                            <div className='counter-value-flex'>
-                                <div className='counter-row'>
-                                    
-                                    <>Protein:</>
-                                    <input
-                                    type='number'
-                                    name='protein'
-                                    value={newCounter.protein}
-                                    placeholder=''
-                                    onChange={handleCounterChange}
-                                    className='add-meal-counters'
-                                    />
+                            <form onSubmit={submit} >
+                                <div className='counter-value-flex'>
+                                    <div className='counter-row'>
+                                        <>Calories:</>
+                                        <input
+                                            type='number'
+                                            name='calories'
+                                            value={newCounter.calories}
+                                            placeholder=''
+                                            onChange={handleCounterChange}
+                                            className='add-meal-counters'
+                                        />
                                     </div>
-                                <div className='counter-row'>
-                                    <>Sugar:</>
-                                    <input
+                                    <div className='counter-row'>
+                                        <>FATS:</>
+                                        <input
+                                            type='number'
+                                            name='fat'
+                                            value={newCounter.fat}
+                                            placeholder=''
+                                            onChange={handleCounterChange}
+                                            className='add-meal-counters'
+                                        />
+                                    </div>
+                                </div>
+                                <div className='counter-value-flex'>
+                                    <div className='counter-row-pro'>
+                                        <>Protein:</>
+                                        <input
                                         type='number'
-                                        name='sugar'
-                                        value={newCounter.sugar}
+                                        name='protein'
+                                        value={newCounter.protein}
                                         placeholder=''
                                         onChange={handleCounterChange}
                                         className='add-meal-counters'
-                                    />
+                                        />
+                                    </div>
+                                    <div className='counter-row'>
+                                        <>Sugar:</>
+                                        <input
+                                            type='number'
+                                            name='sugar'
+                                            value={newCounter.sugar}
+                                            placeholder=''
+                                            onChange={handleCounterChange}
+                                            className='add-meal-counters'
+                                        />
+                                    </div>
                                 </div>
+                            </form>
                         </div>
                     </div>
-                    </div>
-                    
                     }
                 </div>
-            </form>
-            <div style={{paddingBottom:'15px'}}><button className='add-ingredients-butt' onClick={clear}><img src={addM}/><div style={{fontSize: '1em'}}>Add Meal</div></button></div>
+            <div style={{paddingBottom:'15px', marginTop: '-25px'}}><button className='add-ingredients-butt' onClick={clear}><img src={addM}/><div style={{fontSize: '1em'}}>Add Meal</div></button></div>
         </div>
     )
 }

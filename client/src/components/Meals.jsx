@@ -70,7 +70,7 @@ const Meals = (props) => {
     return (
         <div className=''>
             {/* <Link to="/" className='hey-span'>Hey</Link> */}
-            {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>}
+            {/* {!newM && <button onClick={() => setNewM(!newM)}>+ Meal?</button>} */}
             {newM ?
                 <NewMeal setNewM={setNewM} user={user} setStats={setStats} />
             :
@@ -80,7 +80,7 @@ const Meals = (props) => {
                     </>
                     {chosen? 
                         <div>
-                            <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats}  meals={meals}/>
+                            <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats} meals={meals}/>
                         </div>
                     :
                     <div className='hey-meals-dd'>
@@ -91,7 +91,7 @@ const Meals = (props) => {
                     </div>
                     }
                 </div>
-        }
+            }
         </div>
     )
 }

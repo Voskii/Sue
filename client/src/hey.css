@@ -18,14 +18,14 @@
   font-size: 1.95em;
   color: var(--r);
   text-align: center;
-  padding: 55px 0px;
+  padding: 25px 0px;
 }
 
 .welcome-userr{
   font-size: 1.4em;
   color: var(--r);
   text-align: center;
-  padding: 55px 0px;
+  padding: 25px 0px;
 }
 
 .stat-tracked{
@@ -95,9 +95,8 @@ p{
 }
 
 .header-name{
-  padding-top:1px;
+  padding-top: 3px;
   font-size: 2em;
-  margin-bottom: -4px;
   color: var(--ws);
   font-family: 'sansita extrabold';
 }
@@ -145,12 +144,10 @@ nav a {
 }
 
 .path-meal-span{
-  background-color: ;
   width: 200%;
 }
 
 .path-hey-span{
-  background-color: ;
   width: 100%;
 }
 
