@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react'
 import { MealContext } from '../context/MealProvider'
 import StatGen from './StatGen'
 import { useEffect } from 'react'
+import BACK from '../images/Return.png'
 
 export default function NewMeal(props) {
 
@@ -46,8 +47,8 @@ export default function NewMeal(props) {
                             placeholder='Image URL Address'
                             onChange={handleChange}
                         />
-                        <div style={{padding:'10px'}}>
-                            <button className='add-meal-butt'>Next</button>
+                        <div style={{padding:'10px', display: 'flex'}}>
+                            <div className='add-meal-butt' onClick={() => setNewM(false)}><img src={BACK} style={{width: '20px', padding: '4px'}} /></div><button className='add-meal-butt'>Next</button>
                         </div>
                     </form>
                 }
