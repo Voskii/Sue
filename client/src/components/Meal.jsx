@@ -3,6 +3,9 @@ import Stat from './Stat'
 import StatGen from './StatGen'
 import { MealContext } from '../context/MealProvider'
 import { StatContext } from '../context/StatProvider'
+import YATHATONE from '../images/Check.png'
+import TRASH from '../images/Remove.png'
+import ADDD from '../images/Joyent.png'
 
 const Meal = (props) => {
 
@@ -60,12 +63,12 @@ const Meal = (props) => {
 
                 </div>
             :
-                <div onClick={()=>mealClicked(meal)}>{meal.name}</div>
+                <div onClick={()=>mealClicked(meal)} style={{padding: '5px', textDecoration: 'underline'}}>{meal.name}</div>
             }
             {!showStats && 
                 <div className='triggers'>
-                    <div onClick={()=>check(meal)}>{checked? '👀':'✨'}</div>
-                    <div><button onClick={()=>deleteMeal(meal)}>✖</button></div>
+                    <div onClick={()=>check(meal)}>{checked? <img src={YATHATONE} /> : <img src={ADDD}/>}</div>
+                    <div><div onClick={()=>deleteMeal(meal)}><img src={TRASH}/></div></div>
                 </div>
             }
             

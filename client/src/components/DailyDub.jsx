@@ -90,19 +90,22 @@ const DailyDub = (props) => {
     )
 
     return (
-        <div className='daily-dub-container'>
+        <div className={generate? '': 'daily-dub-container'}>
             {generate && 
-                <>
-                    <h3>To Track</h3>
-                        {trackMe}
-                    <form onSubmit={addDubs}>
-                        <button>TRACK ME</button>
-                        {/* {'-get, update frontend'} */}
-                    </form>
-                    
-                    <h3>Tracking</h3>
-                        {fishMe}
-                </>
+                <div>
+                    <div className='to-track'>
+                        <h3>To Track</h3>
+                            {trackMe}
+                        <form onSubmit={addDubs}>
+                            <button>TRACK ME</button>
+                            {/* {'-get, update frontend'} */}
+                        </form>
+                    </div>
+                    <div className='actually-tracked'>
+                        <h3>Tracking</h3>
+                            {fishMe}
+                    </div>
+                </div>
             }
             {onDeck &&
                 <>

@@ -1,8 +1,34 @@
 .hey-meals-dd{
   display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 25%;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--dr);
+  text-align: center;
+  width: 100%;
+  color: var(--p);
+  margin: 0px auto;
+  max-width: 290px;
+  border-radius: 3px 0px 5px 5px;
+  margin-bottom: 20px;
+}
+
+.map-scroll{
+  height: 380px;
+  width: 150px;
+  overflow: scroll;
+  color: whitesmoke;
+}
+
+.to-track{
+  overflow: scroll;
+  height: 200px;
+  width: 150px;
+}
+
+.actually-tracked{
+  overflow: scroll;
+  height: 200px;
+  width: 150px;
 }
 
 .hey-background{
@@ -46,9 +72,11 @@
 }
 
 .triggers{
+  display: flex;
+  justify-content: center;
   padding: 5px;
   display: flex;
-  gap: 8px;
+  gap: 5px;
 }
 
 .new-meal{
@@ -161,9 +189,8 @@ nav a {
   color: var(--p);
   margin: 0px auto;
   max-width: 290px;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 3px 5px 5px;
   margin-bottom: 20px;
-  /* border: 1px dashed var(--p); */
 }
 
 .daily-stats{

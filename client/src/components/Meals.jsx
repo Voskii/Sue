@@ -57,7 +57,7 @@ const Meals = (props) => {
     const mapMe = meals.map(meal => {
 
         return (
-            <div>
+            <div >
                 {createStat? 
                     <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false} stats={meal.stats} getMeals={getMeals} hideCounts={true} /> 
                 :
@@ -79,15 +79,17 @@ const Meals = (props) => {
                         {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
                     </>
                     {chosen? 
-                        <div>
+                        <div style={{color: ''}}>
                             <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats} meals={meals}/>
                         </div>
                     :
                     <div className='hey-meals-dd'>
-                        <ul>
+                        <ul className='map-scroll'>
                             {mapMe}
                         </ul>
-                        {dubs && <DailyDub trackedMeals={trackedMeals} setTrackedMeals={setTrackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />}
+                        <div>
+                            {dubs && <DailyDub trackedMeals={trackedMeals} setTrackedMeals={setTrackedMeals} generate={true} stats={stats} getStats={getStats} getDubs={getDubs} dubs={dubs} />}
+                        </div>
                     </div>
                     }
                 </div>
