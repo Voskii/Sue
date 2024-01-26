@@ -10,10 +10,11 @@
   max-width: 290px;
   border-radius: 3px 0px 5px 5px;
   margin-bottom: 20px;
+  
 }
 
 .map-scroll{
-  height: 380px;
+  height: 400px;
   width: 150px;
   overflow: scroll;
   color: whitesmoke;
@@ -29,6 +30,7 @@
   overflow: scroll;
   height: 200px;
   width: 150px;
+
 }
 
 .hey-background{
@@ -226,6 +228,7 @@ nav a {
   margin: 0px auto;
   max-width: 335px;
   border-radius: 3px;
+  
   }
 
   .ateit-butt{
@@ -240,4 +243,3 @@ nav a {
     filter: drop-shadow(4px 4px 1px var(--lr));
     border-radius: 5px;
   }
-

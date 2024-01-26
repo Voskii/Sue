@@ -4,8 +4,8 @@ import { StatContext } from '../context/StatProvider'
 import { DubContext } from '../context/DailyDubProvider'
 import forkknife from '../images/forkknife.png'
 import ateIt from '../images/ateIt.png'
-// import ForceUpdateMethod from './components/ForceUpdateMethod.jsx'
 import axios from 'axios'
+import TRASH from '../images/Remove.png'
 
 
 const DailyDub = (props) => {
@@ -66,8 +66,11 @@ const DailyDub = (props) => {
     .map((dubb, index) =>
         dubb.eatWhen !== undefined ? (
             <div key={index} style={{ color: 'whitesmoke' , lineHeight: '40px', fontSize: '1.6em'}}>
-                {dubb.name.charAt(0).toUpperCase() + dubb.name.slice(1).toLowerCase()}
-                {generate && <button onClick={()=>delDub(dubb)}>X</button>}
+                {generate ? 
+                    <span style={{display: 'flex', justifyContent:'space-between', padding: '5', fontSize: '.7em'}} ><div style={{paddingLeft:'3px'}}>{dubb.name.charAt(0).toUpperCase() + dubb.name.slice(1).toLowerCase()}</div><img src={TRASH} onClick={()=>delDub(dubb)}/></span>
+                :
+                    <div>{dubb.name.charAt(0).toUpperCase() + dubb.name.slice(1).toLowerCase()}</div>
+                }
             </div>
         ) : null
     );
@@ -82,27 +85,30 @@ const DailyDub = (props) => {
         <div key={i}>
             {console.log('dub:', dub, 'index:', i)}
             <div style={{color: 'whiteSmoke'}}>{dub.name}</div>
-            <h6>Eat When?</h6>
-            <span><select onChange={(event)=>handleChangeMealTimee(i, event.target.value)}>
-                {options.map(option => <option>{option}</option>)}
-            </select></span><span><button onClick={() => delThisTrackedOne(dub, i)}>✖</button></span>
+            <h5 style={{color: 'var(--w)'}}># Meal of Day?</h5>
+            <div style={{display:'flex', justifyContent: 'center'}} className='custom-select'>
+                <select onChange={(event)=>handleChangeMealTimee(i, event.target.value)}>
+                    {options.map(option => <option>{option}</option>)}
+                </select>
+                <img src={TRASH} onClick={() => delThisTrackedOne(dub, i)}/>
+            </div>
         </div>
     )
 
     return (
-        <div className={generate? '': 'daily-dub-container'}>
+        <div className={generate? '' : 'daily-dub-container'}>
             {generate && 
                 <div>
                     <div className='to-track'>
-                        <h3>To Track</h3>
+                        <h3 style={{color:'whitesmoke', textDecoration: 'underline'}}>To Track</h3>
                             {trackMe}
-                        <form onSubmit={addDubs}>
-                            <button>TRACK ME</button>
+                        <form onSubmit={addDubs} style={{paddingTop: '5px'}}>
+                            <button className='ateit-butt'>Track All</button>
                             {/* {'-get, update frontend'} */}
                         </form>
                     </div>
                     <div className='actually-tracked'>
-                        <h3>Tracking</h3>
+                        <h3 style={{color:'var(--ws)', textDecoration: 'underline', paddingBottom: '10px'}}>On Deck</h3>
                             {fishMe}
                     </div>
                 </div>

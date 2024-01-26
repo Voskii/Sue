@@ -1,6 +1,8 @@
 :root {
   --bg: #2f4454;
   --m: #2e151b;
+  --llm: #7E5156;
+  --lm: #6E4146;
   --p: #da7b93;
   --lg: #376E6f; 
   --dg: #1C3334;
@@ -11,6 +13,7 @@
   --dr: #8d6266;
   --trans: rgb(55, 110, 111, 50%);
   --font: 1rem Sansita;
+
 }
 
 *{
@@ -237,4 +240,29 @@ input{
 
 form{
   text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  /* background: var(--llm); */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: var(--dr); */
+  
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--lm);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--llm);
+}
+
+::-webkit-scrollbar-corner{
+  background: var(--dr);
 }
