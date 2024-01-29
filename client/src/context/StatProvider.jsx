@@ -79,8 +79,10 @@ export default function StatProvider(props){
     // }
     
     //handlesub async await
-    const handleSubmit = async (event) => {
-        event.preventDefault()
+    const handleSubmit = async (event, isAddingToMeal) => {
+        if(!isAddingToMeal){
+            event.preventDefault()
+        }
         console.log('inside handle sub', newStat)
 
         try{

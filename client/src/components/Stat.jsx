@@ -1,7 +1,7 @@
 import React from "react";
 
 const Stat = (props) => {
-    const { info, whiteOut} = props
+    const { info, whiteOut, isMealCard} = props
     //separate tracked value from untracked value
     return (
         <div className="stat-info">

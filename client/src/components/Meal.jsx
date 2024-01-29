@@ -27,15 +27,16 @@ const Meal = (props) => {
     }
 
     return (
-        <div style={{paddingTop: '30px'}}>
+        <div className=''>
             {showStats?
-                <div>
-                    <div onClick={()=>cleanUp(meal)}>{meal.name}</div>
+                <div className='show-meal'>
+                    <div onClick={()=>cleanUp(meal)} style={{textDecoration: 'underline', padding: '5px'}}>{meal.name}</div>
+                        {meal.imgUrl && <img src={meal.imgUrl} className='meal-image'/>}
                         <div className='both-stats'>
 
                             <div className="stat-untracked">
-                                <h6 className='stat-colors'>Ingredient</h6>
-                                {meal.stats?.map(item => <Stat key={item._id} info={item} track={true} whiteOut={true}/>)}
+                                <h6 className='stat-colors' style={{padding:'5px', textDecoration: 'underline'}}>Ingredient</h6>
+                                {meal.stats?.map(item => <Stat key={item._id} info={item} track={true} whiteOut={true} isMealCard={true}/>)}
                             </div>
 
                             {/* <div className="stat-tracked">
@@ -43,22 +44,22 @@ const Meal = (props) => {
                                 {statMe}
                             </div> */}
 
-                            <div style={{display: 'flex', flexDirection: 'column', padding: '10px', width: '55px'}}>
-                        <span>Calories</span>
-                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].calories}</div>
-                        <span>Protein</span>
-                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].protein}</div>
-                        <span>FAT</span>
-                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].fat}</div>
-                        <span>Sugar</span>
-                        <div style={{color: 'whiteSmoke'}}>{meal.mealCount[0].sugar}</div>
-                    </div>
+                            <div className='counter-container-meal'>
+                                <span>Calories</span>
+                                <div style={{color: 'var(--lr)'}}>{meal.mealCount[0].calories}</div>
+                                <span>Protein</span>
+                                <div style={{color: 'var(--lr)'}}>{meal.mealCount[0].protein}</div>
+                                <span>FAT</span>
+                                <div style={{color: 'var(--lr)'}}>{meal.mealCount[0].fat}</div>
+                                <span>Sugar</span>
+                                <div style={{color: 'var(--lr)'}}>{meal.mealCount[0].sugar}</div>
+                            </div>
                         </div>
                         
                         {makeMeAStat? 
-                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM} hideCounts={true} updateMealsMap={updateMealsMap}/>
+                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM} updateMealsMap={updateMealsMap} isAddToMeal={true} thisMeal={meal}/>
                         :
-                            <button onClick={()=>setMakeMeAStat(!makeMeAStat)}>+Stat?</button>
+                            <button onClick={()=>setMakeMeAStat(!makeMeAStat)}>Edit?</button>
                         }
 
                 </div>

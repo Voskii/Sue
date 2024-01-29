@@ -238,6 +238,17 @@ input{
   text-align: center;
 }
 
+.show-meal{
+  max-width: 290px;
+  background-color: var(--dr);
+  text-align: center;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 form{
   text-align: center;
 }
@@ -266,3 +277,4 @@ form{
 ::-webkit-scrollbar-corner{
   background: var(--dr);
 }
+

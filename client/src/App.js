@@ -31,7 +31,7 @@ function App() {
         <>
           <Header logout={logout}  />
           {location.pathname === '/hey' && <div className='welcome-user'>Welcome {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</div>}
-          {location.pathname === '/meals' && <div className='welcome-userr'>Check out your current Meals</div>}
+          {location.pathname === '/meals' && <div className='welcome-userr'>Click Meal Name or Star!</div>}
         </>
         :token && dubs.length !== 0 && 
         <>

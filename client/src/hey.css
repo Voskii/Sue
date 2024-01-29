@@ -10,7 +10,6 @@
   max-width: 290px;
   border-radius: 3px 0px 5px 5px;
   margin-bottom: 20px;
-  
 }
 
 .map-scroll{
@@ -50,8 +49,8 @@
 }
 
 .welcome-userr{
-  font-size: 1.4em;
-  color: var(--r);
+  font-size: 1.5em;
+  color: var(--ws);
   text-align: center;
   padding: 25px 0px;
 }
@@ -66,6 +65,7 @@
 
 .both-stats{
   display: flex;
+  flex-direction: column;
   
 }
 
@@ -195,6 +195,20 @@ nav a {
   margin-bottom: 20px;
 }
 
+.counter-container-meal{
+  display: flex;
+  background-color: var(--lm);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  color: var(--ws);
+  margin: 0px auto;
+  max-width: 290px;
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 20px;
+}
+
 .daily-stats{
   color: var(--ws);
   text-decoration: underline 1px;
@@ -208,7 +222,9 @@ nav a {
   .stat-info{
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    justify-content: center;
+    gap: 50px;
+    padding: 15px;
   }
 
   .daily-dub-container{

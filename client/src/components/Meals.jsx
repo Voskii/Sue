@@ -59,7 +59,7 @@ const Meals = (props) => {
         return (
             <div >
                 {createStat? 
-                    <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false} stats={meal.stats} getMeals={getMeals} hideCounts={true} /> 
+                    <StatGen key={meal._id} setCreateStat={setCreateStat} createStat={createStat} meal={meal._id} setStats={setStats} setNewM={false} stats={meal.stats} getMeals={getMeals} /> 
                 :
                     <Meal key={meal._id} noBro={true} meal={meal} mealClicked={mealClicked} track={track} setShowStats={setShowStats} showStats={showStats} setNewM={false} stats={meal.stats} meals={meals} setMeals={setMeals}/>
                 }
@@ -75,12 +75,9 @@ const Meals = (props) => {
                 <NewMeal setNewM={setNewM} user={user} setStats={setStats} />
             :
                 <div>
-                    <>
-                        {!chosen && !dubs[0] && <h6 style={{color: 'whitesmoke'}}>Click Meal name or Star!</h6>}
-                    </>
                     {chosen? 
-                        <div style={{color: ''}}>
-                            <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats} meals={meals}/>
+                        <div>
+                            <Meal key={chosen._id} onClick={cleanUp} meal={chosen} cleanUp={cleanUp} setShowStats={setShowStats} showStats={showStats} track={track} getStats={getStats} setStats={setStats} meals={meals} thisMeal={true}/>
                         </div>
                     :
                     <div className='hey-meals-dd'>

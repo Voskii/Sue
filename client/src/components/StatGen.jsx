@@ -3,13 +3,14 @@ import axios from 'axios'
 import { StatContext } from '../context/StatProvider'
 import { MealContext } from '../context/MealProvider'
 import addM from '../images/Joyentred.png'
+import BACK from '../images/Return.png'
 
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats, setStats } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts} = props
+    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts, isAddToMeal} = props
     
-    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, thisMeal  } = useContext(MealContext)
+    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, thisMeal, addToMealCounterStats  } = useContext(MealContext)
     console.log(meal, 'thisMeal:', thisMeal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -32,9 +33,7 @@ const StatGen = (props) => {
 
     const clear = () => {
         console.log(`in clear comp newStat:`, newStat)
-        if(!hideCounts){
-            addNewCounterStats()
-        }
+        addNewCounterStats()
         setStats(prev => ([
                 ...prev,
                 {
@@ -85,6 +84,28 @@ const StatGen = (props) => {
         console.log(`CHECKED BRUV`)
         setTracked()
     }
+
+    const addToMeal = (event) => {
+        console.log('ADD2MEAL - meal:',meal,'newStat:',newStat,'COUNTERSTATS',counterStats)
+        
+        handleSubmit(event, isAddToMeal)
+        //setFullMeals stats
+        updateMealsMap(meal, newStat)
+        addToMealCounterStats(meal)
+        setStats(prev => ([
+                ...prev,
+                {
+                    name: newStat.name,
+                    value: newStat.value,
+                    mealId: meal,
+                    track: newStat.track
+                }
+        ]))
+        
+        
+        setNewStat('')
+    }
+
     
     return (
         <div className=''>
@@ -116,16 +137,22 @@ const StatGen = (props) => {
                             onChange={handleCheck}
                         />  */}
                         
-                        <div style={{padding:'5px'}}><button className='add-ingredients-butt'><img src={addM}/><div style={{fontSize: '1em'}}>Add Ingredient</div></button></div>
+                        {!isAddToMeal && <div style={{padding:'5px'}}><button className='add-ingredients-butt'><img src={addM}/><div style={{fontSize: '1em'}}>Add Ingredient</div></button></div>}
                         </form>
                     </div>
-                    {hideCounts ?
-                    ''
-                    :
                     <div className='bottom-newMeal-comp'>
                         <div style={{textAlign: 'center', textDecoration: 'underline 1px', color: 'whitesmoke'}}>
-                            <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Total:</div>
-                            <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
+                            {!isAddToMeal ? 
+                                <>
+                                <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Total:</div>
+                                <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
+                                </>
+                            :
+                                <>
+                                    <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Amount to add:</div>
+                                    <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out for each Item )</div>
+                                </>
+                            }
                         </div>
                         <div className='counter-addMeal-container'>
                             <form onSubmit={submit} >
@@ -180,9 +207,22 @@ const StatGen = (props) => {
                             </form>
                         </div>
                     </div>
-                    }
                 </div>
-            <div style={{paddingBottom:'15px', marginTop: '-25px'}}><button className='add-ingredients-butt' onClick={clear}><img src={addM}/><div style={{fontSize: '1em'}}>Add Meal</div></button></div>
+            <div style={{paddingBottom:'15px', marginTop: '-25px'}}>
+                {!isAddToMeal ? 
+                    <button className='add-ingredients-butt' onClick={clear}>
+                        <img src={addM}/>
+                        <div style={{fontSize: '1em'}}>Add Meal</div>
+                    </button>
+                    :
+                    <>
+                        <div style={{display: 'flex', justifyContent: 'center', padding:''}}>
+                            <img src={BACK} style={{width: '20px', padding: '8px'}} className='add-meal-butt' onClick={() => setMakeMeAStat(false)}/>
+                            <button className='add-meal-butt' onClick={()=> addToMeal()}>Add Ingredient</button>  
+                        </div>
+                    </>
+                }
+            </div>
         </div>
     )
 }
