@@ -57,7 +57,7 @@ const Meal = (props) => {
                         </div>
                         
                         {makeMeAStat? 
-                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM} updateMealsMap={updateMealsMap} isAddToMeal={true} thisMeal={meal}/>
+                            <StatGen makeMeAStat={true} setMakeMeAStat={setMakeMeAStat} meal={meal.mealId} setStats={setStats} setNewM={setNewM} updateMealsMap={updateMealsMap} isAddToMeal={true} thatMeal={meal}/>
                         :
                             <button onClick={()=>setMakeMeAStat(!makeMeAStat)}>Edit?</button>
                         }

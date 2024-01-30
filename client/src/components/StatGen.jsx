@@ -8,9 +8,9 @@ import BACK from '../images/Return.png'
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats, setStats } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts, isAddToMeal} = props
+    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts, isAddToMeal, thatMeal} = props
     
-    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, thisMeal, addToMealCounterStats  } = useContext(MealContext)
+    const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, addToMealCounterStats, thisMeal  } = useContext(MealContext)
     console.log(meal, 'thisMeal:', thisMeal)
     // const [wutId, setwutId] = useState({
     //     name: '',
@@ -86,12 +86,12 @@ const StatGen = (props) => {
     }
 
     const addToMeal = (event) => {
-        console.log('ADD2MEAL - meal:',meal,'newStat:',newStat,'COUNTERSTATS',counterStats)
+        console.log('ADD2MEAL - meal:',meal,'newStat:',newStat,'thatMEal:',thatMeal)
         
         handleSubmit(event, isAddToMeal)
         //setFullMeals stats
         updateMealsMap(meal, newStat)
-        addToMealCounterStats(meal)
+        addToMealCounterStats(meal, thatMeal.mealCount[0])
         setStats(prev => ([
                 ...prev,
                 {

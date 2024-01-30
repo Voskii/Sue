@@ -71,6 +71,32 @@ counterRouter.post("/", (req, res, next) => {
     })
 })
 
+counterRouter.put("/:mealId", async (req, res, next) => {
+    try{
+        console.log('INSIDE COUNTPUT req:', req)
+        const mealId = req.params.mealId
+        const incrementBy = req.body// Object containing key-value pairs to increment properties
+            console.log('MEAL PUT')
+        const filter = { mealId }
+        const update = { $inc: {} } // Initialize the update object with an empty $inc property
+    
+        for (const [key, value] of Object.entries(incrementBy)) {
+            if (typeof value === "number") {
+            update.$inc[key] = value
+            } else {
+            console.warn(`Property '${key}' is not a number and will not be incremented.`)
+            }
+        }
+            const options = { new: true, upsert: true }
+            const counter = await Counter.findOneAndUpdate(filter, update, options)
+    
+            return res.status(200).json({ message: "Counter updated successfully", counter })
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Server error" })
+        }
+})
+
 // counterRouter.post("/user/:userId", (req, res, next) => {
 //     const newCounter = new Counter(req.body)
 //     newCounter.save((err, savedCounter) => {
