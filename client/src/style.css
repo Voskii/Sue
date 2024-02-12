@@ -247,6 +247,7 @@ input{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 0px 0px 5px 5px;
 }
 
 form{

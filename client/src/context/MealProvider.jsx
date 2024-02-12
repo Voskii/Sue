@@ -357,25 +357,25 @@ export default function MealProvider(props){
         }
     }
 
-    const addToMealCounterStats = async (thisOne, thisMeal) => {
-        console.log('A2M NewCounter:',newCounter, 'counterStats', counterStats, 'thisOne:', thisOne)
+    const addToMealCounterStats = async (thisOne, theseCounts) => {
+        console.log('A2M NewCounter:',newCounter, 'counterStats', counterStats, 'thisOne:', thisOne, 'theseCounts', theseCounts)
         try {
             // Update counterStats state
-            setMeals((prev) =>
-                prev.map((prevMeal) => {
-                if (prevMeal._id === thisOne) {
-                    return {
-                        ...prev,
-                        mealCount: [
-                            prev.protein + newCounter.protein,
-                            prev.calories + newCounter.calories,
-                            prev.sugar + newCounter.sugar,
-                            prev.fat + newCounter.fat
-                        ] // Add the new stat to the stats array
-                    };
-                } else {
-                    return prev;
-            }}))
+            // setMeals((prev) =>
+            //     prev.map((prevMeal) => {
+            //     if (prevMeal._id === thisOne) {
+            //         return {
+            //             ...prev,
+            //             mealCount: {
+            //                 protein: prev.protein + newCounter.protein,
+            //                 calories: prev.calories + newCounter.calories,
+            //                 sugar: prev.sugar + newCounter.sugar,
+            //                 fat: prev.fat + newCounter.fat
+            //             } // Add the new stat to the stats array
+            //         };
+            //     } else {
+            //         return prev;
+            // }}))
     
             // Perform side effect (API call) immediately after updating the state
             const updateCounterStats = async () => {
@@ -383,7 +383,7 @@ export default function MealProvider(props){
                     // MAKE PUT REQ TO MEAL COUNTER NOT USER
                     const updateCounter = await mealAxios.put(`/api/counter/${thisOne}`, newCounter)
                     const yaya = updateCounter.data
-                    console.log('yayaPut', yaya)
+                    console.log('CounterUpdate', yaya)
                     
                     
                     
@@ -394,6 +394,13 @@ export default function MealProvider(props){
     
             // Call the function for updating counterStats
             updateCounterStats()
+            setNewCounter(prev=>({
+                protein: Number(0),
+                calories:Number(0),
+                sugar: Number(0),
+                fat: Number(0),
+                mealId: prev.mealId
+            }))
         } catch (err) {
             console.log(err)
         }
@@ -436,10 +443,10 @@ export default function MealProvider(props){
     }
 
     const updateMealsMap = (updateThisId, newInfo) => {
-        console.log('UMM id:', updateThisId, 'new stat:', newInfo)
+        console.log('UMM id:', updateThisId, 'newstat:', newInfo)
         setMeals((prev) =>
         prev.map((prev) => {
-            if (prev._id === updateThisId) {
+            if (prev.mealId === updateThisId) {
                 return {
                     ...prev,
                     stats: [...prev.stats, newInfo] // Add the new stat to the stats array
@@ -479,6 +486,7 @@ export default function MealProvider(props){
                 counterStats,
                 handleCounterChange,
                 newCounter,
+                setNewCounter,
                 addNewCounterStats,
                 getUserCounts,
                 userCounts,

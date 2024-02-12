@@ -8,7 +8,7 @@ import BACK from '../images/Return.png'
 const StatGen = (props) => {
 
     const { handleSubmit, setMealIdNow, handleChange, newStat, setNewStat, newMeal, setTracked, getStats, setStats } = useContext(StatContext)
-    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts, isAddToMeal, thatMeal} = props
+    const { meal, setNewM, setCreateStat, createStat, makeMeAStat, setMakeMeAStat, hideCounts, isAddToMeal, thatMeal, updateDemCounts, updateDemStats} = props
     
     const { addMeal, getMeals, meals, setMeals, updateMealsMap, mealId, fullMeal, setFullMeal, getDubs, dubs, setMealId, handleCounterChange, counterStats, newCounter, addNewCounterStats, addToMealCounterStats, thisMeal  } = useContext(MealContext)
     console.log(meal, 'thisMeal:', thisMeal)
@@ -65,6 +65,7 @@ const StatGen = (props) => {
         event.preventDefault()
         handleSubmit(event)
         //setFullMeals stats
+        
         updateMealsMap(meal, newStat)
         // setMeals((prev) =>
         // prev.map((prev) => {
@@ -87,11 +88,15 @@ const StatGen = (props) => {
 
     const addToMeal = (event) => {
         console.log('ADD2MEAL - meal:',meal,'newStat:',newStat,'thatMEal:',thatMeal)
-        
+        updateDemCounts()
+        if(newStat.name){
+            updateDemStats()
+        }
         handleSubmit(event, isAddToMeal)
         //setFullMeals stats
-        updateMealsMap(meal, newStat)
         addToMealCounterStats(meal, thatMeal.mealCount[0])
+        updateMealsMap(meal, newStat)
+        
         setStats(prev => ([
                 ...prev,
                 {
@@ -120,6 +125,7 @@ const StatGen = (props) => {
                                 placeholder='Name'
                                 onChange={handleChange}
                                 style={{transform: 'scale(.9)'}}
+                                required
                             />
                             <input
                                 type='text'
@@ -128,6 +134,7 @@ const StatGen = (props) => {
                                 placeholder='Stat'
                                 onChange={handleChange}
                                 style={{transform: 'scale(.9)'}}
+                                required
                             />
                         {/* <input
                             type='checkbox'
@@ -144,8 +151,8 @@ const StatGen = (props) => {
                         <div style={{textAlign: 'center', textDecoration: 'underline 1px', color: 'whitesmoke'}}>
                             {!isAddToMeal ? 
                                 <>
-                                <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Total:</div>
-                                <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
+                                    <div style={{padding: '0px 5px 5px 5px', color: 'whitesmoke'}}>Total:</div>
+                                    <div style={{color: 'whiteSmoke', fontSize: '.6em', paddingBottom: '8px'}}>( Fill out once )</div>
                                 </>
                             :
                                 <>

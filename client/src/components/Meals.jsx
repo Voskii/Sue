@@ -20,7 +20,6 @@ const Meals = (props) => {
     const [ newM, setNewM ] = useState(false)
     
     const [ showStats, setShowStats ] = useState(false)
-    console.log(meals)
 
     useEffect(() => {
         getMeals()
@@ -34,7 +33,9 @@ const Meals = (props) => {
 
     const mealClicked = (meal) => {
         console.log(`meal clicked`)
-        setChosen(meal)
+        if(!showStats){
+            setChosen(meal)
+        }
         setShowStats(!showStats)
     }
 
@@ -49,13 +50,11 @@ const Meals = (props) => {
     }
 
     const cleanUp = () => {
-        setChosen('')
-        
         setShowStats(false)
+        setChosen('')
     }
 
     const mapMe = meals.map(meal => {
-
         return (
             <div >
                 {createStat? 
